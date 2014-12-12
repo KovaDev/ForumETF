@@ -23,3 +23,12 @@ c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\WebGre
 c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Antlr3.Runtime.pdb
 c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Newtonsoft.Json.xml
 c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\System.Web.Optimization.xml
+c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.dll
+c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.Host.SystemWeb.dll
+c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.Security.Cookies.dll
+c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.Security.dll
+c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Owin.dll
+c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.xml
+c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.Host.SystemWeb.xml
+c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.Security.xml
+c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.Security.Cookies.xml
