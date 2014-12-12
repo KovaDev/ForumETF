@@ -32,3 +32,11 @@ c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Micros
 c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.Host.SystemWeb.xml
 c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.Security.xml
 c:\users\ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\EntityFramework.dll
+C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\EntityFramework.SqlServer.dll
+C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\EntityFramework.xml
+C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\EntityFramework.SqlServer.xml
+C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.AspNet.Identity.EntityFramework.xml

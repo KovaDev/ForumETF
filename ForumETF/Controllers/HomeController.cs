@@ -13,8 +13,9 @@ namespace ForumETF.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var userClaims = User.Identity as ClaimsIdentity;
-            ViewBag.Country = userClaims.FindFirst(ClaimTypes.Country).Value;
+            // Ovo je radilo u prvom slucaju bez citanja iz baze
+            //var userClaims = User.Identity as ClaimsIdentity;
+            //ViewBag.Country = userClaims.FindFirst(ClaimTypes.Country).Value;
 
             return View();
         }
