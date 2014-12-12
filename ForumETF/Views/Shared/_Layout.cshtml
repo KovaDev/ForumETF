@@ -10,20 +10,40 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
+    <!-- Main menu -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ETF Forum", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("ETF Forum", "Index", "Home", new { @class = "navbar-brand" })
             </div>
+
+            <!-- Collection of nav links and other content for toggling -->
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <!-- Lijeva strana menija -->
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="#">Početna</a></li>
+                    <li><a href="#">Tagovi</a></li>
+                    <li><a href="#">Kategorije</a></li>
+                    <li><a href="#">Korisnici</a></li>
+                </ul>
+                <!-- Desna strana menija -->
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li><a href="#">@User.Identity.Name</a></li>
+                        <li>@Html.ActionLink("Logout", "LogOut", "Auth")</li>
+                    }
                 </ul>
             </div>
+           
         </div>
     </div>
 
@@ -35,7 +55,7 @@
         </footer>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
