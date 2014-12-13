@@ -22,7 +22,8 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                @Html.ActionLink("ETF Forum", "Index", "Home", new { @class = "navbar-brand" })
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">ETF Forum</a>
+                
             </div>
 
             <!-- Collection of nav links and other content for toggling -->
@@ -41,7 +42,11 @@
                         <li><a href="#">@User.Identity.Name</a></li>
                         <li>@Html.ActionLink("Logout", "LogOut", "Auth")</li>
                     }
-                    <li>@Html.ActionLink("Registracija", "Register", "Auth")</li>
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Prijava", "LogIn", "Auth")</li>
+                        <li>@Html.ActionLink("Registracija", "Register", "Auth")</li>
+                    }
                 </ul>
             </div>
            
@@ -50,6 +55,9 @@
 
     <div class="container body-content">
         @RenderBody()
+    </div>
+
+    <div class="container">
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
@@ -58,5 +66,6 @@
 
     <script src="~/Scripts/jquery-2.1.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/functions.js"></script>
 </body>
 </html>

@@ -1,23 +1,36 @@
-﻿using System;
+﻿using ForumETF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace ForumETF.Controllers
 {   
     [Authorize]
     public class HomeController : Controller
     {
-        // GET: Home
-        public ActionResult Index()
-        {
-            // Ovo je radilo u prvom slucaju bez citanja iz baze
-            //var userClaims = User.Identity as ClaimsIdentity;
-            //ViewBag.Country = userClaims.FindFirst(ClaimTypes.Country).Value;
+        private AppDbContext db = new AppDbContext();
 
-            return View();
+        // GET: Home
+        [HttpGet]
+        public async Task<ActionResult> Index()
+        {
+            var posts = await db.Posts.ToListAsync();
+
+            return View(posts);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
 

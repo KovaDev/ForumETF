@@ -1,8 +1,31 @@
-﻿
+﻿@model IEnumerable<ForumETF.Models.Post>
 @{
     ViewBag.Title = "Index";
 }
 
-<h1>Dobrodosli na pocetnu stranicu</h1>
-<h2>@ViewBag.Country</h2>
+<h2>Dobrodosli na pocetnu stranicu</h2>
+
+<div class="row">
+    <form>
+        <div class="form-group">
+            <label>Pretraga</label>
+            <input type="text" class="form-control" id="search" value="Unesite pojam za pretragu" />
+        </div>
+        <button type="submit" class="btn btn-primary">Pretraga</button>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        @foreach (var item in Model)
+        {
+            <h3>@item.Title</h3>
+            <p>@item.Content</p>
+            <br />
+        }
+    </div>
+    <div class="col-md-4">
+        <p>afafaf</p>
+    </div>
+</div>
 

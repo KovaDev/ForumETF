@@ -27,7 +27,7 @@ namespace ForumETF
 
             UserManagerFactory = () =>
             {
-                var userManager = new UserManager<AppUser>(new UserStore<AppUser>(new DbContext()));
+                var userManager = new UserManager<AppUser>(new UserStore<AppUser>(new AppDbContext()));
 
                 userManager.UserValidator = new UserValidator<AppUser>(userManager)
                 {

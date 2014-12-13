@@ -9,13 +9,16 @@ namespace ForumETF.Models
 {
     public class LoginModel
     {
-        [Required]  
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Polje je obavezno !")]
+        public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Polje je obavezno !")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Polje je obavezno !")]  
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
 
         [HiddenInput]
         public string ReturnUrl { get; set; }

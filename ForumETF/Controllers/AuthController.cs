@@ -29,6 +29,7 @@ namespace ForumETF.Controllers
 
         // GET: Auth
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult LogIn(string returnUrl)
         {
             var model = new LoginModel
@@ -40,6 +41,7 @@ namespace ForumETF.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> LogIn(LoginModel model)
         {
             if(!ModelState.IsValid)
@@ -47,7 +49,7 @@ namespace ForumETF.Controllers
                 return View(); // ako je doslo do problema, forma se ponovo prikazuje
             }
 
-            var user = await userManager.FindAsync(model.Email, model.Password);
+            var user = await userManager.FindAsync(model.UserName, model.Password);
 
             if (user != null)
             {
@@ -84,7 +86,9 @@ namespace ForumETF.Controllers
             // klasa AppUser nasledjuje IdentityUser i samim tim ima sve njene propertije
             var user = new AppUser
             {
-                UserName = model.Email,
+                UserName = model.UserName,
+                Email = model.Email,
+                //UserName = model.Email,
                 Country = model.Country
             };
 
@@ -100,7 +104,7 @@ namespace ForumETF.Controllers
                 var authManager = ctx.Authentication;
 
                 //GetAuthenticationManager().SignIn(identity);
-                authManager.SignIn(identity);
+                //authManager.SignIn(identity);
 
                 return RedirectToAction("index", "home");
             }
