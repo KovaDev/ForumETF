@@ -1,12 +1,16 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+    padding-bottom: 100px;
+    position: relative;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+    padding-top: 50px;
+    padding-bottom: 100px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -14,5 +18,20 @@ input,
 select,
 textarea {
     /*max-width: 280px;*/
+}
+
+#search-label {
+    position: relative;
+    top: 10px;
+    left: -12px;
+}
+
+#main-footer {
+    position: absolute;
+    height: 60px;
+    background: #263238;
+    width: 100%;
+    bottom: 0;
+    border-top: solid #FF3D00 4px;
 }
 

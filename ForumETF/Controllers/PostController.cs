@@ -21,19 +21,13 @@ namespace ForumETF.Controllers
             this.manager = new UserManager<AppUser>(new UserStore<AppUser>(db));
     	}
 
-        // GET: Post
-        public ActionResult Index()
-        {
-            //return View(await db.Posts.ToListAsync());
-            return View();
-        }
-
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
+        [HttpPost]
         public async Task<ActionResult> Create(Post model)
         {
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());

@@ -3,16 +3,25 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Dobrodosli na pocetnu stranicu</h2>
 
-<div class="row">
-    <form>
-        <div class="form-group">
-            <label>Pretraga</label>
-            <input type="text" class="form-control" id="search" value="Unesite pojam za pretragu" />
-        </div>
-        <button type="submit" class="btn btn-primary">Pretraga</button>
-    </form>
+<!-- search row -->
+<div class="row" id="search-section">
+    <div class="col-md-8">
+        <form>
+            <div class="col-md-1" id="search-label">
+                <i class="fa fa-search fa-2x"></i>
+            </div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <!--<label>Pretraga</label>-->
+                    <input type="text" class="form-control" id="search" value="Unesite pojam za pretragu" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Pretraga</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="row">
@@ -21,11 +30,40 @@
         {
             <h3>@item.Title</h3>
             <p>@item.Content</p>
+            <hr />
             <br />
         }
     </div>
-    <div class="col-md-4">
-        <p>afafaf</p>
+    <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-12">
+            <h3>Kategorije</h3>
+            <br />
+            <nav>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#">Kategorija 1</a></li>
+                    <li class="list-group-item"><a href="#">Kategorija 2</a></li>
+                    <li class="list-group-item"><a href="#">Kategorija 3</a></li>
+                    <li class="list-group-item"><a href="#">Kategorija 4</a></li>
+                    <li class="list-group-item"><a href="#">Kategorija 5</a></li>
+                    <li class="list-group-item"><a href="#">Kategorija 6</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-12">
+            <h3>Tag cloud</h3>
+            <br />
+            <nav>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#">Matematika</a></li>
+                    <li class="list-group-item"><a href="#">Fizika</a></li>
+                    <li class="list-group-item"><a href="#">Objektno orijentisano programiranje</a></li>
+                    <li class="list-group-item"><a href="#">Programski jezici</a></li>
+                    <li class="list-group-item"><a href="#">Opsti smjer</a></li>
+                    <li class="list-group-item"><a href="#">Osnovi elektrotehnike 2</a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
+
 </div>
 

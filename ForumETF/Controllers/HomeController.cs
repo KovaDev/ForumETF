@@ -24,6 +24,16 @@ namespace ForumETF.Controllers
             return View(posts);
         }
 
+        public ActionResult Categories()
+        {
+            return null;
+        }
+
+        public ActionResult Tags()
+        {
+            return null;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -32,7 +42,5 @@ namespace ForumETF.Controllers
             }
             base.Dispose(disposing);
         }
-
-
     }
 }
