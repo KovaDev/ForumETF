@@ -12,8 +12,11 @@ namespace ForumETF.Models
         public string Content { get; set; }
         public int Votes { get; set; }
         public bool IsApproved { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public virtual AppUser User { get; set; }
+        public virtual Category Category { get; set; }
+
         public virtual ICollection<Tag> Tags { get; set; }
     }
 }

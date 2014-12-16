@@ -39,6 +39,7 @@ namespace ForumETF.Controllers
                 Content = model.Content,
                 Votes = model.Votes,
                 IsApproved = false,
+                CreatedAt = DateTime.Now,
                 User = currentUser
             };
 
@@ -50,7 +51,6 @@ namespace ForumETF.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
-
             return View(post);
         }
 

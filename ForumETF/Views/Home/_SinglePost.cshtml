@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ForumETF.Models.Post>
+
+@foreach (var item in Model)
+{
+    <header class="row">
+        <h3>@Html.ActionLink(item.Title, "Details", "Post", new { id = item.PostId }, null)</h3>
+    </header>
+    <div class="row">
+        <p>@item.Content</p>
+    </div>
+    <footer class="row post-footer">
+        <i class="fa fa-user"></i>&nbsp;autor: Ivan | 
+        <i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014 |
+        <i class="fa fa-comments"></i>&nbsp;broj komentara 7 |
+        <i class="fa fa-reply"></i>&nbsp;broj odgovora: 2
+    </footer>
+}

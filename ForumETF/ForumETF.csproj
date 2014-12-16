@@ -163,6 +163,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,9 +175,18 @@
     <Compile Include="Migrations\201412162047186_ManyToManyPostTags.Designer.cs">
       <DependentUpon>201412162047186_ManyToManyPostTags.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412162231510_AddedPostCreateDateAndTime.cs" />
+    <Compile Include="Migrations\201412162231510_AddedPostCreateDateAndTime.Designer.cs">
+      <DependentUpon>201412162231510_AddedPostCreateDateAndTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412162312559_CategoryTableCreatedAndSeeded.cs" />
+    <Compile Include="Migrations\201412162312559_CategoryTableCreatedAndSeeded.Designer.cs">
+      <DependentUpon>201412162312559_CategoryTableCreatedAndSeeded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\AppDbContext.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
@@ -193,6 +203,7 @@
     <Content Include="Views\Post\Create.cshtml" />
     <Content Include="Views\Post\Details.cshtml" />
     <Content Include="Views\Post\404.cshtml" />
+    <Content Include="Views\Home\_SinglePost.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -203,6 +214,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Views\Tag\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412122223256_InitialCreate.resx">
@@ -210,6 +222,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412162047186_ManyToManyPostTags.resx">
       <DependentUpon>201412162047186_ManyToManyPostTags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412162231510_AddedPostCreateDateAndTime.resx">
+      <DependentUpon>201412162231510_AddedPostCreateDateAndTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412162312559_CategoryTableCreatedAndSeeded.resx">
+      <DependentUpon>201412162312559_CategoryTableCreatedAndSeeded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

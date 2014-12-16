@@ -36,3 +36,7 @@ textarea {
     border-top: solid #FF3D00 4px;
 }
 
+#post-footer {
+    height: auto;
+    width: 100%;
+}
