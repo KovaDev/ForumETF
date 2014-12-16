@@ -170,10 +170,15 @@
     <Compile Include="Migrations\201412122223256_InitialCreate.Designer.cs">
       <DependentUpon>201412122223256_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412162047186_ManyToManyPostTags.cs" />
+    <Compile Include="Migrations\201412162047186_ManyToManyPostTags.Designer.cs">
+      <DependentUpon>201412162047186_ManyToManyPostTags.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="ViewModels\RegisterModel.cs" />
@@ -186,6 +191,8 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Post\Create.cshtml" />
+    <Content Include="Views\Post\Details.cshtml" />
+    <Content Include="Views\Post\404.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -200,6 +207,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412122223256_InitialCreate.resx">
       <DependentUpon>201412122223256_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412162047186_ManyToManyPostTags.resx">
+      <DependentUpon>201412162047186_ManyToManyPostTags.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

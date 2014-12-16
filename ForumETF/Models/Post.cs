@@ -14,5 +14,6 @@ namespace ForumETF.Models
         public bool IsApproved { get; set; }
 
         public virtual AppUser User { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

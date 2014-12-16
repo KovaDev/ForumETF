@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
+using System.Net;
 
 namespace ForumETF.Controllers
 {
@@ -49,6 +50,25 @@ namespace ForumETF.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
+
+            return View(post);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Details(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Post post = await db.Posts.FindAsync(id);
+
+            if (post == null)
+            {
+                //return HttpNotFound();
+                return View("404");
+            }
 
             return View(post);
         }
