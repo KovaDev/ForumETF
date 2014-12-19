@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using System.Net;
+using ForumETF.ViewModels;
 
 namespace ForumETF.Controllers
 {
@@ -25,13 +26,40 @@ namespace ForumETF.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            var categories = db.Categories.ToList();
+
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "Izaberite kategoriju", Value = "0" });
+
+            int counter = 1;
+
+            foreach (var c in categories)
+            {
+                items.Add(new SelectListItem { Text = c.CategoryName, Value = counter.ToString()});
+                counter++;
+            }
+
+            ViewBag.Categories = items;
+
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Post model)
+        public async Task<ActionResult> Create(CreatePostViewModel model)
         {
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
+
+            ICollection<Tag> tagList = new List<Tag>();
+            
+            string[] tagNames = model.Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string tagName in tagNames)
+            {
+                tagList.Add(GetTag(tagName));
+            }
+
+            //Category cat = await db.Categories.FindAsync(1);
+            Category cat = db.Categories.Where(c => c.CategoryName == model.Category).FirstOrDefault();
 
             var post = new Post
             {
@@ -40,7 +68,9 @@ namespace ForumETF.Controllers
                 Votes = model.Votes,
                 IsApproved = false,
                 CreatedAt = DateTime.Now,
-                User = currentUser
+                User = currentUser,
+                Category = cat,
+                Tags = tagList
             };
 
             if (ModelState.IsValid)
@@ -71,6 +101,11 @@ namespace ForumETF.Controllers
             }
 
             return View(post);
+        }
+
+        private Tag GetTag(string tagName)
+        {
+            return db.Tags.Where(t => t.TagName == tagName).FirstOrDefault() ?? new Tag { TagName = tagName };
         }
 
     }

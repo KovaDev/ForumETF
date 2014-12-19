@@ -19,7 +19,8 @@ namespace ForumETF.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var posts = await db.Posts.ToListAsync();
+            //var posts = await db.Posts.ToListAsync();
+            var posts = await db.Posts.OrderByDescending(p => p.CreatedAt).ToListAsync();
 
             return View(posts);
         }
