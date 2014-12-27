@@ -48,3 +48,16 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.PostId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-4">
+        <div class="form-group">
+            @Html.Label("Komentar: ", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextArea("Komentar na post")
+            </div>
+        </div>
+    </div>
+</div>
