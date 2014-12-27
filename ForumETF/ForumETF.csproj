@@ -182,8 +182,12 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Web.config" />
@@ -200,6 +204,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -227,7 +232,12 @@
     <Compile Include="Migrations\201412182346097_CommentModelCreated.Designer.cs">
       <DependentUpon>201412182346097_CommentModelCreated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412272101271_AnswerModelCreated.cs" />
+    <Compile Include="Migrations\201412272101271_AnswerModelCreated.Designer.cs">
+      <DependentUpon>201412272101271_AnswerModelCreated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\Category.cs" />
@@ -257,6 +267,9 @@
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Post\_AddComment.cshtml" />
+    <Content Include="Views\Post\_Comments.cshtml" />
+    <Content Include="Views\Comment\_Comments.cshtml" />
+    <Content Include="Views\Home\_CategoriesWidget.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -285,6 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412182346097_CommentModelCreated.resx">
       <DependentUpon>201412182346097_CommentModelCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412272101271_AnswerModelCreated.resx">
+      <DependentUpon>201412272101271_AnswerModelCreated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<ForumETF.Models.Category>
+
+<div class="col-md-12">
+    <h3>Kategorije</h3>
+    <br />
+    <nav>
+        <ul class="list-group">
+            @foreach (var category in Model)
+            {
+                <li class="list-group-item"><a href="#">@category.CategoryName</a></li>
+            }
+        </ul>
+    </nav>
+</div>

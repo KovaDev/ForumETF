@@ -8,6 +8,7 @@ namespace ForumETF.ViewModels
 {
     public class PostDetailsViewModel
     {
+        public int PostID { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public int Votes { get; set; }

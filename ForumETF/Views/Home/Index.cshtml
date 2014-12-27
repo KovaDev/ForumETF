@@ -29,7 +29,7 @@
         @Html.Partial("_SinglePost")
     </div>
     <div class="col-md-3 col-md-offset-1">
-        <div class="col-md-12">
+        @*<div class="col-md-12">
             <h3>Kategorije</h3>
             <br />
             <nav>
@@ -42,7 +42,12 @@
                     <li class="list-group-item"><a href="#">Kategorija 6</a></li>
                 </ul>
             </nav>
-        </div>
+        </div>*@
+
+        @{
+            Html.RenderAction("Categories", "Home");
+        } 
+
         <div class="col-md-12">
             <h3>Tag cloud</h3>
             <br />

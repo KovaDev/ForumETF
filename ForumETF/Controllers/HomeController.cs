@@ -19,15 +19,17 @@ namespace ForumETF.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            //var posts = await db.Posts.ToListAsync();
             var posts = await db.Posts.OrderByDescending(p => p.CreatedAt).ToListAsync();
 
             return View(posts);
         }
 
+        [ChildActionOnly]
         public ActionResult Categories()
         {
-            return null;
+            var categories = db.Categories.ToList();
+
+            return PartialView("_CategoriesWidget", categories);
         }
 
         public ActionResult Tags()

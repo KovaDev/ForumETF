@@ -94,13 +94,23 @@ namespace ForumETF.Controllers
 
             Post post = await db.Posts.FindAsync(id);
 
+            PostDetailsViewModel viewModel = new PostDetailsViewModel
+            {
+                PostID = post.PostId,
+                Title = post.Title,
+                Content = post.Content,
+                Votes = post.Votes,
+                Tags = post.Tags.ToList(),
+                Comments = post.Comments.ToList()
+            };
+
             if (post == null)
             {
                 //return HttpNotFound();
                 return View("404");
             }
 
-            return View(post);
+            return View(viewModel);
         }
 
         private Tag GetTag(string tagName)

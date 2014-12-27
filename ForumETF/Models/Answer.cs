@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ForumETF.Models
 {
-    public class Comment
+    public class Answer
     {
-        public int CommentId { get; set; }
+        public int AnswerId { get; set; }
         public string Content { get; set; }
         public bool IsApproved { get; set; }
         public DateTime CreatedAt { get; set; }

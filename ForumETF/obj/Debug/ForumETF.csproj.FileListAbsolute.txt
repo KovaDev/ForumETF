@@ -46,3 +46,4 @@ C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.AddedPostCreateDateAndTime.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.CategoryTableCreatedAndSeeded.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.CommentModelCreated.resources
+C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.AnswerModelCreated.resources
