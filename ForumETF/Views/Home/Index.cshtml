@@ -29,23 +29,9 @@
         @Html.Partial("_SinglePost")
     </div>
     <div class="col-md-3 col-md-offset-1">
-        @*<div class="col-md-12">
-            <h3>Kategorije</h3>
-            <br />
-            <nav>
-                <ul class="list-group">
-                    <li class="list-group-item"><a href="#">Kategorija 1</a></li>
-                    <li class="list-group-item"><a href="#">Kategorija 2</a></li>
-                    <li class="list-group-item"><a href="#">Kategorija 3</a></li>
-                    <li class="list-group-item"><a href="#">Kategorija 4</a></li>
-                    <li class="list-group-item"><a href="#">Kategorija 5</a></li>
-                    <li class="list-group-item"><a href="#">Kategorija 6</a></li>
-                </ul>
-            </nav>
-        </div>*@
-
+       
         @{
-            Html.RenderAction("Categories", "Home");
+            Html.RenderAction("CategoriesWidget", "Home");
         } 
 
         <div class="col-md-12">

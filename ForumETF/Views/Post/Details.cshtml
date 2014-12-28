@@ -72,15 +72,51 @@
 {
     <div class="row">
         <div class="col-md-8 col-md-offset-4">
+
             <div class="form-group">
-                @Html.Label("Komentar: ", new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextArea("comment_body")
+             
+                <div class="col-md-12" id="markdown-wrapper">
+                    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#markdown" id="markdown-toolbar">
+                        <div class="btn-group">
+                            <a class="btn" title="" data-edit="bold" data-original-title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                            <a class="btn" title="" data-edit="italic" data-original-title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                            <a class="btn" title="" data-edit="strikethrough" data-original-title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+                            <a class="btn" title="" data-edit="underline" data-original-title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" title="" data-edit="insertunorderedlist" data-original-title="Bullet list"><i class="fa fa-list-ul"></i></a>
+                            <a class="btn" title="" data-edit="insertorderedlist" data-original-title="Number list"><i class="fa fa-list-ol"></i></a>
+                            <a class="btn" title="" data-edit="outdent" data-original-title="Reduce indent (Shift+Tab)"><i class="fa fa-outdent"></i></a>
+                            <a class="btn" title="" data-edit="indent" data-original-title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" title="" data-edit="justifyleft" data-original-title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                            <a class="btn" title="" data-edit="justifycenter" data-original-title="Center (Ctrl/Cmd+E)">
+                                <i class="fa fa-align-center"></i>
+                            </a>
+                            <a class="btn" title="" data-edit="justifyright" data-original-title="Align Right (Ctrl/Cmd+R)">
+                                <i class="fa fa-align-right"></i>
+                            </a>
+                            <a class="btn" title="" data-edit="justifyfull" data-original-title="Justify (Ctrl/Cmd+J)">
+                                <i class="fa fa-align-justify"></i>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" title="" data-edit="undo" data-original-title="Undo (Ctrl/Cmd+Z)">
+                                <i class="fa fa-undo"></i>
+                            </a>
+                            <a class="btn" title="" data-edit="redo" data-original-title="Redo (Ctrl/Cmd+Y)">
+                                <i class="fa fa-repeat"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="markdown" contenteditable="true"></div>
                 </div>
             </div>
+
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Ostavi komentar" class="btn btn-default" />
+                <div class="col-md-10">
+                    <input type="submit" value="Ostavi komentar" class="btn btn-default" id="comment" />
                 </div>
             </div>
         </div>

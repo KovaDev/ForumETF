@@ -25,14 +25,15 @@ namespace ForumETF.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult Categories()
+        public ActionResult CategoriesWidget()
         {
             var categories = db.Categories.ToList();
 
             return PartialView("_CategoriesWidget", categories);
         }
 
-        public ActionResult Tags()
+        [ChildActionOnly]
+        public ActionResult TagsWidget()
         {
             return null;
         }

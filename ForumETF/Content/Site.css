@@ -40,3 +40,36 @@ textarea {
     height: auto;
     width: 100%;
 }
+
+#markdown {
+    height: 200px;
+    border: solid #2196f3 4px;
+    width: 100%;
+    padding-bottom: 50px;
+    overflow-y: scroll;
+}
+
+#markdown-toolbar {
+    padding-bottom: 10px;
+}
+
+#markdown-wrapper {
+    padding-bottom: 10px;
+}
+
+#tag {
+    
+}
+
+.tags-row {
+    padding-top: 10px;
+}
+
+.tags-row a {
+    background: #607d8b;
+    font-size: 12px;
+    height: 24px;
+    padding-top: 0px;
+}
+
+

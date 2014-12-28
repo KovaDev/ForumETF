@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Post", FormMethod.Post, new { id = "createPostForm"})) 
 {
     @Html.AntiForgeryToken()
     
@@ -50,7 +50,10 @@
             @Html.Label("Kategorija: ", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @*@Html.DropDownList("Country", ViewData["Countries"] as SelectList, new { @class = "form-control" })*@
-                @Html.DropDownList("Categories")
+                @*@Html.DropDownList("Categories")*@
+                
+                @Html.DropDownListFor(model => model.SelectedId, Model.Categories, "-- Izaberite kategoriju --")
+
             </div>
         </div>
 

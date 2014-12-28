@@ -26,41 +26,34 @@ namespace ForumETF.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var categories = db.Categories.ToList();
-
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem { Text = "Izaberite kategoriju", Value = "0" });
-
-            int counter = 1;
-
-            foreach (var c in categories)
+            CreatePostViewModel viewModel = new CreatePostViewModel
             {
-                items.Add(new SelectListItem { Text = c.CategoryName, Value = counter.ToString()});
-                counter++;
-            }
-
-            ViewBag.Categories = items;
-
-            return View();
+                Categories = new SelectList(CategoriesDropdownList(), "Value", "Text")
+            };
+           
+            return View(viewModel);
         }
 
         [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)] // na ovaj nacin ce akcija prihvatati i druge vrijednosti osim modela MOZDA :D
         public async Task<ActionResult> Create(CreatePostViewModel model)
         {
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
 
             ICollection<Tag> tagList = new List<Tag>();
-            
-            string[] tagNames = model.Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (string tagName in tagNames)
+            if (!String.IsNullOrEmpty(model.Tags) && !String.IsNullOrWhiteSpace(model.Tags))
             {
-                tagList.Add(GetTag(tagName));
+                string[] tagNames = model.Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string tagName in tagNames)
+                {
+                    tagList.Add(GetTag(tagName));
+                }
             }
-
-            //Category cat = await db.Categories.FindAsync(1);
-            Category cat = db.Categories.Where(c => c.CategoryName == model.Category).FirstOrDefault();
-
+            
+            Category cat = await db.Categories.FindAsync(model.SelectedId);
+            
             var post = new Post
             {
                 Title = model.Title,
@@ -85,7 +78,7 @@ namespace ForumETF.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -116,6 +109,41 @@ namespace ForumETF.Controllers
         private Tag GetTag(string tagName)
         {
             return db.Tags.Where(t => t.TagName == tagName).FirstOrDefault() ?? new Tag { TagName = tagName };
+        }
+
+        private List<SelectListItem> CategoriesDropdownList()
+        {
+            // 1. NACIN
+            //var categories = db.Categories.ToList();
+
+            //List<SelectListItem> list = new List<SelectListItem>();
+
+            //foreach (var c in categories)
+            //{
+            //    list.Add(new SelectListItem { Text = c.CategoryName, Value = c.CategoryId.ToString() });
+            //}
+
+            //return list;
+
+            // 2. NACIN
+            //var list = db.Categories.Select(c => new SelectListItem
+            //    {
+            //        Value = c.CategoryId.ToString(),
+            //        Text = c.CategoryName
+            //    });
+
+            //return list.ToList();
+
+            // 3 NACIN
+            var list = from c in db.Categories
+                       select new SelectListItem
+                       {
+                           Value = c.CategoryId.ToString(),
+                           Text = c.CategoryName
+                       };
+
+            return list.ToList();
+
         }
 
     }

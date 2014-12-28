@@ -41,7 +41,6 @@ C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\Micros
 C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.InitialCreate.resources
 C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.csproj.GenerateResource.Cache
-C:\Users\Ivan\Documents\Visual Studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.csprojResolveAssemblyReference.cache
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.ManyToManyPostTags.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.AddedPostCreateDateAndTime.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.CategoryTableCreatedAndSeeded.resources

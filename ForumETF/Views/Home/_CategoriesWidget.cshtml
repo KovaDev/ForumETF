@@ -7,7 +7,9 @@
         <ul class="list-group">
             @foreach (var category in Model)
             {
-                <li class="list-group-item"><a href="#">@category.CategoryName</a></li>
+                <li class="list-group-item">
+                    <i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;<a href="#">@category.CategoryName</a>&nbsp;(@category.Posts.Count)
+                </li>
             }
         </ul>
     </nav>
