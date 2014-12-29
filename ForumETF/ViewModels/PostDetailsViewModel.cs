@@ -13,6 +13,7 @@ namespace ForumETF.ViewModels
         public string Content { get; set; }
         public int Votes { get; set; }
 
+        public AppUser User { get; set; }
         public List<Tag> Tags { get; set; }
         public List<Category> Categories { get; set; }
         public List<Comment> Comments { get; set; }

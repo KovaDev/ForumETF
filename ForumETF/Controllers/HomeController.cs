@@ -32,10 +32,11 @@ namespace ForumETF.Controllers
             return PartialView("_CategoriesWidget", categories);
         }
 
-        [ChildActionOnly]
+        //[ChildActionOnly]
+        [Route("Tag/Tagovi")]
         public ActionResult TagsWidget()
         {
-            return null;
+            return Content("Route test");
         }
 
         protected override void Dispose(bool disposing)

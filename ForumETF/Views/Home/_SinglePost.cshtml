@@ -2,13 +2,13 @@
 
 @foreach (var item in Model)
 {
-    <header class="row post-title">
+    <header class="col-md-12 post-title">
         <h3>@Html.ActionLink(item.Title, "Details", "Post", new { id = item.PostId }, null)</h3>
     </header>
-    <div class="row">
+    <div class="col-md-12">
         <p>@item.Content</p>
     </div>
-    <footer class="row post-footer">
+    <footer class="col-md-12 post-footer">
         <div>
             <i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@item.User.UserName</a> |
             <i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014 |
@@ -18,7 +18,7 @@
         </div>
         <div class="tags-row">
             @foreach (var tag in item.Tags)
-            { 
+            {
                 <a href="#" class="btn btn-primary tag">@tag.TagName</a>
             }
         </div>

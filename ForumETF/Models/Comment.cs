@@ -7,6 +7,12 @@ namespace ForumETF.Models
 {
     public class Comment
     {
+        public Comment()
+        {
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+        }
+
         public int CommentId { get; set; }
         public string Content { get; set; }
         public bool IsApproved { get; set; }

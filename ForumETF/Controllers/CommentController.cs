@@ -26,14 +26,15 @@ namespace ForumETF.Controllers
             return View();
         }
 
-        public PartialViewResult Create(string comment_body, int post)
+        [HttpPost]
+        public PartialViewResult Create(int post, string commentContent)
         {
             var currentUser = manager.FindById(User.Identity.GetUserId());
             var existing_post = db.Posts.Find(post);
 
             Comment comment = new Comment
             {
-                Content = comment_body,
+                Content = commentContent,
                 IsApproved = true,
                 User = currentUser,
                 Post = existing_post
@@ -42,9 +43,7 @@ namespace ForumETF.Controllers
             db.Comments.Add(comment);
             db.SaveChanges();
 
-            var comments = db.Comments.ToList();
-
-            return PartialView("_Comments", comments);
+            return PartialView("_NewComment", comment);
         }
 
     }

@@ -177,7 +177,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Scripts\functions.js" />
+    <Content Include="Scripts\Custom\functions.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -192,6 +192,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -248,7 +252,6 @@
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
-    <Compile Include="ViewModels\CategoriesWidgetViewModel.cs" />
     <Compile Include="ViewModels\CreatePostViewModel.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="ViewModels\PostDetailsViewModel.cs" />
@@ -272,8 +275,10 @@
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Post\_AddComment.cshtml" />
     <Content Include="Views\Post\_Comments.cshtml" />
-    <Content Include="Views\Comment\_Comments.cshtml" />
     <Content Include="Views\Home\_CategoriesWidget.cshtml" />
+    <Content Include="Views\Tag\Index.cshtml" />
+    <Content Include="Views\Comment\_NewComment.cshtml" />
+    <Content Include="Views\Post\_RichEditor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -286,7 +291,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="HtmlHelpers\" />
     <Folder Include="Views\Answer\" />
-    <Folder Include="Views\Tag\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412122223256_InitialCreate.resx">

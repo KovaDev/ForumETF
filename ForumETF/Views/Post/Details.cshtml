@@ -4,123 +4,94 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="row">
 
-<div id="divResponse">
-    <h4>Post</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <header class="col-md-12">
+        <h3>@Model.Title</h3>
+    </header>
+    <div class="col-md-12">
+        <div class="col-md-1">
+            <span class="vote-span"><a href="#"><i class="fa fa-angle-up fa-3x"></i></a></span>
+            <span class="vote-span" id="vote-count">@Model.Votes</span>
+            <span class="vote-span"><a href="#"><i class="fa fa-angle-down fa-3x"></i></a></span>
+            <span class="vote-span"><a href="#"><i class="fa fa-star-o fa-3x" style="color: yellow;"></i></a></span>
+        </div>
+        <div class="col-md-11">
+            <p>
+                @Model.Content
+            </p>
+        </div>
+        <footer class="col-md-11 col-md-offset-1">
+            <div>
+                <i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@Model.User.UserName</a>&nbsp; | &nbsp;
+                <i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014 &nbsp; | &nbsp;
+                <i class="fa fa-comments"></i>&nbsp;broj komentara: @Model.Comments.Count &nbsp; | &nbsp;
+                <i class="fa fa-reply"></i>&nbsp;broj odgovora: 5
+            </div>
+            <div class="tags-row">
+                @foreach (var tag in Model.Tags)
+                {
+                    <a href="#" class="btn btn-primary tag">@tag.TagName</a>
+                }
+            </div>
+        </footer>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Votes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Votes)
-        </dd>
-
-    </dl>
 </div>
-@*<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PostId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
 
 <div class="row">
-    @foreach (var comment in Model.Comments)
-    { 
-        <p>
-            @comment.Content
-        </p>
-        <br />
-    }
+    <div class="col-md-8 col-md-offset-4" id="comments-area">
+        @foreach (var comment in Model.Comments)
+        {   
+            <div class="col-md-12 comment">
+                <div class="col-md-12">
+                    @comment.Content
+                </div>
+                <div class="col-md-12">
+                    <i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@comment.User.UserName</a>&nbsp; | &nbsp;
+                    <i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-8 col-md-offset-4">
+        <hr />
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <a href="#" id="new-comment-link" class="btn-link">Dodajte komentar&nbsp;<i class="fa fa-angle-down"></i></a>
+            </div>
+        </div>
+        <div class="col-md-12" id="create-comment-form">
+            @using (Ajax.BeginForm("Create", "Comment", new { post = @Model.PostID }, new AjaxOptions{
+                UpdateTargetId="comments-area", 
+                HttpMethod = "Post", 
+                InsertionMode = InsertionMode.InsertAfter}))
+            {
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <label>Komentar:</label>
+                    </div>
+                    <div class="col-md-10 col-md-offset-2">
+                        <textarea id="comment-textarea" name="commentContent"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Ostavite komentar" class="btn btn-danger" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
 
 <hr />
 
-
-
-@{
-    AjaxOptions options = new AjaxOptions();
-    options.HttpMethod = "Post";
-    //options.OnBegin = "OnBegin";
-    //options.OnFailure = "OnFailure";
-    //options.OnComplete = "OnComplete";
-    //options.OnSuccess = "OnSuccess";
-    //options.LoadingElementId = "divProgress";
-    //options.LoadingElementDuration = 1000;
-    options.UpdateTargetId = "divResponse";
-    options.InsertionMode = InsertionMode.InsertAfter;
-}
-
-@using (Ajax.BeginForm("Create", "Comment", new { post = Model.PostID }, options))
-{
-    <div class="row">
-        <div class="col-md-8 col-md-offset-4">
-
-            <div class="form-group">
-             
-                <div class="col-md-12" id="markdown-wrapper">
-                    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#markdown" id="markdown-toolbar">
-                        <div class="btn-group">
-                            <a class="btn" title="" data-edit="bold" data-original-title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
-                            <a class="btn" title="" data-edit="italic" data-original-title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
-                            <a class="btn" title="" data-edit="strikethrough" data-original-title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
-                            <a class="btn" title="" data-edit="underline" data-original-title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn" title="" data-edit="insertunorderedlist" data-original-title="Bullet list"><i class="fa fa-list-ul"></i></a>
-                            <a class="btn" title="" data-edit="insertorderedlist" data-original-title="Number list"><i class="fa fa-list-ol"></i></a>
-                            <a class="btn" title="" data-edit="outdent" data-original-title="Reduce indent (Shift+Tab)"><i class="fa fa-outdent"></i></a>
-                            <a class="btn" title="" data-edit="indent" data-original-title="Indent (Tab)"><i class="fa fa-indent"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn" title="" data-edit="justifyleft" data-original-title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
-                            <a class="btn" title="" data-edit="justifycenter" data-original-title="Center (Ctrl/Cmd+E)">
-                                <i class="fa fa-align-center"></i>
-                            </a>
-                            <a class="btn" title="" data-edit="justifyright" data-original-title="Align Right (Ctrl/Cmd+R)">
-                                <i class="fa fa-align-right"></i>
-                            </a>
-                            <a class="btn" title="" data-edit="justifyfull" data-original-title="Justify (Ctrl/Cmd+J)">
-                                <i class="fa fa-align-justify"></i>
-                            </a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn" title="" data-edit="undo" data-original-title="Undo (Ctrl/Cmd+Z)">
-                                <i class="fa fa-undo"></i>
-                            </a>
-                            <a class="btn" title="" data-edit="redo" data-original-title="Redo (Ctrl/Cmd+Y)">
-                                <i class="fa fa-repeat"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div id="markdown" contenteditable="true"></div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-10">
-                    <input type="submit" value="Ostavi komentar" class="btn btn-default" id="comment" />
-                </div>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-4">
+        @Html.Partial("_RichEditor")            
     </div>
-}
+</div>
+
 
 

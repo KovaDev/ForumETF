@@ -21,9 +21,9 @@ textarea {
 }
 
 #search-label {
-    position: relative;
+    /*position: relative;
     top: 10px;
-    left: -12px;
+    left: -12px;*/
 }
 
 #main-footer {
@@ -70,6 +70,33 @@ textarea {
     font-size: 12px;
     height: 24px;
     padding-top: 0px;
+}
+
+.vote-span {
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
+#vote-count {
+    font-size: 24px;
+}
+
+#comments-area {
+    padding-top: 20px;
+}
+
+.comment {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#create-comment-form {
+    display: none;
+}
+
+#comment-textarea {
+    width: 100%;
 }
 
 

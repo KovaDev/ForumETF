@@ -12,6 +12,7 @@ using ForumETF.ViewModels;
 
 namespace ForumETF.Controllers
 {
+    [RoutePrefix("Post")]
     public class PostController : Controller
     {
         private AppDbContext db = null;
@@ -78,14 +79,15 @@ namespace ForumETF.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Details(int? id)
+        [Route("Details/{postId:int}")]
+        public async Task<ActionResult> Details(int? postId)
         {
-            if (id == null)
+            if (postId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Post post = await db.Posts.FindAsync(id);
+            Post post = await db.Posts.FindAsync(postId);
 
             PostDetailsViewModel viewModel = new PostDetailsViewModel
             {
@@ -93,6 +95,7 @@ namespace ForumETF.Controllers
                 Title = post.Title,
                 Content = post.Content,
                 Votes = post.Votes,
+                User = post.User,
                 Tags = post.Tags.ToList(),
                 Comments = post.Comments.ToList()
             };
