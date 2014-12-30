@@ -60,8 +60,6 @@ namespace ForumETF.Controllers
                 Title = model.Title,
                 Content = model.Content,
                 Votes = model.Votes,
-                IsApproved = false,
-                CreatedAt = DateTime.Now,
                 User = currentUser,
                 Category = cat,
                 Tags = tagList
@@ -97,7 +95,8 @@ namespace ForumETF.Controllers
                 Votes = post.Votes,
                 User = post.User,
                 Tags = post.Tags.ToList(),
-                Comments = post.Comments.ToList()
+                Comments = post.Comments.ToList(),
+                Answers = post.Answers.ToList()
             };
 
             if (post == null)

@@ -34,7 +34,8 @@ namespace ForumETF.App_Start
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-                    "~/Scripts/Custom/functions.js"
+                    "~/Scripts/Custom/functions.js",
+                    "~/Scripts/Custom/bootstrap-validation.js"
                 ));
         }
 

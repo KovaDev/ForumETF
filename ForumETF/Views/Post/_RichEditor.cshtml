@@ -1,7 +1,7 @@
-﻿@using (Ajax.BeginForm("Create", "Comment", new { post = Model.PostID }, new AjaxOptions
+﻿@using (Ajax.BeginForm("Create", "Answer", new { post = Model.PostID }, new AjaxOptions
 {
     HttpMethod = "Post",
-    UpdateTargetId = "",
+    UpdateTargetId = "answers-area",
     InsertionMode = InsertionMode.InsertAfter
 }
         ))
@@ -46,10 +46,12 @@
             <div id="markdown" contenteditable="true"></div>
         </div>
     </div>
-
+    
+    <input type="hidden" name="answer" id="answer-hidden" value="" />
+    
     <div class="form-group">
         <div class="col-md-10">
-            <input type="submit" value="Ostavi komentar" class="btn btn-default" id="comment" />
+            <input type="submit" value="Ostavi komentar" class="btn btn-default" id="answer-submit" />
         </div>
     </div>
 }

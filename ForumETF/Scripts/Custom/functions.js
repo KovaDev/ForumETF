@@ -2,15 +2,15 @@
 $(document).ready(function () {
 
     $("#markdown").wysiwyg();
-    var commentForm = $("#create-comment-form");
+    //var commentForm = $("#create-comment-form");
 
     $("#new-comment-link").click(function (event) {
 
         event.preventDefault();
         
-        var content = $("#comment-textarea").text();
+        //var content = $("#commentTextarea").text();
 
-        $("#create-comment-form").slideToggle("fast");
+        $("#comment-form-wrapper").slideToggle("fast");
         
         //if (commentForm.css("display") == "none") {
         //    commentForm.slideToggle("fast");
@@ -19,53 +19,51 @@ $(document).ready(function () {
         //}
     });
 
-
-    //$(commentForm).submit(function (e) {
-    //    $.ajax({
-    //        url: '@Url.Action("Create", "Comment")',
-    //        type: "Post",
-    //        cache: false,
-    //        async: true,
-    //        dataType: 'json',
-    //        data: { content: content },
-    //        success: function (data) {
-    //            alert(data);
-    //        }
-    //    });
-    //    e.preventDefault();
-    //    e.unbind();
-    //});
-
-    //$(commentForm).submit();
-
-
-
-
-    $("#createPostForm").bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            Title: {
-                message: 'The username is not valid',
-                validators: {
-                    notEmpty: {
-                        message: 'Polje je obavezno!'
-                    },
-                }
-            },
-            Content: {
-                validators: {
-                    notEmpty: {
-                        message: 'The email is required and cannot be empty'
-                    },
-                }
-            }
+    $("#markdown").keyup(function () {
+        if ($("#markdown").html() == "") {
+            $("#answer-submit").prop("disabled", true)
+        } else if ($("#markdown").html() != "") {
+            $("#answer-submit").prop("disabled", false)
         }
-
     });
+
+    $("#answer-submit").bind("click", function () {
+        $("#answer-hidden").val($("#markdown").html().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+    });
+
+
+    //$("#createPostForm").bootstrapValidator({
+    //    message: 'This value is not valid',
+    //    feedbackIcons: {
+    //        valid: 'glyphicon glyphicon-ok',
+    //        invalid: 'glyphicon glyphicon-remove',
+    //        validating: 'glyphicon glyphicon-refresh'
+    //    },
+    //    fields: {
+    //        Title: {
+    //            message: 'The username is not valid',
+    //            validators: {
+    //                notEmpty: {
+    //                    message: 'Polje je obavezno!'
+    //                },
+    //            }
+    //        },
+    //        SelectedId: {
+    //            validators: {
+    //                notEmpty: {
+    //                    message: 'Morate izabrati neku od ponuđenih kategorija!'
+    //                }
+    //            }
+    //        },
+    //        Content: {
+    //            validators: {
+    //                notEmpty: {
+    //                    message: 'Polje je obavezno!'
+    //                },
+    //            }
+    //        }
+    //    }
+
+    //});
 
 });

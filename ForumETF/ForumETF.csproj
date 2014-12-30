@@ -177,6 +177,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\Custom\bootstrap-validation.js" />
     <Content Include="Scripts\Custom\functions.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -243,6 +244,10 @@
     <Compile Include="Migrations\201412272101271_AnswerModelCreated.Designer.cs">
       <DependentUpon>201412272101271_AnswerModelCreated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412301809383_AnswerAndPostModelsUpdated.cs" />
+    <Compile Include="Migrations\201412301809383_AnswerAndPostModelsUpdated.Designer.cs">
+      <DependentUpon>201412301809383_AnswerAndPostModelsUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AppUser.cs" />
@@ -279,6 +284,7 @@
     <Content Include="Views\Tag\Index.cshtml" />
     <Content Include="Views\Comment\_NewComment.cshtml" />
     <Content Include="Views\Post\_RichEditor.cshtml" />
+    <Content Include="Views\Answer\_NewAnswer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -290,7 +296,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="HtmlHelpers\" />
-    <Folder Include="Views\Answer\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412122223256_InitialCreate.resx">
@@ -310,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412272101271_AnswerModelCreated.resx">
       <DependentUpon>201412272101271_AnswerModelCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412301809383_AnswerAndPostModelsUpdated.resx">
+      <DependentUpon>201412301809383_AnswerAndPostModelsUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

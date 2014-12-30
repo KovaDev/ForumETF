@@ -49,11 +49,7 @@
         <div class="form-group">
             @Html.Label("Kategorija: ", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @*@Html.DropDownList("Country", ViewData["Countries"] as SelectList, new { @class = "form-control" })*@
-                @*@Html.DropDownList("Categories")*@
-                
                 @Html.DropDownListFor(model => model.SelectedId, Model.Categories, "-- Izaberite kategoriju --")
-
             </div>
         </div>
 

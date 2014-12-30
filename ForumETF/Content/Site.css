@@ -13,6 +13,20 @@
     padding-bottom: 100px;
 }
 
+/*#main-nav {
+    background: #424242;
+    color: #fff;
+    border-bottom: solid #03a9f4 5px;
+}
+
+    #main-nav a {
+        color: white;
+    }
+
+    #main-nav a:hover {
+        color:  #2196F3;         
+    }*/
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -91,12 +105,25 @@ textarea {
     padding-bottom: 10px;
 }
 
-#create-comment-form {
+#comment-form-wrapper {
     display: none;
 }
 
-#comment-textarea {
+#commentTextarea {
     width: 100%;
 }
 
+#answers-area .answer-wrapper {
+    /*padding-bottom: 40px;*/
+    margin-bottom: 20px;
+    background: #f5f5f5;
+}
 
+#answers-area .answer-wrapper .answer-content {
+    padding-top: 10px;
+}
+
+.post-wrapper {
+    background: #f5f5f5;
+    padding-bottom: 20px;
+}

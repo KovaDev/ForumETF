@@ -1,0 +1,22 @@
+﻿@model ForumETF.Models.Answer
+
+<div class="col-md-12 answer-wrapper">
+    <div class="col-md-1">
+        <span class="vote-span"><a href="#"><i class="fa fa-angle-up fa-3x"></i></a></span>
+        <span class="vote-span" id="vote-count">@Model.Votes</span>
+        <span class="vote-span"><a href="#"><i class="fa fa-angle-down fa-3x"></i></a></span>
+        <span class="vote-span"><a href="#"><i class="fa fa-star-o fa-3x" style="color: yellow;"></i></a></span>
+    </div>
+    <div class="col-md-11">
+        <p>
+            @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Content))
+        </p>
+    </div>
+    <footer class="col-md-11 col-md-offset-1">
+        <div>
+            <i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@Model.User.UserName</a>&nbsp; | &nbsp;
+            <i class="fa fa-calendar"></i>&nbsp;datum objave: @Model.CreatedAt
+        </div>
+        <hr />
+    </footer>
+</div>
