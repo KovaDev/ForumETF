@@ -18,12 +18,19 @@ namespace ForumETF.Controllers
 
         // GET: Home
         [HttpGet]
-        public async Task<ActionResult> Index(int? page)
+        public ActionResult Index(int? page, string searchTerm = null)
         {
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            var posts = db.Posts.OrderByDescending(p => p.CreatedAt).ToPagedList(pageNumber, pageSize);
+            var posts = db.Posts.Where(p => p.Title.Contains(searchTerm) || searchTerm == null)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToPagedList(pageNumber, pageSize);
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Posts", posts);
+            }
 
             return View(posts);
         }

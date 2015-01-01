@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<ForumETF.Models.Post>*@
-@model PagedList.IPagedList<ForumETF.Models.Post>
+﻿@model PagedList.IPagedList<ForumETF.Models.Post>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
@@ -9,25 +8,29 @@
 <!-- search row -->
 <div class="row" id="search-section">
     <div class="col-md-8">
-        <form>
-            <div class="col-md-1" id="search-label">
-                <i class="fa fa-search fa-2x"></i>
-            </div>
-            <div class="col-md-7">
+
+        @using(Ajax.BeginForm("Index", "Home", new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "posts",
+        }, new { id = "search-form" }))
+        {
+            <div class="col-md-8">
                 <div class="form-group">
-                    <!--<label>Pretraga</label>-->
-                    <input type="text" class="form-control" id="search" value="Unesite pojam za pretragu" />
+                    <input type="text" name="searchTerm" class="form-control" id="search" value="Unesite pojam za pretragu" />
                 </div>
             </div>
             <div class="col-md-4">
-                <button type="submit" class="btn btn-primary">Pretraga</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Pretraga</button>
             </div>
-        </form>
+        }
+
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8" id="posts">
         @Html.Partial("_Posts")
     </div>
     <div class="col-md-3 col-md-offset-1">
