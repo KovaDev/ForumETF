@@ -74,6 +74,12 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -129,6 +135,7 @@
     <Content Include="Content\css\tagit.ui-zendesk.css" />
     <Content Include="Content\js\tag-it.js" />
     <Content Include="Content\js\tag-it.min.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -210,6 +217,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\AnswerCommentController.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
@@ -248,8 +256,13 @@
     <Compile Include="Migrations\201412301809383_AnswerAndPostModelsUpdated.Designer.cs">
       <DependentUpon>201412301809383_AnswerAndPostModelsUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412302121508_AnswerCommentModelCreated.cs" />
+    <Compile Include="Migrations\201412302121508_AnswerCommentModelCreated.Designer.cs">
+      <DependentUpon>201412302121508_AnswerCommentModelCreated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\AnswerComment.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\Category.cs" />
@@ -271,7 +284,7 @@
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Post\Details.cshtml" />
     <Content Include="Views\Post\404.cshtml" />
-    <Content Include="Views\Home\_SinglePost.cshtml" />
+    <Content Include="Views\Home\_Posts.cshtml" />
     <Content Include="Views\Post\Create.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
     <Content Include="Views\Posts\Delete.cshtml" />
@@ -296,6 +309,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="HtmlHelpers\" />
+    <Folder Include="Views\AnswerComment\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412122223256_InitialCreate.resx">
@@ -318,6 +332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412301809383_AnswerAndPostModelsUpdated.resx">
       <DependentUpon>201412301809383_AnswerAndPostModelsUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412302121508_AnswerCommentModelCreated.resx">
+      <DependentUpon>201412302121508_AnswerCommentModelCreated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

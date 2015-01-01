@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using PagedList;
 
 namespace ForumETF.Controllers
 {   
@@ -17,9 +18,12 @@ namespace ForumETF.Controllers
 
         // GET: Home
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
-            var posts = await db.Posts.OrderByDescending(p => p.CreatedAt).ToListAsync();
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var posts = db.Posts.OrderByDescending(p => p.CreatedAt).ToPagedList(pageNumber, pageSize);
 
             return View(posts);
         }

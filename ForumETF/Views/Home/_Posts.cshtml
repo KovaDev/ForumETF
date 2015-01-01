@@ -1,9 +1,11 @@
-﻿@model IEnumerable<ForumETF.Models.Post>
+﻿@model PagedList.IPagedList<ForumETF.Models.Post>
+@using PagedList.Mvc;
 
 @foreach (var item in Model)
 {
     <header class="col-md-12 post-title">
         <h3>@Html.ActionLink(item.Title, "Details", "Post", new { id = item.PostId }, null)</h3>
+        
     </header>
     <div class="col-md-12">
         <p>@item.Content</p>
@@ -14,7 +16,6 @@
             <i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014 |
             <i class="fa fa-comments"></i>&nbsp;broj komentara: @item.Comments.Count |
             <i class="fa fa-reply"></i>&nbsp;broj odgovora: @item.Answers.Count
-            <a href="#" id="tag" class="tag btn btn-danger">custom btn</a>
         </div>
         <div class="tags-row">
             @foreach (var tag in item.Tags)
@@ -24,3 +25,9 @@
         </div>
     </footer>
 }
+
+<div class="col-md-12">
+    <hr />
+    <span>Strana @Model.PageNumber od @Model.PageCount</span>
+    @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>

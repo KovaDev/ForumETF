@@ -31,7 +31,8 @@ namespace ForumETF.App_Start
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/PagedList.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                     "~/Scripts/Custom/functions.js",

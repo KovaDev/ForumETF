@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ForumETF.Models.Post>
+﻿@*@model IEnumerable<ForumETF.Models.Post>*@
+@model PagedList.IPagedList<ForumETF.Models.Post>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
 }
@@ -26,7 +28,7 @@
 
 <div class="row">
     <div class="col-md-8">
-        @Html.Partial("_SinglePost")
+        @Html.Partial("_Posts")
     </div>
     <div class="col-md-3 col-md-offset-1">
        
@@ -51,4 +53,3 @@
     </div>
 
 </div>
-
