@@ -1,8 +1,13 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     $("#markdown").wysiwyg();
     //var commentForm = $("#create-comment-form");
+
+    window.setTimeout(function () {
+        $("#alert_message").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
 
     $("#new-comment-link").click(function (event) {
 

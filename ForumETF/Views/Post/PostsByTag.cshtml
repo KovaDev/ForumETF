@@ -4,12 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-
 <!-- search row -->
 <div class="row" id="search-section">
     <div class="col-md-8">
 
-        @using(Ajax.BeginForm("Index", "Home", new AjaxOptions
+        @using (Ajax.BeginForm("Index", "Home", new AjaxOptions
         {
             HttpMethod = "GET",
             InsertionMode = InsertionMode.Replace,
@@ -29,10 +28,7 @@
     </div>
     <div class="col-md-8" id="home-page-filters">
         <div class="col-md-12">
-            <a href="#" class="btn-link">Najpopularniji</a>&nbsp;&nbsp;|&nbsp;
-            <a href="#" class="btn-link">Najnoviji</a>&nbsp;&nbsp;|&nbsp;
-            <a href="#" class="btn-link">Najposjeceniji</a>&nbsp;&nbsp;|&nbsp;
-            <a href="#" class="btn-link">Neodgovoreni</a>
+            <h3>Postovi oznaceni sa: </h3>
         </div>
     </div>
 </div>
@@ -42,10 +38,10 @@
         @Html.Partial("_Posts")
     </div>
     <div class="col-md-3 col-md-offset-1">
-       
+
         @{
             Html.RenderAction("CategoriesWidget", "Home");
-        } 
+        }
 
         <div class="col-md-12">
             <h3>Tag cloud</h3>
@@ -64,3 +60,4 @@
     </div>
 
 </div>
+

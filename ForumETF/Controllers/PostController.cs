@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using System.Net;
+using PagedList;
 using ForumETF.ViewModels;
 
 namespace ForumETF.Controllers
@@ -106,6 +107,35 @@ namespace ForumETF.Controllers
             }
 
             return View(viewModel);
+        }
+
+        //[Route("Tags/{tagName}")]
+        public ActionResult GetPostsByTag(string tagName, int? page)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            Tag tag = db.Tags.Where(t => t.TagName == tagName).SingleOrDefault();
+
+            var posts = db.Posts.Where(p => p.Tags.Select(t => t.TagName).Contains(tagName))
+                .OrderByDescending(p => p.CreatedAt)
+                .ToPagedList(pageNumber, pageSize);
+            
+            return View("PostsByTag", posts);
+        }
+
+        public ActionResult GetPostsByCategory(string categoryName, int? page)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var category = db.Categories.Where(c => c.CategoryName == categoryName).SingleOrDefault();
+
+            var posts = db.Posts.Where(p => p.Category.CategoryName == categoryName)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToPagedList(pageNumber, pageSize);
+
+            return View("PostsByCategory", posts);
         }
 
         private Tag GetTag(string tagName)

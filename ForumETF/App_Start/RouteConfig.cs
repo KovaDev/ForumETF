@@ -16,9 +16,9 @@ namespace ForumETF
 
             // ne radi ruta
             routes.MapRoute(
-                "PostDetails",
-                "Post/Details/{postId}",
-                new { controller = "Post", action = "Details" }, new { postId = @"\d+" });
+                "PostsByTag",
+                "Post/Tags/{tagName}",
+                new { controller = "Post", action = "GetPostsByTag" });
 
             routes.MapRoute(
                 name: "Default",

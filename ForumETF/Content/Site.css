@@ -84,6 +84,7 @@ textarea {
     font-size: 12px;
     height: 24px;
     padding-top: 0px;
+    margin-right: 5px;
 }
 
 .vote-span {
@@ -126,4 +127,8 @@ textarea {
 .post-wrapper {
     background: #f5f5f5;
     padding-bottom: 20px;
+}
+
+#home-page-filters {
+    padding-top: 20px;
 }
