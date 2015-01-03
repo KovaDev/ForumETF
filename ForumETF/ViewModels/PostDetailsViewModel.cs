@@ -18,5 +18,6 @@ namespace ForumETF.ViewModels
         public List<Category> Categories { get; set; }
         public List<Comment> Comments { get; set; }
         public List<Answer> Answers { get; set; }
+        public List<PostAttachment> Attachments { get; set; }
     }
 }

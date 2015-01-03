@@ -28,5 +28,6 @@ namespace ForumETF.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<AnswerComment> AnswerComments { get; set; }
+        public DbSet<PostAttachment> PostAttachments { get; set; }
     }
 }

@@ -177,6 +177,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap-filestyle.js" />
     <Content Include="Scripts\bootstrap-wysiwyg.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -204,6 +205,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -226,6 +228,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\CustomHelpers.cs" />
     <Compile Include="Migrations\201412122223256_InitialCreate.cs" />
     <Compile Include="Migrations\201412122223256_InitialCreate.Designer.cs">
       <DependentUpon>201412122223256_InitialCreate.cs</DependentUpon>
@@ -258,6 +261,14 @@
     <Compile Include="Migrations\201412302121508_AnswerCommentModelCreated.Designer.cs">
       <DependentUpon>201412302121508_AnswerCommentModelCreated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501022157304_PostAttachmentModelCreated.cs" />
+    <Compile Include="Migrations\201501022157304_PostAttachmentModelCreated.Designer.cs">
+      <DependentUpon>201501022157304_PostAttachmentModelCreated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501022332333_PostAttachmentFilenameAdded.cs" />
+    <Compile Include="Migrations\201501022332333_PostAttachmentFilenameAdded.Designer.cs">
+      <DependentUpon>201501022332333_PostAttachmentFilenameAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerComment.cs" />
@@ -266,6 +277,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostAttachment.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="ViewModels\CreatePostViewModel.cs" />
@@ -303,7 +315,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="HtmlHelpers\" />
+    <Folder Include="Uploads\Attachments\" />
+    <Folder Include="Uploads\ProfilePictures\" />
     <Folder Include="Views\AnswerComment\" />
   </ItemGroup>
   <ItemGroup>
@@ -330,6 +343,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412302121508_AnswerCommentModelCreated.resx">
       <DependentUpon>201412302121508_AnswerCommentModelCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501022157304_PostAttachmentModelCreated.resx">
+      <DependentUpon>201501022157304_PostAttachmentModelCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501022332333_PostAttachmentFilenameAdded.resx">
+      <DependentUpon>201501022332333_PostAttachmentFilenameAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

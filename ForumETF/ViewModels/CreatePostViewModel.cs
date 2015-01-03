@@ -15,6 +15,6 @@ namespace ForumETF.ViewModels
         public string Tags { get; set; }
         public SelectList Categories { get; set; }
         public int SelectedId { get; set; }
-        
+        public IEnumerable<HttpPostedFileBase> Files { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using System.Net;
 using PagedList;
 using ForumETF.ViewModels;
+using System.IO;
 
 namespace ForumETF.Controllers
 {
@@ -41,8 +42,23 @@ namespace ForumETF.Controllers
         public async Task<ActionResult> Create(CreatePostViewModel model)
         {
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
-
             ICollection<Tag> tagList = new List<Tag>();
+            ICollection<PostAttachment> attachments = new List<PostAttachment>();
+
+            foreach (var file in model.Files)
+            {
+                if (file.ContentLength > 0)
+                {
+                    var filename = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Attachments"), filename);
+                    file.SaveAs(path);
+                    attachments.Add(new PostAttachment
+                    {
+                        FilePath = path,
+                        FileName = filename
+                    });
+                }
+            }
 
             if (!String.IsNullOrEmpty(model.Tags) && !String.IsNullOrWhiteSpace(model.Tags))
             {
@@ -63,7 +79,8 @@ namespace ForumETF.Controllers
                 Votes = model.Votes,
                 User = currentUser,
                 Category = cat,
-                Tags = tagList
+                Tags = tagList,
+                Attachments = attachments
             };
 
             if (ModelState.IsValid)
@@ -97,7 +114,8 @@ namespace ForumETF.Controllers
                 User = post.User,
                 Tags = post.Tags.ToList(),
                 Comments = post.Comments.ToList(),
-                Answers = post.Answers.ToList()
+                Answers = post.Answers.ToList(),
+                Attachments = post.Attachments.ToList()
             };
 
             if (post == null)
@@ -136,6 +154,16 @@ namespace ForumETF.Controllers
                 .ToPagedList(pageNumber, pageSize);
 
             return View("PostsByCategory", posts);
+        }
+
+        public FileStreamResult GetFile(string filename, int? postId)
+        {
+            PostAttachment file = db.PostAttachments.Where(a => a.Post.PostId == postId && a.FileName == filename).SingleOrDefault();
+
+            string path = file.FilePath;
+            string mime = MimeMapping.GetMimeMapping(file.FileName);
+
+            return File(new FileStream(path, FileMode.Open), mime, file.FileName);
         }
 
         private Tag GetTag(string tagName)

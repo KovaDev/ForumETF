@@ -28,5 +28,6 @@ namespace ForumETF.Models
         public virtual ICollection<Tag> Tags { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Answer> Answers { get; set; }
+        public virtual ICollection<PostAttachment> Attachments { get; set; }
     }
 }
