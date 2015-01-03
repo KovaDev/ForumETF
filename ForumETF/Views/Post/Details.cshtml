@@ -24,23 +24,23 @@
         <footer class="col-md-11 col-md-offset-1">
             <div>
                 <i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@Model.User.UserName</a>&nbsp; | &nbsp;
-                <i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014 &nbsp; | &nbsp;
+                <i class="fa fa-calendar"></i>&nbsp;datum objave: @Model.CreatedAt &nbsp; | &nbsp;
                 <i class="fa fa-comments"></i>&nbsp;broj komentara: @Model.Comments.Count &nbsp; | &nbsp;
                 <i class="fa fa-reply"></i>&nbsp;broj odgovora: 5
             </div>
             <div class="tags-row">
                 @foreach (var tag in Model.Tags)
                 {
-                    <a href="#" class="btn btn-primary tag">@tag.TagName</a>
+                    <a href="@Url.Action("GetPostsByTag", "Post", new { tagName = tag.TagName })" class="btn btn-primary tag">
+                        <i class="fa fa-tag"></i>&nbsp;&nbsp;@tag.TagName
+                    </a>
                 }
             </div>
             <div>
                 @foreach (var file in Model.Attachments)
                 { 
-                    @*<img src="@Url.Content("~/Uploads/Attachments/" + System.IO.Path.GetFileName(file.FilePath))" 
-                         class="img-thumbnail" style="max-width: 120px; max-height: 120px;"/>*@
-                    @*@Html.ActionLink(file.FileName, "GetFile", "Post", new {filename = file.FileName, postId = Model.PostID})*@
-                    @Html.ActionLink("Link download", "GetFile", "Post", new{filename = file.FileName, postId = Model.PostID}, null)
+                    <i class="fa fa-paperclip">&nbsp;&nbsp;</i><a href="@Url.Action("GetFile", "Post", new {filename = file.FileName, postId = Model.PostID})">@file.FileName</a>
+                    @*@Html.ActionLink("Link download", "GetFile", "Post", new{filename = file.FileName, postId = Model.PostID}, null)*@
                     <br />
                 }
             </div>

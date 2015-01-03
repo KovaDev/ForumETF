@@ -111,6 +111,7 @@ namespace ForumETF.Controllers
                 Title = post.Title,
                 Content = post.Content,
                 Votes = post.Votes,
+                CreatedAt = post.CreatedAt,
                 User = post.User,
                 Tags = post.Tags.ToList(),
                 Comments = post.Comments.ToList(),
@@ -138,6 +139,8 @@ namespace ForumETF.Controllers
             var posts = db.Posts.Where(p => p.Tags.Select(t => t.TagName).Contains(tagName))
                 .OrderByDescending(p => p.CreatedAt)
                 .ToPagedList(pageNumber, pageSize);
+
+            ViewBag.Tag = tagName;
             
             return View("PostsByTag", posts);
         }
@@ -152,6 +155,8 @@ namespace ForumETF.Controllers
             var posts = db.Posts.Where(p => p.Category.CategoryName == categoryName)
                 .OrderByDescending(p => p.CreatedAt)
                 .ToPagedList(pageNumber, pageSize);
+
+            ViewBag.Category = categoryName;
 
             return View("PostsByCategory", posts);
         }

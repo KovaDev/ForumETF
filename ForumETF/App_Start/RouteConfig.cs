@@ -14,11 +14,15 @@ namespace ForumETF
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapMvcAttributeRoutes();
 
-            // ne radi ruta
             routes.MapRoute(
                 "PostsByTag",
                 "Post/Tags/{tagName}",
                 new { controller = "Post", action = "GetPostsByTag" });
+
+            routes.MapRoute(
+                "PostsByCategory",
+                "Post/Category/{categoryName}",
+                new { controller = "Post", action = "GetPostsByCategory" });
 
             routes.MapRoute(
                 name: "Default",

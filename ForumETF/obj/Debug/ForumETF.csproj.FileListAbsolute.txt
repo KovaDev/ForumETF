@@ -55,3 +55,4 @@ C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\PagedL
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\PagedList.Mvc.xml
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.PostAttachmentModelCreated.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.PostAttachmentFilenameAdded.resources
+C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.UserAvatarUrlFieldAdded.resources

@@ -9,6 +9,7 @@ namespace ForumETF.Models
     public class AppUser : IdentityUser
     {
         public string Country { get; set; }
+        public string AvatarUrl { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
     }

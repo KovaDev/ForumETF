@@ -12,6 +12,7 @@ namespace ForumETF.ViewModels
         public string Title { get; set; }
         public string Content { get; set; }
         public int Votes { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public AppUser User { get; set; }
         public List<Tag> Tags { get; set; }

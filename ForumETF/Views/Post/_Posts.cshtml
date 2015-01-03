@@ -32,7 +32,7 @@
 
     <div class="col-md-12">
         <hr />
-        <span>Strana @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) od @Model.Count</span>
+        <span>Strana @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) od @Model.PageCount</span>
         @Html.PagedListPager(Model, page => Url.Action("GetPostsByTag", "Post", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
 }

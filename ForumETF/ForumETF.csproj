@@ -133,6 +133,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\jquery.tagit.css" />
     <Content Include="Content\css\tagit.ui-zendesk.css" />
+    <Content Include="Content\images\avatar.jpg" />
     <Content Include="Content\js\tag-it.js" />
     <Content Include="Content\js\tag-it.min.js" />
     <Content Include="Content\PagedList.css" />
@@ -225,6 +226,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -269,6 +271,10 @@
     <Compile Include="Migrations\201501022332333_PostAttachmentFilenameAdded.Designer.cs">
       <DependentUpon>201501022332333_PostAttachmentFilenameAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501031708361_UserAvatarUrlFieldAdded.cs" />
+    <Compile Include="Migrations\201501031708361_UserAvatarUrlFieldAdded.Designer.cs">
+      <DependentUpon>201501031708361_UserAvatarUrlFieldAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerComment.cs" />
@@ -305,6 +311,8 @@
     <Content Include="Views\Answer\_NewAnswer.cshtml" />
     <Content Include="Views\Post\PostsByTag.cshtml" />
     <Content Include="Views\Post\_Posts.cshtml" />
+    <Content Include="Views\Post\PostsByCategory.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -349,6 +357,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501022332333_PostAttachmentFilenameAdded.resx">
       <DependentUpon>201501022332333_PostAttachmentFilenameAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501031708361_UserAvatarUrlFieldAdded.resx">
+      <DependentUpon>201501031708361_UserAvatarUrlFieldAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
