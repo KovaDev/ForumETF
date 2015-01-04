@@ -14,6 +14,7 @@ namespace ForumETF
     public class Startup
     {
         public static Func<UserManager<AppUser>> UserManagerFactory { get; private set; }
+        //public static Func<RoleManager<AppRole>> RoleManagerFactory { get; private set; }
 
         public void Configuration(IAppBuilder app)
         {
@@ -36,6 +37,13 @@ namespace ForumETF
 
                 return userManager;
             };
+
+            //RoleManagerFactory = () =>
+            //{
+            //    var roleManager = new RoleManager<AppRole>(new RoleStore<AppRole>(new AppDbContext()));
+
+            //    return roleManager;
+            //};
 
         }
     }

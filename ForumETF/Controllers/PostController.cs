@@ -176,6 +176,31 @@ namespace ForumETF.Controllers
             return db.Tags.Where(t => t.TagName == tagName).FirstOrDefault() ?? new Tag { TagName = tagName };
         }
 
+        public PartialViewResult MostPopularPosts(int? page)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var posts = db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
+
+            //return PartialView("_Posts", posts);
+            return PartialView("_Content");
+        }
+
+        public PartialViewResult NewestPosts()
+        {
+            var posts = db.Posts.OrderByDescending(p => p.CreatedAt).ToList();
+
+            return PartialView("_Newest", posts);
+        }
+
+        public PartialViewResult UnansweredPosts()
+        {
+            var posts = db.Posts.Where(p => p.Answers.Count == 0).OrderByDescending(p => p.CreatedAt).ToList();
+
+            return PartialView("_Unanswered", posts);
+        }
+
         private List<SelectListItem> CategoriesDropdownList()
         {
             // 1. NACIN

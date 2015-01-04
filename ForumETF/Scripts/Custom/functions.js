@@ -3,6 +3,8 @@
     $("#markdown").wysiwyg();
     //var commentForm = $("#create-comment-form");
 
+    $.ajaxSetup({ cache: false });
+
     window.setTimeout(function () {
         $("#alert_message").fadeTo(500, 0).slideUp(500, function () {
             $(this).remove();

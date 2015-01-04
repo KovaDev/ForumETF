@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using PagedList;
+using System.Web.UI;
 
 namespace ForumETF.Controllers
 {   
@@ -18,6 +19,8 @@ namespace ForumETF.Controllers
 
         // GET: Home
         [HttpGet]
+        //[OutputCache(NoStore = true, Duration = 0, VaryByParam = "None", Location = OutputCacheLocation.ServerAndClient)]
+        //[OutputCache(Duration=60, Location = OutputCacheLocation.ServerAndClient)]
         public ActionResult Index(int? page, string searchTerm = null)
         {
             int pageSize = 10;
@@ -48,6 +51,20 @@ namespace ForumETF.Controllers
         public ActionResult TagsWidget()
         {
             return Content("Route test");
+        }
+
+        //[OutputCache(Duration=60)]
+        //[OutputCache(Duration = 60, Location = OutputCacheLocation.ServerAndClient)]
+        //[OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public PartialViewResult MostPopularPosts(int? page)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var posts = db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
+            
+            return PartialView("_Posts", posts);
+            //return PartialView("_Content");
         }
 
         protected override void Dispose(bool disposing)

@@ -275,6 +275,10 @@
     <Compile Include="Migrations\201501031708361_UserAvatarUrlFieldAdded.Designer.cs">
       <DependentUpon>201501031708361_UserAvatarUrlFieldAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501032344167_AppUserModelFieldsAdded.cs" />
+    <Compile Include="Migrations\201501032344167_AppUserModelFieldsAdded.Designer.cs">
+      <DependentUpon>201501032344167_AppUserModelFieldsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerComment.cs" />
@@ -313,6 +317,7 @@
     <Content Include="Views\Post\_Posts.cshtml" />
     <Content Include="Views\Post\PostsByCategory.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Post\_Content.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -360,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501031708361_UserAvatarUrlFieldAdded.resx">
       <DependentUpon>201501031708361_UserAvatarUrlFieldAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501032344167_AppUserModelFieldsAdded.resx">
+      <DependentUpon>201501032344167_AppUserModelFieldsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

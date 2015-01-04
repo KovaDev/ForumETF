@@ -3,30 +3,56 @@
         <img class="img-rounded" style="max-height: 300px; max-width: 200px; width: 100%; height: 200px; margin-bottom: 10px;" src="http://www.sdtn.com/files/pictures/sdtn_default_profile_image.jpg" />
         <ul class="list-group">
             <li class="list-group-item">
-                <span class="badge">14</span>
-                Cras justo odio
+                @*<span class="badge">14</span>
+                Cras justo odio*@
+                <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Podaci o korisniku</a>
             </li>
             <li class="list-group-item">
-                <span class="badge">2</span>
-                Dapibus ac facilisis in
+                <i class="fa fa-envelope">&nbsp;&nbsp;</i><a href="#">Privatne poruke</a><span class="badge">14</span>
             </li>
             <li class="list-group-item">
-                <span class="badge">1</span>
-                Morbi leo risus
+                @*<span class="badge">2</span>
+                Dapibus ac facilisis in*@
+                <i class="fa fa-bar-chart">&nbsp;&nbsp;</i><a href="#">Statistika</a>
             </li>
             <li class="list-group-item">
-                <span class="badge">2</span>
-                Dapibus ac facilisis in
+                <i class="fa fa-comments-o">&nbsp;&nbsp;</i><a href="#">Objavljeni postovi</a><span class="badge">2</span>
             </li>
             <li class="list-group-item">
-                <span class="badge">1</span>
-                Morbi leo risus
+                @*<span class="badge">1</span>
+                Morbi leo risus*@
+                <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Promjena podataka</a>
+            </li>
+            <li class="list-group-item">
+                @*<span class="badge">2</span>
+                Dapibus ac facilisis in*@
+                <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Promjena lozinke</a>
+            </li>
+            <li class="list-group-item">
+                @*<span class="badge">1</span>
+                Morbi leo risus*@
+                <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Projekti</a>
+            </li>
+            <li class="list-group-item">
+                @*<span class="badge">1</span>
+                Morbi leo risus*@
+                <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Vještine</a>
             </li>
         </ul>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9" id="profile-data"> <!-- Ajax targetUpdateId -->
         <div class="panel panel-default">
-            <div class="panel-heading" style="background: #f44336;">Panel heading</div>
+            <div class="panel-heading" style="background: #f44336;">Lični podaci</div>
+            <div class="panel-body">
+                <i class="fa fa-user">&nbsp;&nbsp;</i>Korisnicko ime<br />
+                <i class="fa fa-user">&nbsp;&nbsp;</i>Ime<br />
+                <i class="fa fa-user">&nbsp;&nbsp;</i>Prezime<br />
+                <i class="fa fa-envelope">&nbsp;&nbsp;</i>Email adresa<br />
+                <i class="fa fa-calendar">&nbsp;&nbsp;</i>Datum registracije<br />
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background: #f44336;">Kontakt podaci</div>
             <div class="panel-body">
                 <i class="fa fa-user">&nbsp;&nbsp;</i>Korisnicko ime<br />
                 <i class="fa fa-user">&nbsp;&nbsp;</i>Ime<br />

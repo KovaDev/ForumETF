@@ -11,11 +11,11 @@
     </div>
     <footer class="col-md-12 post-footer">
         <div>
-            <i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@item.User.UserName</a> |
-            <i class="fa fa-folder-open-o"></i>&nbsp;Kategorija: @Html.ActionLink(item.Category.CategoryName, "GetPostsByCategory", "Post", new { categoryName = item.Category.CategoryName }, null) |
-            <i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014 |
-            <i class="fa fa-comments"></i>&nbsp;broj komentara: @item.Comments.Count |
-            <i class="fa fa-reply"></i>&nbsp;broj odgovora: @item.Answers.Count
+            <span><i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@item.User.UserName</a> |</span>
+            <span><i class="fa fa-folder-open-o"></i>&nbsp;Kategorija: @Html.ActionLink(item.Category.CategoryName, "GetPostsByCategory", "Post", new { categoryName = item.Category.CategoryName }, null) |</span>
+            <span><i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014 |</span>
+            <span><i class="fa fa-comments"></i>&nbsp;broj komentara: @item.Comments.Count |</span>
+            <span><i class="fa fa-reply"></i>&nbsp;broj odgovora: @item.Answers.Count</span>
         </div>
         <div class="tags-row">
             @foreach (var tag in item.Tags)

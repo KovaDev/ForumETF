@@ -10,7 +10,17 @@ namespace ForumETF.Models
     {
         public string Country { get; set; }
         public string AvatarUrl { get; set; }
+        public string About { get; set; }
+        public string FacebookUrl { get; set; }
+        public string TwitterUrl { get; set; }
+        public string LinkedinUrl { get; set; }
+        public string InstagramUrl { get; set; }
+        public string GithubUrl { get; set; }
+        public string Phone { get; set; }
+        public string MobilePhone { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Answer> Answers { get; set; }
+        public virtual ICollection<AnswerComment> AnswerComments { get; set; }
     }
 }
