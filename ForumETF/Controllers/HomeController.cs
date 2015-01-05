@@ -9,13 +9,21 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using PagedList;
 using System.Web.UI;
+using ForumETF.Repositories;
 
 namespace ForumETF.Controllers
 {   
     [Authorize]
     public class HomeController : Controller
     {
-        private AppDbContext db = new AppDbContext();
+        private AppDbContext db = null;
+        private PostRepository repository = null; 
+
+        public HomeController ()
+	    {
+            db = new AppDbContext();
+            repository = new PostRepository();
+	    }
 
         // GET: Home
         [HttpGet]
@@ -58,13 +66,13 @@ namespace ForumETF.Controllers
         //[OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public PartialViewResult MostPopularPosts(int? page)
         {
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
+            //int pageSize = 10;
+            //int pageNumber = (page ?? 1);
 
-            var posts = db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
-            
+            //var posts = db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
+            var posts = repository.GetMostPopularPosts(page);
+
             return PartialView("_Posts", posts);
-            //return PartialView("_Content");
         }
 
         protected override void Dispose(bool disposing)

@@ -42,7 +42,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Request.IsAuthenticated)
                     {
-                        <li><a href="@Url.Action("Profile", "User")">@User.Identity.Name</a></li>
+                        <li><a href="@Url.Action("Profile", "User", new { username = User.Identity.Name })">@User.Identity.Name</a></li>
                         <li>@Html.ActionLink("Logout", "LogOut", "Auth")</li>
                     }
                     @if (!Request.IsAuthenticated)

@@ -5,7 +5,7 @@
             <li class="list-group-item">
                 @*<span class="badge">14</span>
                 Cras justo odio*@
-                <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Podaci o korisniku</a>
+                <i class="fa fa-user">&nbsp;&nbsp;</i>@Ajax.ActionLink("Podaci o korisniku", "Details", "User", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "profile-data", InsertionMode = InsertionMode.Replace })
             </li>
             <li class="list-group-item">
                 <i class="fa fa-envelope">&nbsp;&nbsp;</i><a href="#">Privatne poruke</a><span class="badge">14</span>
@@ -21,7 +21,7 @@
             <li class="list-group-item">
                 @*<span class="badge">1</span>
                 Morbi leo risus*@
-                <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Promjena podataka</a>
+                <i class="fa fa-user">&nbsp;&nbsp;</i>@Ajax.ActionLink("Promjena podataka", "Edit", "User", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "profile-data", InsertionMode = InsertionMode.Replace })
             </li>
             <li class="list-group-item">
                 @*<span class="badge">2</span>
@@ -41,79 +41,7 @@
         </ul>
     </div>
     <div class="col-md-9" id="profile-data"> <!-- Ajax targetUpdateId -->
-        <div class="panel panel-default">
-            <div class="panel-heading" style="background: #f44336;">Lični podaci</div>
-            <div class="panel-body">
-                <i class="fa fa-user">&nbsp;&nbsp;</i>Korisnicko ime<br />
-                <i class="fa fa-user">&nbsp;&nbsp;</i>Ime<br />
-                <i class="fa fa-user">&nbsp;&nbsp;</i>Prezime<br />
-                <i class="fa fa-envelope">&nbsp;&nbsp;</i>Email adresa<br />
-                <i class="fa fa-calendar">&nbsp;&nbsp;</i>Datum registracije<br />
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" style="background: #f44336;">Kontakt podaci</div>
-            <div class="panel-body">
-                <i class="fa fa-user">&nbsp;&nbsp;</i>Korisnicko ime<br />
-                <i class="fa fa-user">&nbsp;&nbsp;</i>Ime<br />
-                <i class="fa fa-user">&nbsp;&nbsp;</i>Prezime<br />
-                <i class="fa fa-envelope">&nbsp;&nbsp;</i>Email adresa<br />
-                <i class="fa fa-calendar">&nbsp;&nbsp;</i>Datum registracije<br />
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" style="background: #f44336;">Panel heading</div>
-            <div class="panel-body">
-                <table class="table table-striped table-hover ">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Column heading</th>
-                            <th>Column heading</th>
-                            <th>Column heading</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="success">
-                            <td>4</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="active">
-                            <td>7</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                        <tr class="warning">
-                            <td>6</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                            <td>Column content</td>
-                        </tr>
-                    </tbody>
-                </table> 
-            </div>
-        </div>
+        @Html.Partial("_Details")
     </div>
     <div class="col-md-12">
         <p>

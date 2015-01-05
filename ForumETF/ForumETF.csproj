@@ -190,6 +190,10 @@
     <Content Include="Scripts\Custom\functions.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery.bootstrap.wizard.js" />
+    <Content Include="Scripts\jquery.bootstrap.wizard.min.js" />
+    <Content Include="Scripts\jquery.bootstrap.wizard.min.js.map" />
+    <Content Include="Scripts\jquery.bootstrap.wizard.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
@@ -289,8 +293,12 @@
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\PostAttachment.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Repositories\IPostRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="ViewModels\CreatePostViewModel.cs" />
+    <Compile Include="ViewModels\UserDetailsViewModel.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="ViewModels\PostDetailsViewModel.cs" />
     <Compile Include="ViewModels\RegisterModel.cs" />
@@ -318,6 +326,8 @@
     <Content Include="Views\Post\PostsByCategory.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Post\_Content.cshtml" />
+    <Content Include="Views\User\_Edit.cshtml" />
+    <Content Include="Views\User\_Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -328,6 +338,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Scripts\Bootstrap\" />
+    <Folder Include="Scripts\JQuery\" />
     <Folder Include="Uploads\Attachments\" />
     <Folder Include="Uploads\ProfilePictures\" />
     <Folder Include="Views\AnswerComment\" />
