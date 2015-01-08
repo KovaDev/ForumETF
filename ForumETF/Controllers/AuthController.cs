@@ -49,7 +49,7 @@ namespace ForumETF.Controllers
                 return View(); // ako je doslo do problema, forma se ponovo prikazuje
             }
 
-            var user = await userManager.FindAsync(model.UserName, model.Password);
+            AppUser user = await userManager.FindAsync(model.UserName, model.Password);
 
             if (user != null)
             {

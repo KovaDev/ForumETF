@@ -29,5 +29,7 @@ namespace ForumETF.Models
         public DbSet<Answer> Answers { get; set; }
         public DbSet<AnswerComment> AnswerComments { get; set; }
         public DbSet<PostAttachment> PostAttachments { get; set; }
+
+        //public System.Data.Entity.DbSet<ForumETF.Models.AppUser> AppUsers { get; set; }
     }
 }

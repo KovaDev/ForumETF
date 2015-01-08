@@ -145,3 +145,35 @@ textarea {
 /*#first-name-div {
     width: 50%;
 }*/
+
+#main-nav {
+    /*background: white;*/
+    border-bottom: solid #03a9f4 4px;
+    box-shadow: none;
+
+    background: #eeeeee;
+}
+
+    #main-nav a {
+        color: #263238;
+    }
+
+    #main-nav a:hover {
+        color: #00bfa5;
+    }
+
+/*.navbar {
+    /*border-bottom: solid #00bfa5 2px;
+    border: 0 !important;
+}*/
+
+.navbar-collapse {
+    border: 0 !important;
+}
+
+#logo {
+    width: 150px;
+    height: 40px;
+    position: relative;
+    bottom: 10px;
+}

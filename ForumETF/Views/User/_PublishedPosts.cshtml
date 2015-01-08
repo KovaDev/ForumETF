@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Post>
+
+@{
+    var counter = 1;
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="background: #c5e1a5;">Objavljeni postovi</div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Naslov</th>
+                        <th>Kategorija</th>
+                        <th>Datum objave</th>
+                        <th>Izmjena</th>
+                        <th>Brisanje</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@counter</td>
+                            <td>@item.Title</td>
+                            <td>@item.Category.CategoryName</td>
+                            <td>@item.CreatedAt</td>
+                            <td><i class="fa fa-trash">&nbsp;</i><a href="#">Izmijeni</a></td>
+                            <td><i class="fa fa-pencil">&nbsp;</i><a href="#">Obriši</a></td>
+                        </tr>
+                        counter++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
