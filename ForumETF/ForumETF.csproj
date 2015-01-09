@@ -134,6 +134,7 @@
     <Content Include="Content\css\jquery.tagit.css" />
     <Content Include="Content\css\tagit.ui-zendesk.css" />
     <Content Include="Content\images\avatar.jpg" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\js\tag-it.js" />
     <Content Include="Content\js\tag-it.min.js" />
     <Content Include="Content\PagedList.css" />
@@ -226,6 +227,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\AnswerCommentController.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
+    <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -304,6 +306,7 @@
     <Compile Include="ViewModels\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\UserEditViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -328,8 +331,12 @@
     <Content Include="Views\Post\_Content.cshtml" />
     <Content Include="Views\User\_Edit.cshtml" />
     <Content Include="Views\User\_Details.cshtml" />
-    <Content Include="Views\User\_Details2.cshtml" />
     <Content Include="Views\User\_PublishedPosts.cshtml" />
+    <Content Include="Views\Answers\Create.cshtml" />
+    <Content Include="Views\Answers\Delete.cshtml" />
+    <Content Include="Views\Answers\Details.cshtml" />
+    <Content Include="Views\Answers\Edit.cshtml" />
+    <Content Include="Views\Answers\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

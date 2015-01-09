@@ -12,11 +12,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Naslov</th>
-                        <th>Kategorija</th>
-                        <th>Datum objave</th>
-                        <th>Izmjena</th>
-                        <th>Brisanje</th>
+                        <th>Naslov&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+                        <th>Kategorija&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+                        <th>Datum objave&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+                        <th>Akcije</th>
                     </tr>
                 </thead>
                 <tbody> 
@@ -24,11 +23,15 @@
                     {
                         <tr>
                             <td>@counter</td>
-                            <td>@item.Title</td>
+                            <td><a href="@Url.Action("Details", "Post", new { postID = item.PostId })">@item.Title</a></td>
                             <td>@item.Category.CategoryName</td>
                             <td>@item.CreatedAt</td>
-                            <td><i class="fa fa-trash">&nbsp;</i><a href="#">Izmijeni</a></td>
-                            <td><i class="fa fa-pencil">&nbsp;</i><a href="#">Obriši</a></td>
+                            <td>
+                                @*<a href="#"><i class="fa fa-pencil">&nbsp;</i></a>&nbsp;&nbsp;&nbsp;
+                                <a href="#"><i class="fa fa-trash-o">&nbsp;</i></a>*@
+                                <button class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                            </td>
                         </tr>
                         counter++;
                     }

@@ -1,11 +1,12 @@
-﻿@model AppUser
+﻿@model UserEditViewModel
 
-@using(Ajax.BeginForm("Edit", "User", new AjaxOptions 
+@*@using (Ajax.BeginForm("Edit", "User", new AjaxOptions
 {
-    UpdateTargetId = "profile-data", 
-    HttpMethod = "Post", 
-    InsertionMode = InsertionMode.Replace 
-}))
+    UpdateTargetId = "profile-data",
+    HttpMethod = "Post",
+    InsertionMode = InsertionMode.Replace
+}, new { id = "userEditForm", enctype = "multipart/form-data" }))*@
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { id = "userEditForm", enctype = "multipart/form-data" }))
 {
     <fieldset>
         <legend>Lični podaci</legend>
@@ -24,7 +25,7 @@
         <div class="form-group">
             <div class="col-md-4"><label>Smjer:</label></div>
             <div class="col-lg-10">
-                @Html.TextBoxFor(model => model.Department, new { placeholder = "adresa" })
+                @Html.TextBoxFor(model => model.Department, new { placeholder = "smjer" })
             </div>
         </div>
         <div class="form-group">
@@ -37,6 +38,12 @@
             <div class="col-md-4"><label>Email:</label></div>
             <div class="col-lg-10">
                 @Html.TextBoxFor(model => model.Email, new { placeholder = "e-mail" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4"><label>Profilna slika:</label></div>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.AvatarUrl, new { type = "file", @class = "filestyle", data_buttonBefore = "true", data_buttonText = "&nbspIzaberite sliku" })
             </div>
         </div>
     </fieldset>

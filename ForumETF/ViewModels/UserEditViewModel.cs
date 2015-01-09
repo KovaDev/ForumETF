@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ForumETF.ViewModels
 {
-    public class UserDetailsViewModel
+    public class UserEditViewModel
     {
         // licni podaci
         public string Email { get; set; }
@@ -14,7 +14,7 @@ namespace ForumETF.ViewModels
         public string Department { get; set; }
         public string Index { get; set; }
         public string Address { get; set; }
-        public string AvatarUrl { get; set; }
+        public HttpPostedFileBase AvatarUrl { get; set; }
 
         public string WebSite { get; set; }
         public string PhoneNumber { get; set; }
