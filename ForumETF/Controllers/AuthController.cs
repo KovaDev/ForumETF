@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
+﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ForumETF.Models;
-using System.Security.Claims;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
-using System.Threading.Tasks;
 
 namespace ForumETF.Controllers
 {
@@ -93,7 +87,6 @@ namespace ForumETF.Controllers
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
-
             
             if (result.Succeeded)
             {
@@ -105,7 +98,8 @@ namespace ForumETF.Controllers
 
                 //GetAuthenticationManager().SignIn(identity);
                 //authManager.SignIn(identity);
-
+                userManager.AddToRole(user.Id, "Admin");
+                
                 return RedirectToAction("index", "home");
             }
 

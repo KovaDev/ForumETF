@@ -47,7 +47,7 @@ namespace ForumETF.Controllers
 
             foreach (var file in model.Files)
             {
-                if (file.ContentLength > 0)
+                if (file.ContentLength != 0)
                 {
                     var filename = Path.GetFileName(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/Uploads/Attachments"), filename);
@@ -126,6 +126,20 @@ namespace ForumETF.Controllers
             }
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int postId)
+        {
+            Post post = db.Posts.Find(postId);
+
+            db.Posts.Remove(post);
+            db.SaveChanges();
+
+            var postCount = db.Posts.Where(p => p.User.UserName == User.Identity.Name).Count();
+          
+            //return RedirectToAction("Profile", "User");
+            return Json(new { num_of_posts = postCount });
         }
 
         //[Route("Tags/{tagName}")]

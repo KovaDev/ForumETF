@@ -39,7 +39,8 @@ namespace ForumETF.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                     "~/Scripts/Custom/functions.js",
-                    "~/Scripts/Custom/bootstrap-validation.js"
+                    "~/Scripts/Custom/bootstrap-validation.js",
+                    "~/Scripts/Custom/modalConfig.js"
                 ));
         }
 

@@ -3,6 +3,12 @@
     padding-bottom: 20px;*/
     padding-bottom: 60px;
     position: relative;
+    /*background: url("~/Content/images/texture.png") repeat;*/
+    background: green;
+}
+
+#body {
+    background: url("images/texture.png") repeat;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -11,6 +17,30 @@
     padding-right: 15px;*/
     padding-top: 50px;
     padding-bottom: 100px;
+}
+
+#body #main-nav {
+    /*background: rgba(255, 255, 255, 0.9);*/
+    background: #fff;
+}
+
+#box-blue1 {
+    background: #76ff03;
+}
+#box-blue2 {
+    background: #00b0ff;
+}
+#box-blue3 {
+    background: #40c4ff;
+}
+
+#profile-wrapper {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#main-cont {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
 /*#main-nav {
@@ -134,7 +164,7 @@ textarea {
 }
 
 #profile-wrapper {
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
     padding-top: 20px;
 }
 
@@ -149,6 +179,7 @@ textarea {
 #main-nav {
     /*background: white;*/
     border-bottom: solid #03a9f4 4px;
+    /*border-bottom: solid #673ab7 4px;*/
     box-shadow: none;
 
     background: #eeeeee;

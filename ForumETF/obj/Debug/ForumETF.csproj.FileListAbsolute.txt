@@ -46,7 +46,6 @@ C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.CategoryTableCreatedAndSeeded.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.CommentModelCreated.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.AnswerModelCreated.resources
-C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.csprojResolveAssemblyReference.cache
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.AnswerAndPostModelsUpdated.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.AnswerCommentModelCreated.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\bin\PagedList.dll
@@ -57,3 +56,5 @@ C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.PostAttachmentFilenameAdded.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.UserAvatarUrlFieldAdded.resources
 C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.AppUserModelFieldsAdded.resources
+C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.csprojResolveAssemblyReference.cache
+C:\Users\Ivan\documents\visual studio 2013\Projects\ForumETF\ForumETF\obj\Debug\ForumETF.Migrations.AdminRoleAdded.resources

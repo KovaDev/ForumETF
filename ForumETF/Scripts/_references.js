@@ -16,3 +16,4 @@
 /// <reference path="Custom/functions.js" />
 /// <reference path="bootstrap-filestyle.js" />
 /// <reference path="jquery.bootstrap.wizard.min.js" />
+/// <reference path="custom/modalconfig.js" />

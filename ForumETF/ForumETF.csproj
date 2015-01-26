@@ -135,6 +135,7 @@
     <Content Include="Content\css\tagit.ui-zendesk.css" />
     <Content Include="Content\images\avatar.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\texture.png" />
     <Content Include="Content\js\tag-it.js" />
     <Content Include="Content\js\tag-it.min.js" />
     <Content Include="Content\PagedList.css" />
@@ -189,6 +190,7 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\Custom\bootstrap-validation.js" />
     <Content Include="Scripts\Custom\functions.js" />
+    <Content Include="Scripts\Custom\modalConfig.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery.bootstrap.wizard.js" />
@@ -233,6 +235,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="CustomAttributes\CustomAuthorize.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -284,6 +287,10 @@
     <Compile Include="Migrations\201501032344167_AppUserModelFieldsAdded.cs" />
     <Compile Include="Migrations\201501032344167_AppUserModelFieldsAdded.Designer.cs">
       <DependentUpon>201501032344167_AppUserModelFieldsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501252044088_AdminRoleAdded.cs" />
+    <Compile Include="Migrations\201501252044088_AdminRoleAdded.Designer.cs">
+      <DependentUpon>201501252044088_AdminRoleAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -337,6 +344,8 @@
     <Content Include="Views\Answers\Details.cshtml" />
     <Content Include="Views\Answers\Edit.cshtml" />
     <Content Include="Views\Answers\Index.cshtml" />
+    <Content Include="Views\Post\_DeleteConfirmed.cshtml" />
+    <Content Include="Views\Shared\Unauthorized.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -389,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501032344167_AppUserModelFieldsAdded.resx">
       <DependentUpon>201501032344167_AppUserModelFieldsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501252044088_AdminRoleAdded.resx">
+      <DependentUpon>201501252044088_AdminRoleAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

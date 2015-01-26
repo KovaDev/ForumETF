@@ -1,3 +1,5 @@
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace ForumETF.Migrations
 {
     using System;
@@ -25,12 +27,17 @@ namespace ForumETF.Migrations
                 );
             */
 
-            context.Categories.AddOrUpdate(c => c.CategoryName,
-                new Category { CategoryName = "Matematika" },
-                new Category { CategoryName = "Fizika" },
-                new Category { CategoryName = "Osnovi elektrotehnike 1" },
-                new Category { CategoryName = "Programski jezici" }
-                );
+            //context.Categories.AddOrUpdate(c => c.CategoryName,
+            //    new Category { CategoryName = "Matematika" },
+            //    new Category { CategoryName = "Fizika" },
+            //    new Category { CategoryName = "Osnovi elektrotehnike 1" },
+            //    new Category { CategoryName = "Programski jezici" }
+            //    );
+
+            //context.Roles.AddOrUpdate(r => r.Name,
+            //    new IdentityRole { Name = "Admin"}
+            //    );
+
 
             //  This method will be called after migrating to the latest version.
 

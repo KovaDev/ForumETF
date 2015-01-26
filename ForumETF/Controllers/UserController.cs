@@ -115,5 +115,10 @@ namespace ForumETF.Controllers
 
             return PartialView("_PublishedPosts", posts);
         }
+
+        public ActionResult Modal(int postId)
+        {
+            return Content("Uspjesno obrisan post br ", postId.ToString());
+        }
     }
 }

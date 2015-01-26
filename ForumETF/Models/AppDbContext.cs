@@ -20,6 +20,15 @@ namespace ForumETF.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Post>().HasMany<Comment>(a => a.Comments).WithOptional().WillCascadeOnDelete(true);
+            modelBuilder.Entity<Post>().HasMany<Answer>(a => a.Answers).WithOptional().WillCascadeOnDelete(true);
+            modelBuilder.Entity<Post>().HasMany<PostAttachment>(a => a.Attachments).WithOptional().WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Post>().HasMany<Tag>(a => a.Tags).WithOptional().WillCascadeOnDelete();
+
+            //modelBuilder.Entity<Comment>().has
+            //modelBuilder.Entity<Answer>().HasMany<Answer>(a => a.Answers).WithOptional().WillCascadeOnDelete();
+            //modelBuilder.Entity<PostAttachment>().HasMany<PostAttachment>(a => a.Attachments).WithOptional().WillCascadeOnDelete();
         }
 
         public DbSet<Post> Posts { get; set; }

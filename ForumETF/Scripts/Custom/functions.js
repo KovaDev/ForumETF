@@ -5,6 +5,64 @@
 
     //$.ajaxSetup({ cache: false });
 
+    $("#posts-table btn").click(function (e) {
+        e.preventDefault();
+        alert("poruka");
+        return false;
+    });
+
+    $(document).on("click", "#taster", function (e) {
+        e.preventDefault();
+        alert("sfsffs");
+        return false;
+    });
+
+    $(document).on("click", ".edit-btn", function (e) {
+        e.preventDefault();
+        alert("sfsffs");
+        return false;
+    });
+
+    var post = null;
+
+    $(document).on("click", ".delete-btn", function (e) {
+        e.preventDefault();
+
+        post = $(this).attr("id");
+        //alert(post);
+        return false;
+    });
+
+    $(document).on("click", "#mySubmit", function (e) {
+        e.preventDefault();
+
+        //$.post("/Post/Delete", { postId: post }, function (data) {
+
+        //    alert(data);
+
+        //});
+
+        $.ajax({
+            type: "Post",
+            url: "/Post/Delete",
+            cache: false,
+            async: false,
+            //dataType: 'text/html',
+            data: { postId: post },
+            success: function (data) {
+                $("#user-posts-count").html(data.num_of_posts);
+
+                var alert = "<div class=\"col-md-12\" id=\"alert-wrapper\"><div class=\"alert alert-dismissable alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button><p>Post je uspješno obrisan!</p></div></div>";
+                
+                $(alert).insertAfter(".panel-body");
+            }
+        });
+        
+        $("#deleteModal").modal("hide");
+        //return false;
+    });
+
+
     window.setTimeout(function () {
         $("#alert_message").fadeTo(500, 0).slideUp(500, function () {
             $(this).remove();
