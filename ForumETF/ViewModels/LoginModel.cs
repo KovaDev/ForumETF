@@ -16,9 +16,9 @@ namespace ForumETF.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Polje je obavezno !")]  
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        //[Required(ErrorMessage = "Polje je obavezno !")]  
+        //[DataType(DataType.EmailAddress)]
+        //public string Email { get; set; }
 
         [HiddenInput]
         public string ReturnUrl { get; set; }

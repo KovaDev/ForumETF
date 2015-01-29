@@ -18,6 +18,9 @@ namespace ForumETF
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles); // dodato naknadno
+
+            // enables optimization and bundling in debug mode
+            //BundleTable.EnableOptimizations = true;
         }
     }
 }

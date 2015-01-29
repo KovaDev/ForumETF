@@ -14,60 +14,18 @@
 
 </head>
 <body id="body">
-    <!-- Main menu -->
-    <div class="navbar navbar-inverse navbar-static-top" id="main-nav">
-        <div class="container">
 
-            <div class="navbar-header">
+    <div id="wrapper">
+        @Html.Partial("_Header")
 
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <a href="@Url.Action("Index", "Home")" class="navbar-brand"><img id="logo" class="img-responsive" src="~/Content/images/logo.png"/></a>
-                
-            </div>
-
-            <!-- Collection of nav links and other content for toggling -->
-            <div class="navbar-collapse collapse">
-                <!-- Lijeva strana menija -->
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>&nbsp;&nbsp;Početna</a></li>
-                    <li><a href="@Url.Action("Create", "Post")"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Postavi pitanje</a></li>
-                    <li><a href="#"><i class="fa fa-tags"></i>&nbsp;&nbsp;Tagovi</a></li>
-                </ul>
-                <!-- Desna strana menija -->
-                <ul class="nav navbar-nav navbar-right">
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li><a href="@Url.Action("Profile", "User", new { username = User.Identity.Name })">@User.Identity.Name</a></li>
-                        <li>@Html.ActionLink("Logout", "LogOut", "Auth")</li>
-                    }
-                    @if (!Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Prijava", "LogIn", "Auth")</li>
-                        <li>@Html.ActionLink("Registracija", "Register", "Auth")</li>
-                    }
-                </ul>
-            </div>
-           
+        <div class="container" id="content-wrapper" style="background: rgba(255, 255, 255, 0.5)">
+            @RenderBody()
         </div>
-    </div>
 
-    <div class="container body-content">
-        @RenderBody()
+        @Html.Partial("_Footer")
     </div>
-
-    <footer id="main-footer">
-        <div class="container">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </div>
-    </footer>
 
     <!-- Scripts -->
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
