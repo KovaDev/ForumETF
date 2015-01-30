@@ -245,6 +245,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpers\CustomHelpers.cs" />
+    <Compile Include="HtmlHelpers\CustomUriHelpers.cs" />
+    <Compile Include="HtmlHelpers\HelperMethods.cs" />
     <Compile Include="Migrations\201412122223256_InitialCreate.cs" />
     <Compile Include="Migrations\201412122223256_InitialCreate.Designer.cs">
       <DependentUpon>201412122223256_InitialCreate.cs</DependentUpon>

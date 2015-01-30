@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,5 +36,27 @@ namespace ForumETF.HtmlHelpers
 
             return null;
         }
+
+        public static IHtmlString ProfileImageFor(this HtmlHelper helper, string content)
+        {
+            var html = new TagBuilder("img");
+            html.MergeAttribute("class", "img-rounded");
+            html.MergeAttribute("id", "profilePicture");
+            html.MergeAttribute("alt", "profile-pic");
+
+            string url = "/Uploads/ProfilePictures/" + System.IO.Path.GetFileName(content);
+
+            if (String.IsNullOrEmpty(content.ToString()) && String.IsNullOrWhiteSpace(content.ToString()))
+            {
+                html.MergeAttribute("src", "http://www.sdtn.com/files/pictures/sdtn_default_profile_image.jpg");
+            }
+            else
+            {
+                html.MergeAttribute("src", HelperMethods.GenerateAbsolutUri(url));
+            }
+
+            return new HtmlString(html.ToString());
+        }
+
     }
 }
