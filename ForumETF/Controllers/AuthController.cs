@@ -83,7 +83,7 @@ namespace ForumETF.Controllers
                 UserName = model.UserName,
                 Email = model.Email,
                 //UserName = model.Email,
-                Country = model.Country
+                //Country = model.Country
             };
 
             var result = await userManager.CreateAsync(user, model.Password);

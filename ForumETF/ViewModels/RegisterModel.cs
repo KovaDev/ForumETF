@@ -19,7 +19,7 @@ namespace ForumETF.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Polje je obavezno!")]
-        public string Country { get; set; }
+        //[Required(ErrorMessage = "Polje je obavezno!")]
+        //public string Country { get; set; }
     }
 }

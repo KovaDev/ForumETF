@@ -10,29 +10,31 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a href="@Url.Action("Index", "Home")" class="navbar-brand"><img id="logo" class="img-responsive" src="~/Content/images/logo.png" /></a>
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand"><img id="logo" class="img-responsive" src="~/Content/images/logo.png" alt="logo-alt" /></a>
 
         </div>
 
         <!-- Collection of nav links and other content for toggling -->
         <div class="navbar-collapse collapse">
+            
             <!-- Lijeva strana menija -->
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>&nbsp;&nbsp;Početna</a></li>
-                <li><a href="@Url.Action("Create", "Post")"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Postavi pitanje</a></li>
-                <li><a href="#"><i class="fa fa-tags"></i>&nbsp;&nbsp;Tagovi</a></li>
+                <li><a href="@Url.Action("Index", "Home")" class="hvr-underline-from-center"><i class="fa fa-home"></i>&nbsp;&nbsp;Početna</a></li>
+                <li><a href="@Url.Action("Create", "Post")" class="hvr-underline-from-center"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Postavi pitanje</a></li>
+                <li><a href="#" class="hvr-underline-from-center"><i class="fa fa-tags"></i>&nbsp;&nbsp;Tagovi</a></li>
             </ul>
+
             <!-- Desna strana menija -->
             <ul class="nav navbar-nav navbar-right">
                 @if (Request.IsAuthenticated)
                 {
-                    <li><a href="@Url.Action("Profile", "User", new { username = User.Identity.Name })">@User.Identity.Name</a></li>
-                    <li>@Html.ActionLink("Logout", "LogOut", "Auth")</li>
+                    <li><a class="hvr-underline-from-center" href="@Url.Action("Profile", "User", new {username = User.Identity.Name})"><i class="fa fa-user"></i>&nbsp;&nbsp;@User.Identity.Name</a></li>
+                    <li><a href="@Url.Action("LogOut", "Auth")" class="hvr-underline-from-center"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a></li>
                 }
                 @if (!Request.IsAuthenticated)
                 {
-                    <li>@Html.ActionLink("Prijava", "LogIn", "Auth")</li>
-                    <li>@Html.ActionLink("Registracija", "Register", "Auth")</li>
+                    <li><a href="@Url.Action("LogIn", "Auth")" class="hvr-underline-from-center"><i class="fa fa-user"></i>&nbsp;&nbsp;Prijava</a></li>
+                    <li><a href="@Url.Action("Register", "Auth")" class="hvr-underline-from-center"><i class="fa fa-user"></i>&nbsp;&nbsp;Registracija</a></li>
                 }
             </ul>
         </div>

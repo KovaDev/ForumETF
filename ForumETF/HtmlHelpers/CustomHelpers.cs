@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IO;
 using System.Linq.Expressions;
-using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 
@@ -29,8 +29,8 @@ namespace ForumETF.HtmlHelpers
             this HtmlHelper<TModel> helper,
             Expression<Func<TModel, TProperty>> expression)
         {
-            var name = ExpressionHelper.GetExpressionText(expression);
-            var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
+            //var name = ExpressionHelper.GetExpressionText(expression);
+            //var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
 
             //string htmlString = 
 
@@ -44,9 +44,9 @@ namespace ForumETF.HtmlHelpers
             html.MergeAttribute("id", "profilePicture");
             html.MergeAttribute("alt", "profile-pic");
 
-            string url = "/Uploads/ProfilePictures/" + System.IO.Path.GetFileName(content);
+            string url = "/Uploads/ProfilePictures/" + Path.GetFileName(content);
 
-            if (String.IsNullOrEmpty(content.ToString()) && String.IsNullOrWhiteSpace(content.ToString()))
+            if (String.IsNullOrEmpty(content) && String.IsNullOrWhiteSpace(content))
             {
                 html.MergeAttribute("src", "http://www.sdtn.com/files/pictures/sdtn_default_profile_image.jpg");
             }

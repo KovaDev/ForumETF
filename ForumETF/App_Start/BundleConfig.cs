@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-
-namespace ForumETF.App_Start
+namespace ForumETF
 {
     public class BundleConfig
     {
@@ -35,7 +30,8 @@ namespace ForumETF.App_Start
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/PagedList.css"));
+                      "~/Content/PagedList.css",
+                      "~/Content/hover.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                     "~/Scripts/Custom/functions.js",

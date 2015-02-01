@@ -18,7 +18,7 @@
     <div id="wrapper">
         @Html.Partial("_Header")
 
-        <div class="container" id="content-wrapper" style="background: rgba(255, 255, 255, 0.5)">
+        <div class="container" id="content-wrapper" @*style="background: rgba(255, 255, 255, 0.5)*@">
             @RenderBody()
         </div>
 
@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" />
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
 
-    @*@RenderSection("scripts", required: false)*@
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>

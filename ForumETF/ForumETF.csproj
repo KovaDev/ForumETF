@@ -134,6 +134,8 @@
     <Content Include="Content\css\jquery.tagit.css" />
     <Content Include="Content\css\tagit.ui-zendesk.css" />
     <Content Include="Content\Dashboard.css" />
+    <Content Include="Content\hover-min.css" />
+    <Content Include="Content\hover.css" />
     <Content Include="Content\images\avatar.jpg" />
     <Content Include="Content\images\etf_logo.png" />
     <Content Include="Content\images\logo.png" />

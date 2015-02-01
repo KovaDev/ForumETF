@@ -3,7 +3,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    overflow: hidden;
+    /*overflow: hidden; ??*/ 
 }
 
 #wrapper {
@@ -18,19 +18,7 @@
     width: 100%;
 }
 
-#content-wrapper {
-    /*width: 100%;*/
-}
 
-#main-footer {
-    position: absolute;
-    height: 60px;
-    background: #ffffff;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    border-top: solid #2196f3 4px;
-}
 
 #body #main-nav {
     /*background: rgba(255, 255, 255, 0.9);*/
@@ -86,10 +74,7 @@ textarea {
 
 
 
-#post-footer {
-    height: auto;
-    width: 100%;
-}
+
 
 #markdown {
     height: 200px;
@@ -107,9 +92,6 @@ textarea {
     padding-bottom: 10px;
 }
 
-#tag {
-    
-}
 
 .tags-row {
     padding-top: 10px;
@@ -170,7 +152,6 @@ textarea {
 }
 
 #profile-wrapper {
-    /*background: #f5f5f5;*/
     padding-top: 20px;
 }
 
@@ -182,16 +163,9 @@ textarea {
     margin-bottom: 10px;
 }
 
-/*#FirstName {
-    width: 100%;
-}*/
-
-/*#first-name-div {
-    width: 50%;
-}*/
-
+/* Main site navigation */
 #main-nav {
-    border-bottom: solid #03a9f4 4px;
+    /*border-bottom: solid #03a9f4 4px;*/
     box-shadow: none;
     background: #eeeeee;
 }
@@ -201,9 +175,10 @@ textarea {
     }
 
     #main-nav a:hover {
-        color: #00bfa5;
+        color: #03a9f4;
     }
 
+/* Ponistavanje bordure kod navbara kod mobilnih verzija */
 /*.navbar {
     /*border-bottom: solid #00bfa5 2px;
     border: 0 !important;
@@ -218,4 +193,21 @@ textarea {
     height: 40px;
     position: relative;
     bottom: 10px;
+}
+
+/* Footer styles */
+
+#main-footer {
+    position: absolute;
+    height: 60px;
+    background: #ffffff;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-top: solid #2196f3 4px;
+}
+
+#post-footer {
+    height: auto;
+    width: 100%;
 }
