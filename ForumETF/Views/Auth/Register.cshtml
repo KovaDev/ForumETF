@@ -1,58 +1,67 @@
 ﻿@model RegisterModel
 @{
-    ViewBag.Title = "Registacija korisnika";
+    ViewBag.Title = "Registracija korisnika";
 }
 
 <div class="row">
-    <div class="col-lg-12" style="background: #ffffff">
-        <div class="col-lg-6 col-md-12 col-sm-12" style="border-right: solid #aeea00 2px; margin-top: 20px; margin-bottom: 20px;">
+    <div class="col-md-12 col-sm-12" id="register-wrapper">
+        <div class="col-md-6 col-sm-6" id="register-form-wrapper">
             @using (Html.BeginForm("Register", "Auth", FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <h2 style="color:  #03a9f4">@ViewBag.Title</h2>
-                <h4>Potrebno je da ispunite sve trazene podatke</h4>
+                <h4>Potrebno je da ispunite sve tražene podatke</h4>
                 <hr />
 
                 <div class="form-group">
-                    <div class="col-lg-3">
+                    <div class="col-md-3">
                         @Html.LabelFor(m => m.UserName, "Korisničko ime:", new { @class = "control-label" })
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-md-9">
                         @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-lg-3">
+                    <div class="col-md-3">
                         @Html.LabelFor(m => m.Email, "E-mail adresa:", new { @class = "control-label" })
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-md-9">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-lg-3">
-                        @Html.LabelFor(m => m.Password, "Lozinka:", new { @class = "control-label" })
+                    <div class="col-md-3">
+                        @Html.LabelFor(m => m.Password, "Lozinka:", new {@class = "control-label"})
                     </div>
-                    <div class="col-lg-9">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <div class="col-md-9">
+                        @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-lg-9 col-lg-offset-3">
+                    <div class="col-md-3">
+                        @Html.LabelFor(m => m.Password2, "Ponovite lozinku:", new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-9">
+                        @Html.PasswordFor(m => m.Password2, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
                         <input type="submit" value="Registruj se" class="btn btn-block btn-primary" />
                     </div>
                 </div>
             }
         </div>
-        <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="col-lg-5 col-md-12 col-sm-12" style="padding-top: 40px">
-                <img src="~/Content/images/etf_logo.png" class="img-rounded" alt="Rounded Image" style="width: 220px; height: 220px;">
+        <div class="col-md-6 col-sm-6" id="register-welcome">
+            <div class="col-md-5 col-sm-12" style="padding-top: 40px">
+                <img src="~/Content/images/etf_logo.png" class="img-rounded welcome-logo" alt="Rounded Image">
             </div>
-            <div class="col-lg-7 col-md-12 col-sm-12" style="padding-top: 30px;">
+            <div class="col-md-7 col-sm-12" style="padding-top: 30px;">
                 <h2>ETF Istočno Sarajevo</h2>
                 <h3>Servis za pitanja i diskusije</h3>
             </div>

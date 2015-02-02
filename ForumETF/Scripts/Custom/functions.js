@@ -36,12 +36,6 @@
     $(document).on("click", "#mySubmit", function (e) {
         e.preventDefault();
 
-        //$.post("/Post/Delete", { postId: post }, function (data) {
-
-        //    alert(data);
-
-        //});
-
         $.ajax({
             type: "Post",
             url: "/Post/Delete",

@@ -1,5 +1,5 @@
 ﻿#body {
-    background: url("images/texture.png") repeat;
+    background: url("images/bg.png") repeat;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -14,17 +14,83 @@
     overflow: hidden;
 }
 
-.form-control {
-    width: 100%;
+#content-wrapper {
+    padding-top: 100px;
+}
+
+/* Login & Registration views */
+#login-wrapper {
+    background: #ffffff;
+    height: 100%;
+    -webkit-box-shadow: 0 1px 10px 3px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 10px 3px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 10px 3px rgba(0,0,0,0.2);
+}
+
+#login-form-wrapper {
+        border-right: solid #aeea00 2px; 
+        margin-top: 20px; 
+        margin-bottom: 20px;
+    }
+
+        #login-welcome:nth-child(n+1) div {
+            padding-top: 40px;
+        }
+
+        #login-welcome:nth-child(n+2) div {
+            padding-top: 30px;
+        }
+
+#register-wrapper {
+    background: #ffffff;
+    -webkit-box-shadow: 0 1px 10px 3px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 10px 3px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 10px 3px rgba(0,0,0,0.2);
+}
+
+    #register-form-wrapper {
+        border-right: solid #aeea00 2px; 
+        margin-top: 20px; 
+        margin-bottom: 20px;
+    }
+
+    #register-welcome {
+        height: 100%;
+    }
+
+        #register-welcome:nth-child(n+1) div {
+            padding-top: 40px;
+        }
+
+        #register-welcome:nth-child(n+2) div {
+            padding-top: 30px;
+        }
+
+/**/
+
+.welcome-logo {
+    width: 220px;
+    height: 220px;
 }
 
 
-
-#body #main-nav {
-    /*background: rgba(255, 255, 255, 0.9);*/
-    background: #fff;
+/* Main site navigation */
+#main-nav {
+    background: #90a4ae;
     
 }
+
+    #main-nav a {
+        /*color: #263238;*/
+        color: #ffffff;
+    }
+
+    #main-nav a:hover {
+        /*color: #03a9f4;*/
+        color: #76ff03;
+    }
+
+/**/
 
 #box-blue1 {
     background: #76ff03;
@@ -44,37 +110,6 @@
     background: rgba(255, 255, 255, 0.2);
     color: #fff;
 }
-
-/*#main-nav {
-    background: #424242;
-    color: #fff;
-    border-bottom: solid #03a9f4 5px;
-}
-
-    #main-nav a {
-        color: white;
-    }
-
-    #main-nav a:hover {
-        color:  #2196F3;         
-    }*/
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    /*max-width: 280px;*/
-}
-
-#search-label {
-    /*position: relative;
-    top: 10px;
-    left: -12px;*/
-}
-
-
-
-
 
 #markdown {
     height: 200px;
@@ -163,27 +198,6 @@ textarea {
     margin-bottom: 10px;
 }
 
-/* Main site navigation */
-#main-nav {
-    /*border-bottom: solid #03a9f4 4px;*/
-    box-shadow: none;
-    background: #eeeeee;
-}
-
-    #main-nav a {
-        color: #263238;
-    }
-
-    #main-nav a:hover {
-        color: #03a9f4;
-    }
-
-/* Ponistavanje bordure kod navbara kod mobilnih verzija */
-/*.navbar {
-    /*border-bottom: solid #00bfa5 2px;
-    border: 0 !important;
-}*/
-
 .navbar-collapse {
     border: 0 !important;
 }
@@ -196,7 +210,6 @@ textarea {
 }
 
 /* Footer styles */
-
 #main-footer {
     position: absolute;
     height: 60px;
@@ -207,7 +220,99 @@ textarea {
     border-top: solid #2196f3 4px;
 }
 
-#post-footer {
-    height: auto;
-    width: 100%;
+    #post-footer {
+        height: auto;
+        width: 100%;
+    }
+
+
+/* Media queries mobile (extra small devices) */
+@media (max-width: 768px) {
+    #content-wrapper {
+        padding-top: 80px;
+    }
+
+    #login-form-wrapper {
+        border-right: 0;
+        border-bottom: solid #aeea00 2px; 
+        margin: 0;
+        padding-top: 10px;
+    }
+
+    #register-form-wrapper {
+        border-right: 0;
+        border-bottom: solid #aeea00 2px; 
+        margin: 0;
+        padding-top: 10px;
+    }
+
+    #login-wrapper {
+        margin-bottom: 20px;
+    }
+
+    #register-wrapper {
+        margin-bottom: 20px;
+    }
+
+    #login-welcome:nth-child(n+1) div {
+        text-align: center;
+    }
+
+    #login-welcome:nth-child(n+1) div img {
+        width: 200px;
+        height: 200px;
+    }
+
+    #login-welcome:nth-child(n+2) div {
+        padding-bottom: 20px;
+    }
+
+    #register-welcome:nth-child(n+1) div {
+        text-align: center;
+    }
+
+    #register-welcome:nth-child(n+1) div img {
+        width: 200px;
+        height: 200px;
+    }
+
+    #register-welcome:nth-child(n+2) div {
+        padding-bottom: 20px;
+    }
+
+}
+
+/* Media queries tablets (small devices) */
+@media (min-width: 768px) and (max-width: 992px) {
+    #login-wrapper {
+        margin-bottom: 30px;
+    }
+
+    #register-wrapper {
+        margin-bottom: 30px;
+    }
+
+    #login-welcome:nth-child(n+1) div {
+        text-align: center;
+    }
+
+    #login-welcome:nth-child(n+2) div h2 {
+        font-size: 30px;
+    }
+
+    #login-welcome:nth-child(n+2) div h3 {
+        font-size: 24px;
+    }
+
+    #register-welcome:nth-child(n+1) div {
+        text-align: center;
+    }
+
+    #register-welcome:nth-child(n+2) div h2 {
+        font-size: 30px;
+    }
+
+    #register-welcome:nth-child(n+2) div h3 {
+        font-size: 24px;
+    }
 }

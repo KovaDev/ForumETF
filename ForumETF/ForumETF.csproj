@@ -137,8 +137,10 @@
     <Content Include="Content\hover-min.css" />
     <Content Include="Content\hover.css" />
     <Content Include="Content\images\avatar.jpg" />
+    <Content Include="Content\images\bg.png" />
     <Content Include="Content\images\etf_logo.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\responsive-design.png" />
     <Content Include="Content\images\texture.png" />
     <Content Include="Content\js\tag-it.js" />
     <Content Include="Content\js\tag-it.min.js" />

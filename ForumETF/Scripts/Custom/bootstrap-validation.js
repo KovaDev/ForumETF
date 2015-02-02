@@ -1,4 +1,4 @@
-﻿$(document).ready(function (event) {
+﻿$(document).ready(function () {
 
     $("#createPostForm").bootstrapValidator({
         message: 'This value is not valid',
@@ -13,7 +13,7 @@
                 validators: {
                     notEmpty: {
                         message: 'Polje je obavezno!'
-                    },
+                    }
                 }
             },
             SelectedId: {
@@ -27,7 +27,7 @@
                 validators: {
                     notEmpty: {
                         message: 'Polje je obavezno!'
-                    },
+                    }
                 }
             }
         }

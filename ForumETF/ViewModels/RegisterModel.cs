@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ForumETF.Models
 {
@@ -12,14 +8,16 @@ namespace ForumETF.Models
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Polje je obavezno!")]
-        [DataType(DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Unesena adresa nije ispravna!")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Polje je obavezno!")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        //[Required(ErrorMessage = "Polje je obavezno!")]
-        //public string Country { get; set; }
+        [Required(ErrorMessage = "Polje je obavezno!")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Lozinke se ne poklapaju!")]
+        public string Password2 { get; set; }
     }
 }
