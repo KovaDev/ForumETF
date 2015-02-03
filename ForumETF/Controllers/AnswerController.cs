@@ -1,12 +1,8 @@
-﻿using ForumETF.Models;
+﻿using System.Net;
+using System.Web.Mvc;
+using ForumETF.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
 
 namespace ForumETF.Controllers
 {
@@ -33,12 +29,12 @@ namespace ForumETF.Controllers
             string content = WebUtility.HtmlDecode(answer);
 
             var currentUser = manager.FindById(User.Identity.GetUserId());
-            var existing_post = db.Posts.Find(post);
+            var existingPost = db.Posts.Find(post);
 
             Answer new_answer = new Answer
             {
                 Content = content,
-                Post = existing_post,
+                Post = existingPost,
                 User = currentUser
             };
 

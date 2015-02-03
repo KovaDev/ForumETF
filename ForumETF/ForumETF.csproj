@@ -359,6 +359,8 @@
     <Content Include="Views\Shared\Unauthorized.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_RichEditor.cshtml" />
+    <Content Include="Views\Post\_RichEditor2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

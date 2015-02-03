@@ -1,72 +1,96 @@
 ﻿@model ForumETF.ViewModels.CreatePostViewModel
-
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Ovdje možete postaviti vaše pitanje";
 }
 
-<h2>Create</h2>
+<div class="row">
+    <div class="col-md-12" id="post-create-wrapper">
+        <section class="col-md-7">
+            @using (Html.BeginForm("Create", "Post", FormMethod.Post, new {id = "createPostForm", @class = "form-horizontal", enctype = "multipart/form-data"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <h3 style="color:  #03a9f4">@ViewBag.Title</h3>
+                <h4>Polja označena zvjezdicom su obavezna!</h4>
+                <hr/>
 
-@using (Html.BeginForm("Create", "Post", FormMethod.Post, new { id = "createPostForm", enctype = "multipart/form-data" })) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Post</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(m => m.Title, "Naslov:", new {@class = "control-label"})
+                    </div>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Title, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(m => m.Tags, "Tagovi:", new {@class = "control-label"})
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.Tags, new {htmlAttributes = new {@class = "form-control"}})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.Label("Kategorija: ", new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.SelectedId, Model.Categories, "-- Izaberite kategoriju --", new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label class="control-label">Tekst:</label>
+                    </div>
+                    <div class="col-md-10" id="post-wysiwyg-wrapper">
+                        @Html.Partial("_RichEditor2")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(m => m.Files, "Dodaci:" , new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Files,
+                                new { type = "file", @class = "filestyle", data_buttonBefore = "true", data_buttonText = "&nbspIzaberite fajl" })
+                        @Html.TextBoxFor(m => m.Files,
+                                new { type = "file", @class = "filestyle", data_buttonBefore = "true", data_buttonText = "&nbspIzaberite fajl" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @*<input type="hidden" name="post-content" id="post-content-hidden" value=""/>*@
+                @*@Html.HiddenFor(m => m.Content, new { name = "postContent", id = "post-content-hidden", value = "kova" })*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Votes, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Votes, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Votes, "", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.Content)
+                
+                <div class="form-group">
+                    <div class="col-md-10 col-md-offset-2">
+                        <input type="submit" id="post-save" value="Pošalji" class="btn btn-block btn-primary" />
+                    </div>
+                </div>
+            }
+        </section>
+        <section class="col-md-5" id="rules-section">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;Pravila za postavljanje pitanja</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Pravilo 1</li>
+                            <li>Pravilo 2</li>
+                            <li>Pravilo 3</li>
+                            <li>Pravilo 4</li>
+                            <li>Pravilo 5</li>
+                            <li>Pravilo 6</li>
+                            <li>Pravilo 7</li>
+                            <li>Pravilo 8</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Kategorija: ", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SelectedId, Model.Categories, "-- Izaberite kategoriju --")
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Files, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Files, 
-                    new { type = "file", @class = "filestyle", data_buttonBefore = "true", data_buttonText = "&nbspIzaberite fajl" })
-                @Html.TextBoxFor(model => model.Files,
-                    new { type = "file", @class = "filestyle", data_buttonBefore = "true", data_buttonText = "&nbspIzaberite fajl" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        </section>
     </div>
-}
+</div>
+
+

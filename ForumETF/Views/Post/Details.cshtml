@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-11">
             <p>
-                @Model.Content
+                @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Content))
             </p>
         </div>
         <footer class="col-md-11 col-md-offset-1">

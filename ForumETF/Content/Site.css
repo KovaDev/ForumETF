@@ -66,18 +66,16 @@
             padding-top: 30px;
         }
 
-/**/
-
 .welcome-logo {
     width: 220px;
     height: 220px;
 }
 
+/**/
 
 /* Main site navigation */
 #main-nav {
     background: #90a4ae;
-    
 }
 
     #main-nav a {
@@ -91,6 +89,39 @@
     }
 
 /**/
+
+/* Create post */
+#post-create-wrapper {
+    background: #ffffff;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+}
+
+#rules-section > div {
+    padding-top: 22px;
+}
+
+#rules-section .panel-heading {
+    color: #ffffff;
+    background: #37474f;
+}
+
+    #rules-section .panel-heading i {
+        color: #d50000;
+    }
+
+.btn-toolbar .btn-group a {
+    width: 37px;
+    text-align: center;
+}
+
+.btn-toolbar .btn-group a i {
+    position: relative;
+    right: 3px;
+}
+
+
+
 
 #box-blue1 {
     background: #76ff03;
@@ -111,7 +142,8 @@
     color: #fff;
 }
 
-#markdown {
+/* Rich editor styles */
+#post-wysiwyg {
     height: 200px;
     border: solid #2196f3 4px;
     width: 100%;
@@ -119,13 +151,23 @@
     overflow-y: scroll;
 }
 
-#markdown-toolbar {
+#post-wysiwyg-toolbar {
     padding-bottom: 10px;
 }
 
-#markdown-wrapper {
+#post-wysiwyg-wrapper {
     padding-bottom: 10px;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 .tags-row {

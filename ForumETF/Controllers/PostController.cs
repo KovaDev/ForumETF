@@ -17,13 +17,13 @@ namespace ForumETF.Controllers
     [RoutePrefix("Post")]
     public class PostController : Controller
     {
-        private AppDbContext db = null;
-        private UserManager<AppUser> manager = null;
+        private readonly AppDbContext _db;
+        private readonly UserManager<AppUser> _manager;
 
         public PostController ()
 	    {
-            this.db = new AppDbContext();
-            this.manager = new UserManager<AppUser>(new UserStore<AppUser>(db));
+            _db = new AppDbContext();
+            _manager = new UserManager<AppUser>(new UserStore<AppUser>(_db));
     	}
 
         [HttpGet]
@@ -38,16 +38,27 @@ namespace ForumETF.Controllers
         }
 
         [HttpPost]
-        [AcceptVerbs(HttpVerbs.Post)] // na ovaj nacin ce akcija prihvatati i druge vrijednosti osim modela MOZDA :D
+        //[AcceptVerbs(HttpVerbs.Post)] // na ovaj nacin ce akcija prihvatati i druge vrijednosti osim modela MOZDA :D
         public async Task<ActionResult> Create(CreatePostViewModel model)
         {
-            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
+            var currentUser = await _manager.FindByIdAsync(User.Identity.GetUserId());
             ICollection<Tag> tagList = new List<Tag>();
             ICollection<PostAttachment> attachments = new List<PostAttachment>();
+            //var content = WebUtility.HtmlDecode(model.Content);
+            string content;
+
+            if (model.Content != null)
+            {
+                content = WebUtility.HtmlDecode(model.Content);
+            }
+            else
+            {
+                content = "asfafafafafssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
+            }
 
             foreach (var file in model.Files)
             {
-                if (file.ContentLength != 0)
+                if (file != null && file.ContentLength != 0)
                 {
                     var filename = Path.GetFileName(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/Uploads/Attachments"), filename);
@@ -70,13 +81,13 @@ namespace ForumETF.Controllers
                 }
             }
             
-            Category cat = await db.Categories.FindAsync(model.SelectedId);
+            Category cat = await _db.Categories.FindAsync(model.SelectedId);
             
             var post = new Post
             {
                 Title = model.Title,
-                Content = model.Content,
-                Votes = model.Votes,
+                Content = content,
+                Votes = 0,
                 User = currentUser,
                 Category = cat,
                 Tags = tagList,
@@ -85,13 +96,13 @@ namespace ForumETF.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Posts.Add(post);
-                await db.SaveChangesAsync();
+                _db.Posts.Add(post);
+                await _db.SaveChangesAsync();
 
                 return RedirectToAction("Index", "Home");
             }
             
-            return View(post);
+            return View(model);
         }
 
         [HttpGet]
@@ -103,7 +114,7 @@ namespace ForumETF.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Post post = await db.Posts.FindAsync(postId);
+            Post post = await _db.Posts.FindAsync(postId);
 
             PostDetailsViewModel viewModel = new PostDetailsViewModel
             {
@@ -131,12 +142,12 @@ namespace ForumETF.Controllers
         [HttpPost]
         public ActionResult Delete(int postId)
         {
-            Post post = db.Posts.Find(postId);
+            Post post = _db.Posts.Find(postId);
 
-            db.Posts.Remove(post);
-            db.SaveChanges();
+            _db.Posts.Remove(post);
+            _db.SaveChanges();
 
-            var postCount = db.Posts.Where(p => p.User.UserName == User.Identity.Name).Count();
+            var postCount = _db.Posts.Count(p => p.User.UserName == User.Identity.Name);
           
             //return RedirectToAction("Profile", "User");
             return Json(new { num_of_posts = postCount });
@@ -148,9 +159,9 @@ namespace ForumETF.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            Tag tag = db.Tags.Where(t => t.TagName == tagName).SingleOrDefault();
+            Tag tag = _db.Tags.Where(t => t.TagName == tagName).SingleOrDefault();
 
-            var posts = db.Posts.Where(p => p.Tags.Select(t => t.TagName).Contains(tagName))
+            var posts = _db.Posts.Where(p => p.Tags.Select(t => t.TagName).Contains(tagName))
                 .OrderByDescending(p => p.CreatedAt)
                 .ToPagedList(pageNumber, pageSize);
 
@@ -164,9 +175,9 @@ namespace ForumETF.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            var category = db.Categories.Where(c => c.CategoryName == categoryName).SingleOrDefault();
+            var category = _db.Categories.Where(c => c.CategoryName == categoryName).SingleOrDefault();
 
-            var posts = db.Posts.Where(p => p.Category.CategoryName == categoryName)
+            var posts = _db.Posts.Where(p => p.Category.CategoryName == categoryName)
                 .OrderByDescending(p => p.CreatedAt)
                 .ToPagedList(pageNumber, pageSize);
 
@@ -177,7 +188,7 @@ namespace ForumETF.Controllers
 
         public FileStreamResult GetFile(string filename, int? postId)
         {
-            PostAttachment file = db.PostAttachments.Where(a => a.Post.PostId == postId && a.FileName == filename).SingleOrDefault();
+            PostAttachment file = _db.PostAttachments.Where(a => a.Post.PostId == postId && a.FileName == filename).SingleOrDefault();
 
             string path = file.FilePath;
             string mime = MimeMapping.GetMimeMapping(file.FileName);
@@ -187,7 +198,7 @@ namespace ForumETF.Controllers
 
         private Tag GetTag(string tagName)
         {
-            return db.Tags.Where(t => t.TagName == tagName).FirstOrDefault() ?? new Tag { TagName = tagName };
+            return _db.Tags.Where(t => t.TagName == tagName).FirstOrDefault() ?? new Tag { TagName = tagName };
         }
 
         public PartialViewResult MostPopularPosts(int? page)
@@ -195,7 +206,7 @@ namespace ForumETF.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            var posts = db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
+            var posts = _db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
 
             //return PartialView("_Posts", posts);
             return PartialView("_Content");
@@ -203,14 +214,14 @@ namespace ForumETF.Controllers
 
         public PartialViewResult NewestPosts()
         {
-            var posts = db.Posts.OrderByDescending(p => p.CreatedAt).ToList();
+            var posts = _db.Posts.OrderByDescending(p => p.CreatedAt).ToList();
 
             return PartialView("_Newest", posts);
         }
 
         public PartialViewResult UnansweredPosts()
         {
-            var posts = db.Posts.Where(p => p.Answers.Count == 0).OrderByDescending(p => p.CreatedAt).ToList();
+            var posts = _db.Posts.Where(p => p.Answers.Count == 0).OrderByDescending(p => p.CreatedAt).ToList();
 
             return PartialView("_Unanswered", posts);
         }
@@ -239,7 +250,7 @@ namespace ForumETF.Controllers
             //return list.ToList();
 
             // 3 NACIN
-            var list = from c in db.Categories
+            var list = from c in _db.Categories
                        select new SelectListItem
                        {
                            Value = c.CategoryId.ToString(),

@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    $("#markdown").wysiwyg();
+    $("#post-wysiwyg").wysiwyg();
     //var commentForm = $("#create-comment-form");
 
     //$.ajaxSetup({ cache: false });
@@ -79,10 +79,10 @@
     });
 
     $("#markdown").keyup(function () {
-        if ($("#markdown").html() == "") {
-            $("#answer-submit").prop("disabled", true)
-        } else if ($("#markdown").html() != "") {
-            $("#answer-submit").prop("disabled", false)
+        if ($("#markdown").html() === "") {
+            $("#answer-submit").prop("disabled", true);
+        } else if ($("#markdown").html() !== "") {
+            $("#answer-submit").prop("disabled", false);
         }
     });
 
@@ -91,38 +91,40 @@
     });
 
 
-    //$("#createPostForm").bootstrapValidator({
-    //    message: 'This value is not valid',
-    //    feedbackIcons: {
-    //        valid: 'glyphicon glyphicon-ok',
-    //        invalid: 'glyphicon glyphicon-remove',
-    //        validating: 'glyphicon glyphicon-refresh'
-    //    },
-    //    fields: {
-    //        Title: {
-    //            message: 'The username is not valid',
-    //            validators: {
-    //                notEmpty: {
-    //                    message: 'Polje je obavezno!'
-    //                },
-    //            }
-    //        },
-    //        SelectedId: {
-    //            validators: {
-    //                notEmpty: {
-    //                    message: 'Morate izabrati neku od ponuđenih kategorija!'
-    //                }
-    //            }
-    //        },
-    //        Content: {
-    //            validators: {
-    //                notEmpty: {
-    //                    message: 'Polje je obavezno!'
-    //                },
-    //            }
-    //        }
-    //    }
+    /* Kreiranje posta */
+    //var editor = $("#post-rich-editor");
 
+    //$(editor).keyup(function () {
+    //    if ($(editor).html() === "") {
+    //        $("#answer-submit").prop("disabled", true);
+    //    } else if ($(editor).html() !== "") {
+    //        $("#answer-submit").prop("disabled", false);
+    //    }
+    //});
+
+    //$("#answer-submit").bind("click", function () {
+    //    $("#answer-hidden").val($("#markdown").html().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+    //});
+
+    //function bindValueOnHiddenField() {
+        
+    //}
+
+    //function getRichEditorContent(selector) {
+    //    return $(selector).html().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    //}
+
+    $("#post-save").bind("click", function () {
+        $("#Content").val($("#post-wysiwyg").html().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+    });
+
+    //$("#createPostForm").submit(function (event) {
+    //    //alert("Handler for .submit() called.");
+    //    event.preventDefault();
+    //});
+
+    //$("#post-create-submit").bind("click", function () {
+    //    $("#post-content-hidden").val(getRichEditorContent(editor));
     //});
 
 });

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
 
@@ -9,33 +9,33 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <!-- Bootstrap theme -->
-    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/paper/bootstrap.min.css" rel="stylesheet" />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/paper/bootstrap.min.css" rel="stylesheet"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 
 </head>
 <body id="body">
 
-    <div id="wrapper">
-        @Html.Partial("_Header")
+<div id="wrapper">
+    @Html.Partial("_Header")
 
-        <div class="container" id="content-wrapper" @*style="background: rgba(255, 255, 255, 0.5)*@">
-            @RenderBody()
-        </div>
-
-        @Html.Partial("_Footer")
+    <div class="container" id="content-wrapper">
+        @RenderBody()
     </div>
 
-    <!-- Scripts -->
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/custom")
+    @Html.Partial("_Footer")
+</div>
 
-    <!-- Bootstrap Validator CDN -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" />
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+<!-- Scripts -->
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/custom")
 
-    @RenderSection("scripts", required: false)
+<!-- Bootstrap Validator CDN -->
+@*<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>*@
+
+@*@RenderSection("scripts", required: false)*@
 
 </body>
 </html>
