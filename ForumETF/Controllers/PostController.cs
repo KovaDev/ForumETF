@@ -44,7 +44,7 @@ namespace ForumETF.Controllers
             var currentUser = await _manager.FindByIdAsync(User.Identity.GetUserId());
             ICollection<Tag> tagList = new List<Tag>();
             ICollection<PostAttachment> attachments = new List<PostAttachment>();
-            //var content = WebUtility.HtmlDecode(model.Content);
+            
             string content;
 
             if (model.Content != null)
@@ -101,6 +101,8 @@ namespace ForumETF.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
+
+            model.Categories = new SelectList(CategoriesDropdownList(), "Value", "Text");
             
             return View(model);
         }
@@ -258,7 +260,6 @@ namespace ForumETF.Controllers
                        };
 
             return list.ToList();
-
         }
 
     }
