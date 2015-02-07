@@ -1,108 +1,34 @@
-﻿@model PagedList.IPagedList<ForumETF.Models.Post>
-@using PagedList.Mvc;
-@{
-    ViewBag.Title = "Index";
-}
-
-
-<!-- search row -->
-<div class="row" id="search-section">
-    <div class="col-md-8">
-
-        @using(Ajax.BeginForm("Index", "Home", new AjaxOptions
+﻿<div class="row" id="search-section">
+    <div class="col-md-12">
+        @using (Ajax.BeginForm("Index", "Home", new AjaxOptions
         {
             HttpMethod = "GET",
             InsertionMode = InsertionMode.Replace,
             UpdateTargetId = "posts",
-        }, new { id = "search-form" }))
+        }, new {id = "search-form", @class = "form-horizontal"}))
         {
-            <div class="col-md-8">
-                <div class="form-group">
-                    <input type="text" name="searchTerm" class="form-control" id="search" placeholder="Unesite pojam za pretragu" />
+            <div class="form-group">
+                <div class="col-md-6">
+                    <input type="text" name="searchTerm" class="form-control" id="search" placeholder="Unesite pojam za pretragu"/>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Pretraga</button>
+                <div class="col-md-2">
+                    <button type="submit" id="btn-search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Pretraga</button>
+                </div>
             </div>
         }
-
-    </div>
-    <div class="col-md-8" id="home-page-filters">
-        <div class="col-md-12">
-            @*<a href="#" class="btn-link">Najpopularniji</a>&nbsp;&nbsp;|&nbsp;
-            <a href="#" class="btn-link">Najnoviji</a>&nbsp;&nbsp;|&nbsp;
-            <a href="#" class="btn-link">Najposjeceniji</a>&nbsp;&nbsp;|&nbsp;
-            <a href="#" class="btn-link">Neodgovoreni</a>*@
-            @*<div class="btn-group btn-group-justified">
-                
-                @Ajax.ActionLink("Najpopularniji", "MostPopularPosts", "Post", new AjaxOptions
-                {
-                    HttpMethod = "Get",
-                    UpdateTargetId = "posts",
-                    InsertionMode = InsertionMode.Replace,
-                    AllowCache = false
-                }, new { @class = "btn btn-default" })
-                <a href="#" class="btn btn-default">Najnoviji</a>
-                <a href="#" class="btn btn-default">Najposjeceniji</a>
-                <a href="#" class="btn btn-default">Neodgovoreni</a>
-            </div>*@
-
-            <ul class="nav nav-tabs">
-                <li class="active"><a aria-expanded="true" href="#newest" data-toggle="tab">Najnoviji</a></li>
-                <li class=""><a aria-expanded="false" href="#popular" data-toggle="tab">Najpopularniji</a></li>
-                <li class=""><a aria-expanded="false" href="#viewed" data-toggle="tab">Najposjećeniji</a></li>
-                <li class=""><a aria-expanded="false" href="#unanswered" data-toggle="tab">Bez odgovora</a></li>
-            </ul>
-
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="newest">
-                    <p>Tab 1</p>
-                </div>
-                <div class="tab-pane fade in" id="popular">
-                    <p>Tab 2</p>
-                </div>
-                <div class="tab-pane fade in" id="viewed">
-                    <p>Tab 3</p>
-                </div>
-                <div class="tab-pane fade in" id="unanswered">
-                    <p>Tab 4</p>
-                </div>
-            </div>
-
-        </div>
     </div>
 </div>
 
-<div class="row" id="main-cont">
-    <div class="col-md-8" id="posts">
-        <div class="col-lg-12">
-            <div class="col-lg-1" id="box-blue1"><p>Box 1</p></div>
-            <div class="col-lg-1" id="box-blue2"><p>Box 2</p></div>
-            <div class="col-lg-1" id="box-blue3"><p>Box 3</p></div>
-            <div class="col-lg-9"><p>Box 4</p></div>
+<div class="row" id="posts-section">
+    <div class="col-md-12" id="posts-wrapper">
+        <div id="post-list" class="col-md-9">
+            @Html.Partial("_Posts")
         </div>
-        @Html.Partial("_Posts")
-    </div>
-    <div class="col-md-3 col-md-offset-1">
-       
-        @{
-            Html.RenderAction("CategoriesWidget", "Home");
-        } 
-
-        <div class="col-md-12">
-            <h3>Tag cloud</h3>
-            <br />
-            <nav>
-                <ul class="list-group">
-                    <li class="list-group-item"><a href="#">Matematika</a></li>
-                    <li class="list-group-item"><a href="#">Fizika</a></li>
-                    <li class="list-group-item"><a href="#">Objektno orijentisano programiranje</a></li>
-                    <li class="list-group-item"><a href="#">Programski jezici</a></li>
-                    <li class="list-group-item"><a href="#">Opsti smjer</a></li>
-                    <li class="list-group-item"><a href="#">Osnovi elektrotehnike 2</a></li>
-                </ul>
-            </nav>
+        <div id="widgets" class="col-md-3">
+            @{
+                Html.RenderAction("CategoriesWidget", "Home");
+            }
+            @Html.Partial("_TagsWidget")
         </div>
     </div>
-
 </div>

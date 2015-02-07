@@ -1,33 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
 using System.Web;
+using System.Web.Mvc;
 using ForumETF.Models;
+using ForumETF.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList;
 
 namespace ForumETF.Repositories
 {
     public class PostRepository : IPostRepository
     {
-        private AppDbContext db = null;
+        private readonly AppDbContext _db;
+        private readonly UserManager<AppUser> _manager;
 
         public PostRepository()
         {
-            this.db = new AppDbContext();
+            _db = new AppDbContext();
+            _manager = new UserManager<AppUser>(new UserStore<AppUser>(_db));
         }
 
-        public void Create()
+        public void Create(CreatePostViewModel model, List<PostAttachment> attachments, AppUser user)
         {
-            throw new NotImplementedException();
+            var post = CreatePostObject(model, attachments, user);
+            _db.Posts.Add(post);
         }
 
         public List<Post> GetAllPosts()
         {
-            throw new NotImplementedException();
+            return _db.Posts.ToList();
         }
 
-        public ViewModels.PostDetailsViewModel GetPostDetails(int postId)
+        public PostDetailsViewModel GetPostDetails(int postId)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +44,120 @@ namespace ForumETF.Repositories
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            return db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
+            return _db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
         }
+
+        public List<SelectListItem> PopulateCategoriesDropdown()
+        {
+            var list = from c in _db.Categories
+                       select new SelectListItem
+                       {
+                           Value = c.CategoryId.ToString(),
+                           Text = c.CategoryName
+                       };
+
+            return list.ToList();
+        }
+
+        public Tag GetTag(string tagName)
+        {
+            return _db.Tags.FirstOrDefault(t => t.TagName == tagName) ?? new Tag { TagName = tagName };
+        }
+
+        public FileStreamResult GetFile(string filename, int? postId)
+        {
+            var file = _db.PostAttachments.SingleOrDefault(a => a.Post.PostId == postId && a.FileName == filename);
+
+            string path = file.FilePath;
+            string mime = MimeMapping.GetMimeMapping(file.FileName);
+
+            return null;
+            //return File(new FileStream(path, FileMode.Open), mime, file.FileName);
+        }
+
+        public IPagedList<Post> GetPostsByCategory(string categoryName, int? page)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var category = _db.Categories.SingleOrDefault(c => c.CategoryName == categoryName);
+
+            var posts = _db.Posts.Where(p => p.Category.CategoryName == categoryName)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToPagedList(pageNumber, pageSize);
+
+            return posts;
+        }
+
+
+        public Post CreatePostObject(CreatePostViewModel model, List<PostAttachment> attachments, AppUser user)
+        {
+            string decodedContent = GetDecodedHtml(model.Content);
+
+            
+
+            var post = new Post
+            {
+                Title = model.Title,
+                Content = decodedContent,
+                Votes = 0,
+                User = user,
+                Category = GetCategoryById(model.SelectedId),
+                Tags = GetListOfTags(model.Tags),
+                Attachments = attachments
+            };
+
+            return post;
+        }
+
+        public void SavePost()
+        {
+            _db.SaveChanges();
+        }
+
+        private List<Tag> GetListOfTags(string tags)
+        {
+            List<Tag> tagList = new List<Tag>();
+
+            if (!String.IsNullOrEmpty(tags) && !String.IsNullOrWhiteSpace(tags))
+            {
+                string[] tagNames = tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string tagName in tagNames)
+                {
+                    tagList.Add(this.GetTag(tagName));
+                }
+            }
+
+            return tagList;
+        }
+
+        private Category GetCategoryById(int id)
+        {
+            return _db.Categories.Find(id);
+        }
+
+        private string GetDecodedHtml(string content)
+        {
+            string newContent = "";
+
+            if (content != null)
+            {
+                newContent = WebUtility.HtmlDecode(content);
+            }
+            else
+            {
+                newContent = "";
+            }
+
+            return newContent;
+        }
+
+        public Post CreatePost(CreatePostViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+  
     }
 }

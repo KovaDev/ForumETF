@@ -11,6 +11,7 @@ using System.Net;
 using PagedList;
 using ForumETF.ViewModels;
 using System.IO;
+using ForumETF.Repositories;
 
 namespace ForumETF.Controllers
 {
@@ -19,11 +20,13 @@ namespace ForumETF.Controllers
     {
         private readonly AppDbContext _db;
         private readonly UserManager<AppUser> _manager;
+        private readonly IPostRepository _repo;
 
         public PostController ()
 	    {
             _db = new AppDbContext();
             _manager = new UserManager<AppUser>(new UserStore<AppUser>(_db));
+            _repo = new PostRepository();
     	}
 
         [HttpGet]
@@ -31,7 +34,8 @@ namespace ForumETF.Controllers
         {
             CreatePostViewModel viewModel = new CreatePostViewModel
             {
-                Categories = new SelectList(CategoriesDropdownList(), "Value", "Text")
+                //Categories = new SelectList(CategoriesDropdownList(), "Value", "Text")
+                Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text")
             };
            
             return View(viewModel);
@@ -41,10 +45,25 @@ namespace ForumETF.Controllers
         //[AcceptVerbs(HttpVerbs.Post)] // na ovaj nacin ce akcija prihvatati i druge vrijednosti osim modela MOZDA :D
         public async Task<ActionResult> Create(CreatePostViewModel model)
         {
-            var currentUser = await _manager.FindByIdAsync(User.Identity.GetUserId());
+            //var currentUser = User.Identity.GetUserId();
+
+            //if (ModelState.IsValid)
+            //{
+            //    _repo.Create(model, GetPostAttachments(model.Files), currentUser);
+            //    _repo.SavePost();
+
+            //    return RedirectToAction("Index", "Home");
+            //}
+
+            //model.Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text");
+
+            //return View(model);
+
+            //var currentUser = await _manager.FindByIdAsync(User.Identity.GetUserId());
+            var currentUser = await GetLoggedInUser();
             ICollection<Tag> tagList = new List<Tag>();
             ICollection<PostAttachment> attachments = new List<PostAttachment>();
-            
+
             string content;
 
             if (model.Content != null)
@@ -78,11 +97,12 @@ namespace ForumETF.Controllers
                 foreach (string tagName in tagNames)
                 {
                     tagList.Add(GetTag(tagName));
+                    //tagList.Add(_repo.GetTag(tagName));
                 }
             }
-            
+
             Category cat = await _db.Categories.FindAsync(model.SelectedId);
-            
+
             var post = new Post
             {
                 Title = model.Title,
@@ -102,8 +122,8 @@ namespace ForumETF.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            model.Categories = new SelectList(CategoriesDropdownList(), "Value", "Text");
-            
+            model.Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text");
+
             return View(model);
         }
 
@@ -174,23 +194,23 @@ namespace ForumETF.Controllers
 
         public ActionResult GetPostsByCategory(string categoryName, int? page)
         {
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
+            //int pageSize = 10;
+            //int pageNumber = (page ?? 1);
 
-            var category = _db.Categories.Where(c => c.CategoryName == categoryName).SingleOrDefault();
+            //var category = _db.Categories.Where(c => c.CategoryName == categoryName).SingleOrDefault();
 
-            var posts = _db.Posts.Where(p => p.Category.CategoryName == categoryName)
-                .OrderByDescending(p => p.CreatedAt)
-                .ToPagedList(pageNumber, pageSize);
+            //var posts = _db.Posts.Where(p => p.Category.CategoryName == categoryName)
+            //    .OrderByDescending(p => p.CreatedAt)
+            //    .ToPagedList(pageNumber, pageSize);
 
             ViewBag.Category = categoryName;
 
-            return View("PostsByCategory", posts);
+            return View("PostsByCategory", _repo.GetPostsByCategory(categoryName, page));
         }
 
         public FileStreamResult GetFile(string filename, int? postId)
         {
-            PostAttachment file = _db.PostAttachments.Where(a => a.Post.PostId == postId && a.FileName == filename).SingleOrDefault();
+            PostAttachment file = _db.PostAttachments.SingleOrDefault(a => a.Post.PostId == postId && a.FileName == filename);
 
             string path = file.FilePath;
             string mime = MimeMapping.GetMimeMapping(file.FileName);
@@ -200,17 +220,12 @@ namespace ForumETF.Controllers
 
         private Tag GetTag(string tagName)
         {
-            return _db.Tags.Where(t => t.TagName == tagName).FirstOrDefault() ?? new Tag { TagName = tagName };
+            return _repo.GetTag(tagName);
         }
 
         public PartialViewResult MostPopularPosts(int? page)
         {
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-
-            var posts = _db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
-
-            //return PartialView("_Posts", posts);
+            // to be implemented
             return PartialView("_Content");
         }
 
@@ -228,38 +243,31 @@ namespace ForumETF.Controllers
             return PartialView("_Unanswered", posts);
         }
 
-        private List<SelectListItem> CategoriesDropdownList()
+        private List<PostAttachment> GetPostAttachments(IEnumerable<HttpPostedFileBase> files)
         {
-            // 1. NACIN
-            //var categories = db.Categories.ToList();
+            List<PostAttachment> attachments = new List<PostAttachment>();
 
-            //List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var file in files)
+            {
+                if (file != null && file.ContentLength != 0)
+                {
+                    var filename = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Attachments"), filename);
+                    file.SaveAs(path);
+                    attachments.Add(new PostAttachment
+                    {
+                        FilePath = path,
+                        FileName = filename
+                    });
+                }
+            }
 
-            //foreach (var c in categories)
-            //{
-            //    list.Add(new SelectListItem { Text = c.CategoryName, Value = c.CategoryId.ToString() });
-            //}
+            return attachments;
+        }
 
-            //return list;
-
-            // 2. NACIN
-            //var list = db.Categories.Select(c => new SelectListItem
-            //    {
-            //        Value = c.CategoryId.ToString(),
-            //        Text = c.CategoryName
-            //    });
-
-            //return list.ToList();
-
-            // 3 NACIN
-            var list = from c in _db.Categories
-                       select new SelectListItem
-                       {
-                           Value = c.CategoryId.ToString(),
-                           Text = c.CategoryName
-                       };
-
-            return list.ToList();
+        private async Task<AppUser> GetLoggedInUser()
+        {
+            return await _manager.FindByIdAsync(User.Identity.GetUserId());
         }
 
     }

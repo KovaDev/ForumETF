@@ -1,4 +1,14 @@
-﻿#body {
+﻿h5, h6, p, span, a{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+#btn-search {
+    text-transform: capitalize;
+}
+
+#body {
     background: url("images/bg.png") repeat;
     height: 100%;
     width: 100%;
@@ -122,17 +132,6 @@
 
 
 
-
-#box-blue1 {
-    background: #76ff03;
-}
-#box-blue2 {
-    background: #00b0ff;
-}
-#box-blue3 {
-    background: #40c4ff;
-}
-
 #profile-wrapper {
     background: rgba(255, 255, 255, 0.2);
 }
@@ -251,6 +250,8 @@
     bottom: 10px;
 }
 
+
+
 /* Footer styles */
 #main-footer {
     position: absolute;
@@ -266,6 +267,132 @@
         height: auto;
         width: 100%;
     }
+
+
+/* Home page */
+#search-section {
+    background: #ffffff;
+}
+
+#search-section div {
+    background: #ffffff;
+    padding-top: 10px;
+}
+
+#posts-section {
+    background: #ffffff;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+
+#widgets {
+    padding: 0;
+}
+
+/* home page posts */
+
+#post-list {
+    padding-top: 30px;
+    border-right: solid #aeea00 2px;
+}
+
+#posts-wrapper {
+    padding: 0;
+}
+
+.single-post {
+    height: 120px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.post-col-1, .post-col-2, .post-col-3, .post-col-4 {
+    height: 80px;
+    width: 80px;
+}
+
+.single-post .col-md-1 {
+    padding: 0;
+}
+
+.post-col-1 {
+    background: #263238;
+    color: #ffffff;
+    text-align: center;
+    padding: 0;
+}
+
+    .post-col-1 span{
+        float: left;
+        width: 100%;
+        padding-top: 1px;
+    }
+
+        .post-col-1 i{
+            color: #ffc107;
+        }
+
+.post-col-2 {
+    text-align: center;
+    background: #37474f;
+    color: #ffffff;
+}
+
+    .post-col-2 span{
+        float: left;
+        width: 100%;
+        padding-top: 1px;
+    }
+
+.post-col-3 {
+    background: #455a64;
+    color: #ffffff;
+}
+
+    .post-col-3 span{
+        float: left;
+        width: 100%;
+        font-size: 12px;
+        text-align: center;
+        padding-top: 3px;
+    }
+
+.post-col-4 {
+    background: #546e7a;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+    .post-col-4 span{
+        float: left;
+        width: 100%;
+        text-align: center;
+        padding-top: 3px;
+    }
+
+.post-title {
+    height: 40px;
+}
+
+    .post-title p {
+        height: 40px;
+        width: 100%;
+    }
+
+    .post-title p a{
+        font-size: 24px;
+    }
+
+.post-info {
+    height: 40px;
+    padding-top: 10px;
+}
+
+.tags-section a {
+    text-transform: capitalize;
+}
+
+
 
 
 /* Media queries mobile (extra small devices) */

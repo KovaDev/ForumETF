@@ -1,6 +1,6 @@
-﻿@model IEnumerable<ForumETF.Models.Category>
+﻿@model IEnumerable<Category>
 
-<div class="col-md-12">
+<div class="col-md-12 widget">
     <h3>Kategorije</h3>
     <br />
     <nav>
@@ -8,7 +8,8 @@
             @foreach (var category in Model)
             {
                 <li class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;<a href="@Url.Action("GetPostsByCategory", "Post", new { categoryName = category.CategoryName })">@category.CategoryName</a>&nbsp;(@category.Posts.Count)
+                    <i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;
+                        <a href="@Url.Action("GetPostsByCategory", "Post", new { categoryName = category.CategoryName })">@category.CategoryName</a>&nbsp;(@category.Posts.Count)
                 </li>
             }
         </ul>

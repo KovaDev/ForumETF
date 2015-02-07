@@ -1,31 +1,47 @@
-﻿@model PagedList.IPagedList<ForumETF.Models.Post>
+﻿@model IPagedList<Post>
 @using PagedList.Mvc;
 
 @foreach (var item in Model)
 {
-    <header class="col-md-12 post-title">
-        <h3>@Html.ActionLink(item.Title, "Details", "Post", new { id = item.PostId }, null)</h3>
-    </header>
-    <div class="col-md-12">
-        <p>@MvcHtmlString.Create(HttpUtility.HtmlDecode(item.Content))</p>
-    </div>
-    <footer class="col-md-12 post-footer">
-        <div>
-            <span><i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@item.User.UserName</a> |</span>
-            <span><i class="fa fa-folder-open-o"></i>&nbsp;Kategorija: @Html.ActionLink(item.Category.CategoryName, "GetPostsByCategory", "Post", new { categoryName = item.Category.CategoryName }, null) |</span>
-            <span><i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014 |</span>
-            <span><i class="fa fa-comments"></i>&nbsp;broj komentara: @item.Comments.Count |</span>
-            <span><i class="fa fa-reply"></i>&nbsp;broj odgovora: @item.Answers.Count</span>
+    <div class="single-post">
+        <div class="col-md-1 post-col-1">
+            <span>Rejting</span>
+            <span>5</span>
+            <span><i class="fa fa-star-o"></i></span>
         </div>
-        <div class="tags-row">
+        <div class="col-md-1 post-col-2">
+            <span><i class="fa fa-chevron-up"></i></span>
+            <span>@item.Votes</span>
+            <span><i class="fa fa-chevron-down"></i></span>
+        </div>
+        <div class="col-md-1 post-col-3">
+            <span>Broj</span>
+            <span>odgovora</span>
+            <span>@item.Answers.Count</span>
+        </div>
+        <div class="col-md-1 post-col-4">
+            <span>Broj</span>
+            <span>komentara</span>
+            <span>@item.Comments.Count</span>
+        </div>
+        <div class="col-md-8 post-body">
+            <div class="post-title">
+                <p>@Html.ActionLink(item.Title, "Details", "Post", new {id = item.PostId}, null)</p>
+            </div>
+            <div class="post-info">
+                <span><i class="fa fa-user"></i>&nbsp;autor: <a href="@Url.Action("Profile", "User", new {username = @item.User.UserName})" class="btn-link">@item.User.UserName</a> |</span>
+                <span><i class="fa fa-folder-open-o"></i>&nbsp;Kategorija: @Html.ActionLink(item.Category.CategoryName, "GetPostsByCategory", "Post", new {categoryName = item.Category.CategoryName}, null) |</span>
+                <span><i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014</span>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-4 tags-section">
             @foreach (var tag in item.Tags)
             {
-                <a href="@Url.Action("GetPostsByTag", "Post", new { tagName = tag.TagName })" class="btn btn-primary tag">
-                    <i class="fa fa-tag"></i>&nbsp;&nbsp;@tag.TagName
-                </a>
+                <a href="#" class="btn btn-xs btn-primary tag">@tag.TagName</a>
             }
         </div>
-    </footer>
+    </div>
+    <br/>
 }
 
 <div class="col-md-12">
