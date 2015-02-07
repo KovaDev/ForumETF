@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq.Expressions;
 using System.Web;
@@ -56,6 +57,26 @@ namespace ForumETF.HtmlHelpers
             }
 
             return new HtmlString(html.ToString());
+        }
+
+        public static IHtmlString SubstringTextFor(this HtmlHelper helper, string text, string action, string controller, object routeValues, string htmlAttributes)
+        {
+            var link = new TagBuilder("a");
+            var href = "/" + controller + "/" + action;
+
+            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(htmlAttributes))
+            {
+                var value = prop.GetValue(htmlAttributes);
+                if (value != null)
+                    link.MergeAttribute(prop.Name.Replace("_", "-"), value.ToString(), true);
+            }
+
+            var linkText = text.Length > 36 ? text.Substring(0, 36) + " ..." : text;
+
+            link.MergeAttribute("href", href);
+            link.InnerHtml = linkText;
+
+            return new HtmlString(link.ToString());
         }
 
     }

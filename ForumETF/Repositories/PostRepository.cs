@@ -6,8 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using ForumETF.Models;
 using ForumETF.ViewModels;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList;
 
 namespace ForumETF.Repositories
@@ -15,12 +13,10 @@ namespace ForumETF.Repositories
     public class PostRepository : IPostRepository
     {
         private readonly AppDbContext _db;
-        private readonly UserManager<AppUser> _manager;
 
-        public PostRepository()
+        public PostRepository(AppDbContext context)
         {
-            _db = new AppDbContext();
-            _manager = new UserManager<AppUser>(new UserStore<AppUser>(_db));
+            _db = context;
         }
 
         public void Create(CreatePostViewModel model, List<PostAttachment> attachments, AppUser user)
@@ -93,8 +89,6 @@ namespace ForumETF.Repositories
         public Post CreatePostObject(CreatePostViewModel model, List<PostAttachment> attachments, AppUser user)
         {
             string decodedContent = GetDecodedHtml(model.Content);
-
-            
 
             var post = new Post
             {

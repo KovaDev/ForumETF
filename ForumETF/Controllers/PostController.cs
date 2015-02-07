@@ -26,7 +26,7 @@ namespace ForumETF.Controllers
 	    {
             _db = new AppDbContext();
             _manager = new UserManager<AppUser>(new UserStore<AppUser>(_db));
-            _repo = new PostRepository();
+            _repo = new PostRepository(_db);
     	}
 
         [HttpGet]
@@ -45,79 +45,12 @@ namespace ForumETF.Controllers
         //[AcceptVerbs(HttpVerbs.Post)] // na ovaj nacin ce akcija prihvatati i druge vrijednosti osim modela MOZDA :D
         public async Task<ActionResult> Create(CreatePostViewModel model)
         {
-            //var currentUser = User.Identity.GetUserId();
-
-            //if (ModelState.IsValid)
-            //{
-            //    _repo.Create(model, GetPostAttachments(model.Files), currentUser);
-            //    _repo.SavePost();
-
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            //model.Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text");
-
-            //return View(model);
-
-            //var currentUser = await _manager.FindByIdAsync(User.Identity.GetUserId());
             var currentUser = await GetLoggedInUser();
-            ICollection<Tag> tagList = new List<Tag>();
-            ICollection<PostAttachment> attachments = new List<PostAttachment>();
-
-            string content;
-
-            if (model.Content != null)
-            {
-                content = WebUtility.HtmlDecode(model.Content);
-            }
-            else
-            {
-                content = "asfafafafafssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
-            }
-
-            foreach (var file in model.Files)
-            {
-                if (file != null && file.ContentLength != 0)
-                {
-                    var filename = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Uploads/Attachments"), filename);
-                    file.SaveAs(path);
-                    attachments.Add(new PostAttachment
-                    {
-                        FilePath = path,
-                        FileName = filename
-                    });
-                }
-            }
-
-            if (!String.IsNullOrEmpty(model.Tags) && !String.IsNullOrWhiteSpace(model.Tags))
-            {
-                string[] tagNames = model.Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                foreach (string tagName in tagNames)
-                {
-                    tagList.Add(GetTag(tagName));
-                    //tagList.Add(_repo.GetTag(tagName));
-                }
-            }
-
-            Category cat = await _db.Categories.FindAsync(model.SelectedId);
-
-            var post = new Post
-            {
-                Title = model.Title,
-                Content = content,
-                Votes = 0,
-                User = currentUser,
-                Category = cat,
-                Tags = tagList,
-                Attachments = attachments
-            };
 
             if (ModelState.IsValid)
             {
-                _db.Posts.Add(post);
-                await _db.SaveChangesAsync();
+                _repo.Create(model, GetPostAttachments(model.Files), currentUser);
+                _repo.SavePost();
 
                 return RedirectToAction("Index", "Home");
             }
@@ -125,6 +58,73 @@ namespace ForumETF.Controllers
             model.Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text");
 
             return View(model);
+
+            //var currentUser = await _manager.FindByIdAsync(User.Identity.GetUserId());
+            //var currentUser = await GetLoggedInUser();
+            //ICollection<Tag> tagList = new List<Tag>();
+            //ICollection<PostAttachment> attachments = new List<PostAttachment>();
+
+            //string content;
+
+            //if (model.Content != null)
+            //{
+            //    content = WebUtility.HtmlDecode(model.Content);
+            //}
+            //else
+            //{
+            //    content = "asfafafafafssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
+            //}
+
+            //foreach (var file in model.Files)
+            //{
+            //    if (file != null && file.ContentLength != 0)
+            //    {
+            //        var filename = Path.GetFileName(file.FileName);
+            //        var path = Path.Combine(Server.MapPath("~/Uploads/Attachments"), filename);
+            //        file.SaveAs(path);
+            //        attachments.Add(new PostAttachment
+            //        {
+            //            FilePath = path,
+            //            FileName = filename
+            //        });
+            //    }
+            //}
+
+            //if (!String.IsNullOrEmpty(model.Tags) && !String.IsNullOrWhiteSpace(model.Tags))
+            //{
+            //    string[] tagNames = model.Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            //    foreach (string tagName in tagNames)
+            //    {
+            //        tagList.Add(GetTag(tagName));
+            //        //tagList.Add(_repo.GetTag(tagName));
+            //    }
+            //}
+
+            //Category cat = await _db.Categories.FindAsync(model.SelectedId);
+
+            //var post = new Post
+            //{
+            //    Title = model.Title,
+            //    Content = content,
+            //    Votes = 0,
+            //    User = currentUser,
+            //    Category = cat,
+            //    Tags = tagList,
+            //    Attachments = attachments
+            //};
+
+            //if (ModelState.IsValid)
+            //{
+            //    _db.Posts.Add(post);
+            //    await _db.SaveChangesAsync();
+
+            //    return RedirectToAction("Index", "Home");
+            //}
+
+            //model.Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text");
+
+            //return View(model);
         }
 
         [HttpGet]

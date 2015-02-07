@@ -22,7 +22,7 @@ namespace ForumETF.Controllers
         public HomeController ()
 	    {
             db = new AppDbContext();
-            repository = new PostRepository();
+            repository = new PostRepository(db);
 	    }
 
         // GET: Home
