@@ -1,4 +1,8 @@
 ﻿@model UserViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
 
 <div class="panel panel-default">
     <div class="panel-heading" id="personal-data">Lični podaci</div>
@@ -13,11 +17,13 @@
 <div class="panel panel-default">
     <div class="panel-heading" id="contact-data">Kontakt podaci</div>
     <div class="panel-body">
-        <i class="fa fa-user">&nbsp;&nbsp;</i>Korisnicko ime<br />
-        <i class="fa fa-user">&nbsp;&nbsp;</i>Ime<br />
-        <i class="fa fa-user">&nbsp;&nbsp;</i>Prezime<br />
-        <i class="fa fa-envelope">&nbsp;&nbsp;</i>Email adresa<br />
-        <i class="fa fa-calendar">&nbsp;&nbsp;</i>Datum registracije<br />
+        <i class="fa fa-user">&nbsp;&nbsp;</i>Email: @Model.Email<br />
+        <i class="fa fa-user">&nbsp;&nbsp;</i>Adresa: @Model.Address<br />
+        <i class="fa fa-user">&nbsp;&nbsp;</i>Broj telefon: @Model.PhoneNumber<br />
+        <i class="fa fa-envelope">&nbsp;&nbsp;</i>Mobilni telefon: @Model.MobilePhone<br />
+        <i class="fa fa-calendar">&nbsp;&nbsp;</i>Facebook: @Model.FacebookUrl<br/>
+        <i class="fa fa-calendar">&nbsp;&nbsp;</i>Twitter: @Model.TwitterUrl<br/>
+        <i class="fa fa-calendar">&nbsp;&nbsp;</i>LinkedIn: @Model.LinkedInUrl<br />
     </div>
 </div>
 <div class="panel panel-default">
@@ -73,3 +79,7 @@
         </table>
     </div>
 </div>
+
+
+
+

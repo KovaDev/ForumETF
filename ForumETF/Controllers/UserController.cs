@@ -28,63 +28,101 @@ namespace ForumETF.Controllers
             manager = new UserManager<AppUser>(new UserStore<AppUser>(db));
         }
 
-        // GET: User
-        public ActionResult Index(string username)
-        {
-            return View();
-        }
-
         [Route("User/Profile/{username}")]
         [ActionName("Profile")]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult UserProfile(string username)
         {
-            //AppUser user = _repo.GetUser(username);
-            AppUser user = manager.FindById(User.Identity.GetUserId());
-            var postsCount = db.Posts.Where(p => p.User.UserName == user.UserName).Count();
+            AppUser user = manager.FindByName(username);
+
+            UserViewModel viewModel = new UserViewModel()
+            {
+                UserName = user.UserName,
+                AvatarUrl = user.AvatarUrl,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Department = user.Department,
+                Address = user.Address,
+                PhoneNumber = user.Phone,
+                MobilePhone = user.MobilePhone,
+                FacebookUrl = user.FacebookUrl,
+                TwitterUrl = user.TwitterUrl,
+                LinkedInUrl = user.LinkedinUrl
+            };
+
+            var postsCount = db.Posts.Count(p => p.User.UserName == user.UserName);
             
             ViewBag.PostsCount = postsCount;
 
-            return View(user);
+            return View("Details", viewModel);
         }
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public PartialViewResult Details(string username)
         {
-            var user = _repo.GetUser(username);
+            //var user = _repo.GetUser(username);
 
-            return PartialView("_Details", user);
+            //return PartialView("_Details", user);
+            return null;
         }
+
+        //[HttpGet]
+        //[OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        //public PartialViewResult Edit()
+        //{
+        //    AppUser user = manager.FindById(User.Identity.GetUserId());
+
+        //    UserEditViewModel model = new UserEditViewModel
+        //    {
+        //        Email = user.Email,
+        //        FirstName = user.FirstName,
+        //        LastName = user.LastName,
+        //        Department = user.Department,
+        //        Address = user.Address
+        //    };
+
+        //    return PartialView("_Edit", model);
+        //}
 
         [HttpGet]
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public PartialViewResult Edit()
+        [Route("User/Profile/{username}/Edit")]
+        public ActionResult Edit(string username)
         {
-            AppUser user = manager.FindById(User.Identity.GetUserId());
+            AppUser user = manager.FindByName(username);
 
-            UserEditViewModel model = new UserEditViewModel
+            UserViewModel viewModel = new UserViewModel()
             {
-                Email = user.Email,
+                UserName = user.UserName,
+                AvatarUrl = user.AvatarUrl,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                Email = user.Email,
                 Department = user.Department,
-                Address = user.Address
+                Address = user.Address,
+                PhoneNumber = user.Phone,
+                MobilePhone = user.MobilePhone,
+                FacebookUrl = user.FacebookUrl,
+                TwitterUrl = user.TwitterUrl,
+                LinkedInUrl = user.LinkedinUrl
             };
 
-            return PartialView("_Edit", model);
+            return View(viewModel);
         }
 
-        
+
         //[OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public ActionResult Edit(UserEditViewModel model)
+        [HttpPost]
+        [Route("User/Profile/{username}/Edit")]
+        public ActionResult Edit(UserViewModel model)
         {
             AppUser user = manager.FindById(User.Identity.GetUserId());
 
-            if (model.AvatarUrl.ContentLength > 0)
+            if (model.Avatar != null && model.Avatar.ContentLength > 0)
             {
-                var filename = Path.GetFileName(model.AvatarUrl.FileName);
+                var filename = Path.GetFileName(model.Avatar.FileName);
                 var path = Path.Combine(Server.MapPath("~/Uploads/ProfilePictures"), filename);
-                model.AvatarUrl.SaveAs(path);
+                model.Avatar.SaveAs(path);
                 user.AvatarUrl = path;
             }
 
@@ -93,12 +131,16 @@ namespace ForumETF.Controllers
             user.Department = model.Department;
             user.Address = model.Address;
             user.Email = model.Email;
+            user.Phone = model.PhoneNumber;
+            user.MobilePhone = model.MobilePhone;
+            user.FacebookUrl = model.FacebookUrl;
+            user.TwitterUrl = model.TwitterUrl;
+            user.LinkedinUrl = model.LinkedInUrl;
 
             IdentityResult result = manager.Update(user);
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
 
-            //return PartialView("_Details", user);
             return RedirectToAction("Profile", "User", new { username = User.Identity.Name });
         }
 

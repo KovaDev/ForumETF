@@ -27,7 +27,7 @@
         <div class="col-md-8 post-body">
             <div class="post-title">
                 <p>
-                    @Html.SubstringTextFor(item.Title, "Details", "Post", new { id = item.PostId }, null)
+                    @Html.SubstringTextFor(item.Title, 36, "Details", "Post", new { id = item.PostId }, null)
                 </p>
             </div>
             <div class="post-info">
@@ -39,7 +39,7 @@
         <div class="col-md-8 col-md-offset-4 tags-section">
             @foreach (var tag in item.Tags)
             {
-                <a href="#" class="btn btn-xs btn-primary tag">@tag.TagName</a>
+                <a href="@Url.Action("GetPostsByTag", "Post", new { tagName = tag.TagName })" class="btn btn-xs btn-primary tag">@tag.TagName</a>
             }
         </div>
     </div>

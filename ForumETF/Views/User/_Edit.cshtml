@@ -1,11 +1,5 @@
-﻿@model UserEditViewModel
+﻿@model UserViewModel
 
-@*@using (Ajax.BeginForm("Edit", "User", new AjaxOptions
-{
-    UpdateTargetId = "profile-data",
-    HttpMethod = "Post",
-    InsertionMode = InsertionMode.Replace
-}, new { id = "userEditForm", enctype = "multipart/form-data" }))*@
 @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { id = "userEditForm", enctype = "multipart/form-data" }))
 {
     <fieldset>

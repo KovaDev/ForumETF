@@ -1,71 +1,22 @@
-﻿@model AppUser
+﻿@model UserViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
 
-<div class="col-md-10 col-md-offset-1" id="profile-wrapper">
-    <div class="col-md-12 col-lg-3">
-        <div class=" @*col-md-pull-3*@">
-            @Html.ProfileImageFor(Model.AvatarUrl)
+<div class="row">
+    <div class="col-md-12" id="profile-wrapper">
+        <div id="profile-left-column" class="col-md-3">
+            <div id="image-wrapper" class="col-md-12">
+                @Html.ProfileImageFor(Model.AvatarUrl, new {id = "profile-image", @class = "img-rounded", alt = "profile-pic"})
+            </div>
+            <div id="profile-nav" class="col-md-12">
+                @Html.Partial("_Navigation")
+            </div>
         </div>
-        <div class=" @*col-md-push-9*@">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    @*<span class="badge">14</span>
-                    Cras justo odio*@
-                    <i class="fa fa-user">&nbsp;&nbsp;</i>
-                    @Ajax.ActionLink("Podaci o korisniku", "Details", "User", new { username = @User.Identity.Name }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "profile-data", InsertionMode = InsertionMode.Replace })
-                </li>
-                <li class="list-group-item">
-                    <i class="fa fa-envelope">&nbsp;&nbsp;</i><a href="#">Privatne poruke</a><span class="badge">14</span>
-                </li>
-                <li class="list-group-item">
-                    @*<span class="badge">2</span>
-                    Dapibus ac facilisis in*@
-                    <i class="fa fa-bar-chart">&nbsp;&nbsp;</i><a href="#">Statistika</a>
-                </li>
-                <li class="list-group-item">
-                    <i class="fa fa-comments-o">&nbsp;&nbsp;</i>@Ajax.ActionLink("Objavljeni postovi", "GetPublishedPosts", "User", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "profile-data", InsertionMode = InsertionMode.Replace })<span id="user-posts-count" class="badge">@ViewBag.PostsCount</span>
-                </li>
-                <li class="list-group-item">
-                    @*<span class="badge">1</span>
-                    Morbi leo risus*@
-                    <i class="fa fa-user">&nbsp;&nbsp;</i>
-                    @Ajax.ActionLink("Promjena podataka", "Edit", "User", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "profile-data", InsertionMode = InsertionMode.Replace })
-                </li>
-                <li class="list-group-item">
-                    @*<span class="badge">2</span>
-                    Dapibus ac facilisis in*@
-                    <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Promjena lozinke</a>
-                </li>
-                <li class="list-group-item">
-                    @*<span class="badge">1</span>
-                    Morbi leo risus*@
-                    <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Projekti</a>
-                </li>
-                <li class="list-group-item">
-                    @*<span class="badge">1</span>
-                    Morbi leo risus*@
-                    <i class="fa fa-user">&nbsp;&nbsp;</i><a href="#">Vještine</a>
-                </li>
-            </ul>
+        <div id="profile-right-column" class="col-md-9">
+            <div id="profile-content" class="">
+                @Html.Partial("_Details")
+            </div>
         </div>
-    </div>
-    <div class="col-md-9" id="profile-data"> <!-- Ajax targetUpdateId -->
-        @Html.Partial("_Details")
-    </div>
-    <div class="col-md-12">
-        <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-            a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-            Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-            a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-            Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-        </p>
     </div>
 </div>
-

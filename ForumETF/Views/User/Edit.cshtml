@@ -1,0 +1,128 @@
+﻿@model UserViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="col-md-12" id="user-edit-wrapper">
+    @using (Html.BeginForm("Edit", "User", FormMethod.Post, new {id = "createPostForm", @class = "form-horizontal", enctype = "multipart/form-data"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h3 style="color:  #03a9f4">Izmjena korisničkih podataka</h3>
+        <h4>Polja označena zvjezdicom su obavezna!</h4>
+
+        <fieldset>
+            <legend>Lični podaci</legend>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.FirstName, "Ime:", new {@class = "control-label"})
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.LastName, "Prezime:", new {@class = "control-label"})
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.LastName, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.LastName, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.Email, "E-mail:", new {@class = "control-label"})
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.Department, "Smjer:", new {@class = "control-label"})
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.Department, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Department, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.Avatar, "Profilna slika:", new { @class = "control-label" })
+                </div>
+
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.Avatar,
+                                new { type = "file", id="update-avatar", @class = "filestyle", data_buttonBefore = "true", data_buttonText = "&nbspIzaberite fajl" })
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Kontakt podaci</legend>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.Address, "Adresa:", new {@class = "control-label"})
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.Address, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Address, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.PhoneNumber, "Broj telefona:", new {@class = "control-label"})
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.MobilePhone, "Mobilni telefon:", new {@class = "control-label"})
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.MobilePhone, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.MobilePhone, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.FacebookUrl, "Facebook:", new {@class = "control-label"})
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.FacebookUrl, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.FacebookUrl, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.TwitterUrl, "Twitter:", new {@class = "control-label"})
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.TwitterUrl, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.TwitterUrl, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-sm-2">
+                    @Html.LabelFor(m => m.LinkedInUrl, "LinkedIn:", new { @class = "control-label" })
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    @Html.TextBoxFor(m => m.LinkedInUrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LinkedInUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="form-group">
+            <div class="col-md-6 col-md-offset-2 col-sm-10 col-sm-offset-2">
+                <input type="submit" id="user-save" value="Sačuvaj" class="btn btn-block btn-primary" />
+            </div>
+        </div>
+    }
+</div>

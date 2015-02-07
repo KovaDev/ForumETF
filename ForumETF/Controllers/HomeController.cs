@@ -16,13 +16,13 @@ namespace ForumETF.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private AppDbContext db = null;
-        private PostRepository repository = null; 
+        private readonly AppDbContext _db;
+        private readonly IPostRepository _repo; 
 
         public HomeController ()
 	    {
-            db = new AppDbContext();
-            repository = new PostRepository(db);
+            _db = new AppDbContext();
+            _repo = new PostRepository(_db);
 	    }
 
         // GET: Home
@@ -34,7 +34,7 @@ namespace ForumETF.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            var posts = db.Posts.Where(p => p.Title.Contains(searchTerm) || searchTerm == null)
+            var posts = _db.Posts.Where(p => p.Title.Contains(searchTerm) || searchTerm == null)
                 .OrderByDescending(p => p.CreatedAt)
                 .ToPagedList(pageNumber, pageSize);
 
@@ -49,9 +49,15 @@ namespace ForumETF.Controllers
         [ChildActionOnly]
         public ActionResult CategoriesWidget()
         {
-            var categories = db.Categories.ToList();
+            var categories = _db.Categories.ToList();
 
             return PartialView("_CategoriesWidget", categories);
+        }
+
+        [ChildActionOnly]
+        public ActionResult TopTenPostsWidget()
+        {
+            return PartialView("_TopTenPostsWidget", _repo.GetTop10Posts());
         }
 
         //[ChildActionOnly]
@@ -70,7 +76,7 @@ namespace ForumETF.Controllers
             //int pageNumber = (page ?? 1);
 
             //var posts = db.Posts.OrderByDescending(p => p.Votes).ToPagedList(pageNumber, pageSize);
-            var posts = repository.GetMostPopularPosts(page);
+            var posts = _repo.GetMostPopularPosts(page);
 
             return PartialView("_Posts", posts);
         }
@@ -79,7 +85,7 @@ namespace ForumETF.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

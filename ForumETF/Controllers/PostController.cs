@@ -1,17 +1,16 @@
-﻿using ForumETF.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity;
-using System.Net;
-using PagedList;
-using ForumETF.ViewModels;
-using System.IO;
+using ForumETF.Models;
 using ForumETF.Repositories;
+using ForumETF.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using PagedList;
 
 namespace ForumETF.Controllers
 {
@@ -34,7 +33,6 @@ namespace ForumETF.Controllers
         {
             CreatePostViewModel viewModel = new CreatePostViewModel
             {
-                //Categories = new SelectList(CategoriesDropdownList(), "Value", "Text")
                 Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text")
             };
            
@@ -42,7 +40,6 @@ namespace ForumETF.Controllers
         }
 
         [HttpPost]
-        //[AcceptVerbs(HttpVerbs.Post)] // na ovaj nacin ce akcija prihvatati i druge vrijednosti osim modela MOZDA :D
         public async Task<ActionResult> Create(CreatePostViewModel model)
         {
             var currentUser = await GetLoggedInUser();
@@ -58,73 +55,6 @@ namespace ForumETF.Controllers
             model.Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text");
 
             return View(model);
-
-            //var currentUser = await _manager.FindByIdAsync(User.Identity.GetUserId());
-            //var currentUser = await GetLoggedInUser();
-            //ICollection<Tag> tagList = new List<Tag>();
-            //ICollection<PostAttachment> attachments = new List<PostAttachment>();
-
-            //string content;
-
-            //if (model.Content != null)
-            //{
-            //    content = WebUtility.HtmlDecode(model.Content);
-            //}
-            //else
-            //{
-            //    content = "asfafafafafssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
-            //}
-
-            //foreach (var file in model.Files)
-            //{
-            //    if (file != null && file.ContentLength != 0)
-            //    {
-            //        var filename = Path.GetFileName(file.FileName);
-            //        var path = Path.Combine(Server.MapPath("~/Uploads/Attachments"), filename);
-            //        file.SaveAs(path);
-            //        attachments.Add(new PostAttachment
-            //        {
-            //            FilePath = path,
-            //            FileName = filename
-            //        });
-            //    }
-            //}
-
-            //if (!String.IsNullOrEmpty(model.Tags) && !String.IsNullOrWhiteSpace(model.Tags))
-            //{
-            //    string[] tagNames = model.Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            //    foreach (string tagName in tagNames)
-            //    {
-            //        tagList.Add(GetTag(tagName));
-            //        //tagList.Add(_repo.GetTag(tagName));
-            //    }
-            //}
-
-            //Category cat = await _db.Categories.FindAsync(model.SelectedId);
-
-            //var post = new Post
-            //{
-            //    Title = model.Title,
-            //    Content = content,
-            //    Votes = 0,
-            //    User = currentUser,
-            //    Category = cat,
-            //    Tags = tagList,
-            //    Attachments = attachments
-            //};
-
-            //if (ModelState.IsValid)
-            //{
-            //    _db.Posts.Add(post);
-            //    await _db.SaveChangesAsync();
-
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            //model.Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text");
-
-            //return View(model);
         }
 
         [HttpGet]
@@ -136,21 +66,9 @@ namespace ForumETF.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Post post = await _db.Posts.FindAsync(postId);
+            var post = _repo.GetPostById(postId);
 
-            PostDetailsViewModel viewModel = new PostDetailsViewModel
-            {
-                PostID = post.PostId,
-                Title = post.Title,
-                Content = post.Content,
-                Votes = post.Votes,
-                CreatedAt = post.CreatedAt,
-                User = post.User,
-                Tags = post.Tags.ToList(),
-                Comments = post.Comments.ToList(),
-                Answers = post.Answers.ToList(),
-                Attachments = post.Attachments.ToList()
-            };
+            var viewModel = CreateDetailsViewModel(post);
 
             if (post == null)
             {
@@ -181,8 +99,6 @@ namespace ForumETF.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            Tag tag = _db.Tags.Where(t => t.TagName == tagName).SingleOrDefault();
-
             var posts = _db.Posts.Where(p => p.Tags.Select(t => t.TagName).Contains(tagName))
                 .OrderByDescending(p => p.CreatedAt)
                 .ToPagedList(pageNumber, pageSize);
@@ -194,38 +110,13 @@ namespace ForumETF.Controllers
 
         public ActionResult GetPostsByCategory(string categoryName, int? page)
         {
-            //int pageSize = 10;
-            //int pageNumber = (page ?? 1);
-
-            //var category = _db.Categories.Where(c => c.CategoryName == categoryName).SingleOrDefault();
-
-            //var posts = _db.Posts.Where(p => p.Category.CategoryName == categoryName)
-            //    .OrderByDescending(p => p.CreatedAt)
-            //    .ToPagedList(pageNumber, pageSize);
-
             ViewBag.Category = categoryName;
 
             return View("PostsByCategory", _repo.GetPostsByCategory(categoryName, page));
         }
 
-        public FileStreamResult GetFile(string filename, int? postId)
-        {
-            PostAttachment file = _db.PostAttachments.SingleOrDefault(a => a.Post.PostId == postId && a.FileName == filename);
-
-            string path = file.FilePath;
-            string mime = MimeMapping.GetMimeMapping(file.FileName);
-
-            return File(new FileStream(path, FileMode.Open), mime, file.FileName);
-        }
-
-        private Tag GetTag(string tagName)
-        {
-            return _repo.GetTag(tagName);
-        }
-
         public PartialViewResult MostPopularPosts(int? page)
         {
-            // to be implemented
             return PartialView("_Content");
         }
 
@@ -243,6 +134,37 @@ namespace ForumETF.Controllers
             return PartialView("_Unanswered", posts);
         }
 
+        /// <summary>
+        /// Pomocna metoda koja omogucava download attachmenta
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="postId"></param>
+        /// <returns></returns>
+        public FileStreamResult GetFile(string filename, int? postId)
+        {
+            PostAttachment file = _db.PostAttachments.SingleOrDefault(a => a.Post.PostId == postId && a.FileName == filename);
+
+            string path = file.FilePath;
+            string mime = MimeMapping.GetMimeMapping(file.FileName);
+
+            return File(new FileStream(path, FileMode.Open), mime, file.FileName);
+        }
+
+        /// <summary>
+        /// Pomocna metoda koja vraca novi Tag objekat ili vec postojeci Tag objekat, na osnovu parametra
+        /// </summary>
+        /// <param name="tagName"></param>
+        /// <returns></returns>
+        private Tag GetTag(string tagName)
+        {
+            return _repo.GetTag(tagName);
+        }
+
+        /// <summary>
+        /// Pomocna metoda koja obradjuje upload fajlova
+        /// </summary>
+        /// <param name="files"></param>
+        /// <returns></returns>
         private List<PostAttachment> GetPostAttachments(IEnumerable<HttpPostedFileBase> files)
         {
             List<PostAttachment> attachments = new List<PostAttachment>();
@@ -265,9 +187,37 @@ namespace ForumETF.Controllers
             return attachments;
         }
 
+        /// <summary>
+        /// Pomocna metoda koja asinhrono vraca objekat aktivnog korisnik
+        /// </summary>
+        /// <returns></returns>
         private async Task<AppUser> GetLoggedInUser()
         {
             return await _manager.FindByIdAsync(User.Identity.GetUserId());
+        }
+
+        /// <summary>
+        /// Pomocna metoda koja kreira instancu PostDetailsViewModel klase na osnovu parametra post
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
+        private PostDetailsViewModel CreateDetailsViewModel(Post post)
+        {
+            PostDetailsViewModel viewModel = new PostDetailsViewModel
+            {
+                PostID = post.PostId,
+                Title = post.Title,
+                Content = post.Content,
+                Votes = post.Votes,
+                CreatedAt = post.CreatedAt,
+                User = post.User,
+                Tags = post.Tags.ToList(),
+                Comments = post.Comments.ToList(),
+                Answers = post.Answers.ToList(),
+                Attachments = post.Attachments.ToList()
+            };
+
+            return viewModel;
         }
 
     }

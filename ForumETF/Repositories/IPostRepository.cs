@@ -12,8 +12,10 @@ namespace ForumETF.Repositories
         // CRUD operations
         void Create(CreatePostViewModel model, List<PostAttachment> attachments, AppUser user);
         List<Post> GetAllPosts();
-        PostDetailsViewModel GetPostDetails(int postId);
+        Post GetPostById(int? postId);
+        PostDetailsViewModel GetPostDetails(int? postId);
         IPagedList<Post> GetMostPopularPosts(int? page);
+        List<Post> GetTop10Posts(); 
         void SavePost();
 
         // helper methods
@@ -21,6 +23,7 @@ namespace ForumETF.Repositories
         List<SelectListItem> PopulateCategoriesDropdown();
         FileStreamResult GetFile(string filename, int? postId);
         IPagedList<Post> GetPostsByCategory(string categoryName, int? page);
+        IPagedList<Post> GetPostsByTag(string tagName, int? page);
         Post CreatePost(CreatePostViewModel model);
         
     }

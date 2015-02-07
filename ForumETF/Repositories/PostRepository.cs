@@ -30,9 +30,9 @@ namespace ForumETF.Repositories
             return _db.Posts.ToList();
         }
 
-        public PostDetailsViewModel GetPostDetails(int postId)
+        public PostDetailsViewModel GetPostDetails(int? postId)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public IPagedList<Post> GetMostPopularPosts(int? page)
@@ -71,7 +71,7 @@ namespace ForumETF.Repositories
             //return File(new FileStream(path, FileMode.Open), mime, file.FileName);
         }
 
-        public IPagedList<Post> GetPostsByCategory(string categoryName, int? page)
+        public IPagedList<Post> GetPostsByTag(string categoryName, int? page)
         {
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -152,6 +152,24 @@ namespace ForumETF.Repositories
             throw new NotImplementedException();
         }
 
-  
+
+
+
+        public Post GetPostById(int? postId)
+        {
+            return _db.Posts.Find(postId);
+        }
+
+
+        public IPagedList<Post> GetPostsByCategory(string categoryName, int? page)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public List<Post> GetTop10Posts()
+        {
+            return _db.Posts.OrderByDescending(p => p.Votes).Take(10).ToList();
+        }
     }
 }

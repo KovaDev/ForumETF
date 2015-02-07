@@ -38,28 +38,35 @@ namespace ForumETF.HtmlHelpers
             return null;
         }
 
-        public static IHtmlString ProfileImageFor(this HtmlHelper helper, string content)
+        public static IHtmlString ProfileImageFor(this HtmlHelper helper, string content, object htmlAttributes)
         {
-            var html = new TagBuilder("img");
-            html.MergeAttribute("class", "img-rounded");
-            html.MergeAttribute("id", "profilePicture");
-            html.MergeAttribute("alt", "profile-pic");
+            var img = new TagBuilder("img");
+            //html.MergeAttribute("class", "img-rounded");
+            //html.MergeAttribute("id", "profilePicture");
+            //html.MergeAttribute("alt", "profile-pic");
 
             string url = "/Uploads/ProfilePictures/" + Path.GetFileName(content);
 
+            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(htmlAttributes))
+            {
+                var value = prop.GetValue(htmlAttributes);
+                if (value != null)
+                    img.MergeAttribute(prop.Name.Replace("_", "-"), value.ToString(), true);
+            }
+
             if (String.IsNullOrEmpty(content) && String.IsNullOrWhiteSpace(content))
             {
-                html.MergeAttribute("src", "http://www.sdtn.com/files/pictures/sdtn_default_profile_image.jpg");
+                img.MergeAttribute("src", "http://www.sdtn.com/files/pictures/sdtn_default_profile_image.jpg");
             }
             else
             {
-                html.MergeAttribute("src", HelperMethods.GenerateAbsolutUri(url));
+                img.MergeAttribute("src", HelperMethods.GenerateAbsolutUri(url));
             }
 
-            return new HtmlString(html.ToString());
+            return new HtmlString(img.ToString());
         }
 
-        public static IHtmlString SubstringTextFor(this HtmlHelper helper, string text, string action, string controller, object routeValues, string htmlAttributes)
+        public static IHtmlString SubstringTextFor(this HtmlHelper helper, string text, int textLength, string action, string controller, object routeValues, string htmlAttributes)
         {
             var link = new TagBuilder("a");
             var href = "/" + controller + "/" + action;
@@ -71,7 +78,7 @@ namespace ForumETF.HtmlHelpers
                     link.MergeAttribute(prop.Name.Replace("_", "-"), value.ToString(), true);
             }
 
-            var linkText = text.Length > 36 ? text.Substring(0, 36) + " ..." : text;
+            var linkText = text.Length > textLength ? text.Substring(0, textLength) + " ..." : text;
 
             link.MergeAttribute("href", href);
             link.InnerHtml = linkText;

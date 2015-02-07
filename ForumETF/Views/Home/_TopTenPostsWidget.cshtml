@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Post>
+
+<div class="col-md-12 widget">
+    <h3>Top 10 postova</h3>
+    <br />
+    <nav>
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">
+                    <i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;
+                    <a href="@Url.Action("Details", "Post", new { id = item.PostId })">@item.Title</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+

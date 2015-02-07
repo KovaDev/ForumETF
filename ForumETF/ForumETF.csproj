@@ -318,7 +318,7 @@
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="ViewModels\CreatePostViewModel.cs" />
-    <Compile Include="ViewModels\UserDetailsViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
     <Compile Include="ViewModels\PostDetailsViewModel.cs" />
     <Compile Include="ViewModels\RegisterModel.cs" />
@@ -362,6 +362,12 @@
     <Content Include="Views\Shared\_RichEditor.cshtml" />
     <Content Include="Views\Post\_RichEditor2.cshtml" />
     <Content Include="Views\Home\_TagsWidget.cshtml" />
+    <Content Include="Views\Home\_TopTenPostsWidget.cshtml" />
+    <Content Include="Views\User\_Navigation.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
