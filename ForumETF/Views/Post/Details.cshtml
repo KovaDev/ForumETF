@@ -39,7 +39,7 @@
             <div>
                 @foreach (var file in Model.Attachments)
                 { 
-                    <i class="fa fa-paperclip">&nbsp;&nbsp;</i><a href="@Url.Action("GetFile", "Post", new {filename = file.FileName, postId = Model.PostID})">@file.FileName</a>
+                    <i class="fa fa-paperclip">&nbsp;&nbsp;</i><a href="@Url.Action("GetFile", "Post", new {filename = file.FileName, postId = Model.PostId})">@file.FileName</a>
                     @*@Html.ActionLink("Link download", "GetFile", "Post", new{filename = file.FileName, postId = Model.PostID}, null)*@
                     <br />
                 }
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="col-md-12" id="comment-form-wrapper">
-            @using (Ajax.BeginForm("Create", "Comment", new { post = @Model.PostID }, new AjaxOptions
+            @using (Ajax.BeginForm("Create", "Comment", new { post = @Model.PostId }, new AjaxOptions
             {
                 UpdateTargetId = "comments-area",
                 HttpMethod = "Post",

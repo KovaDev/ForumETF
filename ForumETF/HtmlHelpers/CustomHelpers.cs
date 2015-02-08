@@ -78,6 +78,13 @@ namespace ForumETF.HtmlHelpers
                     link.MergeAttribute(prop.Name.Replace("_", "-"), value.ToString(), true);
             }
 
+            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(routeValues))
+            {
+                var value = prop.GetValue(routeValues);
+                if (value != null)
+                    href += "/" + Convert.ToInt32(value);
+            }
+
             var linkText = text.Length > textLength ? text.Substring(0, textLength) + " ..." : text;
 
             link.MergeAttribute("href", href);

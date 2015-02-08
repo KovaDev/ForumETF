@@ -11,6 +11,7 @@ using ForumETF.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList;
+using AutoMapper;
 
 namespace ForumETF.Controllers
 {
@@ -68,7 +69,7 @@ namespace ForumETF.Controllers
 
             var post = _repo.GetPostById(postId);
 
-            var viewModel = CreateDetailsViewModel(post);
+            var viewModel = GeneratePostDetailsViewModel(post);
 
             if (post == null)
             {
@@ -90,7 +91,8 @@ namespace ForumETF.Controllers
             var postCount = _db.Posts.Count(p => p.User.UserName == User.Identity.Name);
           
             //return RedirectToAction("Profile", "User");
-            return Json(new { num_of_posts = postCount });
+            //return Json(new { num_of_posts = postCount });
+            return RedirectToAction("GetPublishedPosts", "User");
         }
 
         //[Route("Tags/{tagName}")]
@@ -201,21 +203,10 @@ namespace ForumETF.Controllers
         /// </summary>
         /// <param name="post"></param>
         /// <returns></returns>
-        private PostDetailsViewModel CreateDetailsViewModel(Post post)
+        private PostDetailsViewModel GeneratePostDetailsViewModel(Post post)
         {
-            PostDetailsViewModel viewModel = new PostDetailsViewModel
-            {
-                PostID = post.PostId,
-                Title = post.Title,
-                Content = post.Content,
-                Votes = post.Votes,
-                CreatedAt = post.CreatedAt,
-                User = post.User,
-                Tags = post.Tags.ToList(),
-                Comments = post.Comments.ToList(),
-                Answers = post.Answers.ToList(),
-                Attachments = post.Attachments.ToList()
-            };
+            Mapper.CreateMap<Post, PostDetailsViewModel>();
+            var viewModel = Mapper.Map<PostDetailsViewModel>(post);
 
             return viewModel;
         }

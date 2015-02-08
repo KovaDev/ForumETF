@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
+using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using ForumETF.Repositories;
 using ForumETF.Models;
-using System.Data.Entity;
+using ForumETF.Repositories;
+using ForumETF.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using ForumETF.ViewModels;
-using System.Web.UI;
-using System.IO;
 
 namespace ForumETF.Controllers
 {
@@ -145,8 +141,9 @@ namespace ForumETF.Controllers
         }
 
         [HttpGet]
+        [Route("User/Profile/{username}/Posts")]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public PartialViewResult GetPublishedPosts()
+        public ActionResult GetPublishedPosts()
         {
             AppUser user = manager.FindById(User.Identity.GetUserId());
 
@@ -155,7 +152,24 @@ namespace ForumETF.Controllers
                         select p
                         ).OrderByDescending(p => p.CreatedAt).ToList();
 
-            return PartialView("_PublishedPosts", posts);
+            UserViewModel viewModel = new UserViewModel()
+            {
+                UserName = user.UserName,
+                AvatarUrl = user.AvatarUrl,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Department = user.Department,
+                Address = user.Address,
+                PhoneNumber = user.Phone,
+                MobilePhone = user.MobilePhone,
+                FacebookUrl = user.FacebookUrl,
+                TwitterUrl = user.TwitterUrl,
+                LinkedInUrl = user.LinkedinUrl,
+                Posts = posts
+            };
+
+            return View("PublishedPosts", viewModel);
         }
 
         public ActionResult Modal(int postId)

@@ -14,7 +14,7 @@
         <i class="fa fa-bar-chart">&nbsp;&nbsp;</i><a href="#">Statistika</a>
     </li>
     <li class="list-group-item">
-        <i class="fa fa-comments-o">&nbsp;&nbsp;</i>@Ajax.ActionLink("Objavljeni postovi", "GetPublishedPosts", "User", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "profile-data", InsertionMode = InsertionMode.Replace })<span id="user-posts-count" class="badge">@ViewBag.PostsCount</span>
+        <i class="fa fa-comments-o">&nbsp;&nbsp;</i>@Html.ActionLink("Objavljeni postovi", "GetPublishedPosts", "User", new {username = Model.UserName }, null)<span id="user-posts-count" class="badge">@ViewBag.PostsCount</span>
     </li>
     <li class="list-group-item">
         @*<span class="badge">1</span>

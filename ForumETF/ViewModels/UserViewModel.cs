@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
+using ForumETF.Models;
 
 namespace ForumETF.ViewModels
 {
@@ -21,5 +23,7 @@ namespace ForumETF.ViewModels
         public string FacebookUrl { get; set; }
         public string TwitterUrl { get; set; }
         public string LinkedInUrl { get; set; }
+
+        public List<Post> Posts { get; set; }
     }
 }
