@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList;
 using AutoMapper;
+using ForumETF.HtmlHelpers;
 
 namespace ForumETF.Controllers
 {
@@ -59,8 +60,8 @@ namespace ForumETF.Controllers
         }
 
         [HttpGet]
-        [Route("Details/{postId:int}")]
-        public async Task<ActionResult> Details(int? postId)
+        //[Route("Details/{seoName}")]
+        public ActionResult Details(int? postId, string seoName)
         {
             if (postId == null)
             {
@@ -69,13 +70,16 @@ namespace ForumETF.Controllers
 
             var post = _repo.GetPostById(postId);
 
-            var viewModel = GeneratePostDetailsViewModel(post);
-
             if (post == null)
             {
-                //return HttpNotFound();
                 return View("404");
             }
+
+            var viewModel = GeneratePostDetailsViewModel(post);
+
+            if (seoName != HelperMethods.GetUrlSeoName(viewModel.Title))
+                return RedirectToActionPermanent("Details",
+                    new {postId = viewModel.PostId, seoName = HelperMethods.GetUrlSeoName(viewModel.Title)});
 
             return View(viewModel);
         }
@@ -83,14 +87,13 @@ namespace ForumETF.Controllers
         [HttpPost]
         public ActionResult Delete(int postId)
         {
-            Post post = _db.Posts.Find(postId);
+            var post = _db.Posts.Find(postId);
 
             _db.Posts.Remove(post);
             _db.SaveChanges();
 
             var postCount = _db.Posts.Count(p => p.User.UserName == User.Identity.Name);
           
-            //return RedirectToAction("Profile", "User");
             //return Json(new { num_of_posts = postCount });
             return RedirectToAction("GetPublishedPosts", "User");
         }
@@ -98,7 +101,7 @@ namespace ForumETF.Controllers
         //[Route("Tags/{tagName}")]
         public ActionResult GetPostsByTag(string tagName, int? page)
         {
-            int pageSize = 10;
+            const int pageSize = 10;
             int pageNumber = (page ?? 1);
 
             var posts = _db.Posts.Where(p => p.Tags.Select(t => t.TagName).Contains(tagName))

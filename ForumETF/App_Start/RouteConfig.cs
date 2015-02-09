@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace ForumETF
@@ -23,6 +19,17 @@ namespace ForumETF
                 "PostsByCategory",
                 "Post/Category/{categoryName}",
                 new { controller = "Post", action = "GetPostsByCategory" });
+
+            routes.MapRoute(
+                "HomePage",
+                "Home/Index/page/{page}",
+                new { controller = "Home", action = "Index" });
+
+            routes.MapRoute(
+                "PostDetails",
+                "Post/Details/{postId}/{seoName}",
+                new { controller = "Post", action = "Details", seoName = "" },
+                new { postId = @"^\d+$" });
 
             routes.MapRoute(
                 name: "Default",

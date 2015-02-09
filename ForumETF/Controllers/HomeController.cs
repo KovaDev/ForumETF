@@ -1,15 +1,8 @@
-﻿using ForumETF.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using System.Data.Entity;
-using PagedList;
-using System.Web.UI;
+using ForumETF.Models;
 using ForumETF.Repositories;
+using PagedList;
 
 namespace ForumETF.Controllers
 {   
@@ -40,6 +33,7 @@ namespace ForumETF.Controllers
 
             if (Request.IsAjaxRequest())
             {
+                
                 return PartialView("_Posts", posts);
             }
 

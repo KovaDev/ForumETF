@@ -27,7 +27,8 @@
         <div class="col-md-8 post-body">
             <div class="post-title">
                 <p>
-                    @Html.SubstringTextFor(item.Title, 36, "Details", "Post", new { postId = item.PostId }, null)
+                    @*@Html.SubstringTextFor(item.Title, 36, "Details", "Post", new { postId = item.PostId, seoName = item.Title }, null)*@
+                    @Html.ActionLink(item.Title, "Details", "Post", new { postId = item.PostId, seoName = item.Title}, null)
                 </p>
             </div>
             <div class="post-info">
