@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Owin;
-using Owin;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity;
+using ForumETF;
 using ForumETF.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
+using Owin;
 
-[assembly: OwinStartup(typeof(ForumETF.Startup))]
-
+[assembly: OwinStartup(typeof(Startup))]
 namespace ForumETF
 {
     public class Startup
     {
         public static Func<UserManager<AppUser>> UserManagerFactory { get; private set; }
-        //public static Func<RoleManager<AppRole>> RoleManagerFactory { get; private set; }
 
         public void Configuration(IAppBuilder app)
         {
@@ -38,12 +36,6 @@ namespace ForumETF
                 return userManager;
             };
 
-            //RoleManagerFactory = () =>
-            //{
-            //    var roleManager = new RoleManager<AppRole>(new RoleStore<AppRole>(new AppDbContext()));
-
-            //    return roleManager;
-            //};
 
         }
     }

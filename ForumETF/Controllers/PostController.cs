@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList;
 using AutoMapper;
+using ForumETF.CustomAttributes;
 using ForumETF.HtmlHelpers;
 
 namespace ForumETF.Controllers
@@ -42,39 +43,31 @@ namespace ForumETF.Controllers
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<ActionResult> Create(CreatePostViewModel model)
         {
             var currentUser = await GetLoggedInUser();
 
-            if (ModelState.IsValid)
-            {
-                _repo.Create(model, GetPostAttachments(model.Files), currentUser);
-                _repo.SavePost();
-
-                return RedirectToAction("Index", "Home");
-            }
+            _repo.Create(model, GetPostAttachments(model.Files), currentUser);
+            _repo.SavePost();
 
             model.Categories = new SelectList(_repo.PopulateCategoriesDropdown(), "Value", "Text");
 
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         //[Route("Details/{seoName}")]
         public ActionResult Details(int? postId, string seoName)
         {
-            if (postId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
+            if (postId == null) 
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+      
             var post = _repo.GetPostById(postId);
 
-            if (post == null)
-            {
+            if (post == null) 
                 return View("404");
-            }
-
+           
             var viewModel = GeneratePostDetailsViewModel(post);
 
             if (seoName != HelperMethods.GetUrlSeoName(viewModel.Title))
@@ -82,6 +75,20 @@ namespace ForumETF.Controllers
                     new {postId = viewModel.PostId, seoName = HelperMethods.GetUrlSeoName(viewModel.Title)});
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var post = _db.Posts.Find(id);
+
+            return View(post);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Post post)
+        {
+            return null;
         }
 
         [HttpPost]
@@ -147,13 +154,15 @@ namespace ForumETF.Controllers
         /// <returns></returns>
         public FileStreamResult GetFile(string filename, int? postId)
         {
-            PostAttachment file = _db.PostAttachments.SingleOrDefault(a => a.Post.PostId == postId && a.FileName == filename);
+            var file = _db.PostAttachments.SingleOrDefault(a => a.Post.PostId == postId && a.FileName == filename);
 
             string path = file.FilePath;
             string mime = MimeMapping.GetMimeMapping(file.FileName);
 
             return File(new FileStream(path, FileMode.Open), mime, file.FileName);
         }
+
+        #region private methods
 
         /// <summary>
         /// Pomocna metoda koja vraca novi Tag objekat ili vec postojeci Tag objekat, na osnovu parametra
@@ -210,9 +219,19 @@ namespace ForumETF.Controllers
         {
             Mapper.CreateMap<Post, PostDetailsViewModel>();
             var viewModel = Mapper.Map<PostDetailsViewModel>(post);
+            var comments = _db.Comments.Where(c => c.Post.PostId == post.PostId).ToList();
+            var answers = _db.Answers.Where(a => a.Post.PostId == post.PostId).ToList();
+            //viewModel.Comments = comments;
+            //viewModel.Answers = answers;
+            viewModel.Comments = post.Comments.ToList();
+            viewModel.Answers = post.Answers.ToList();
 
             return viewModel;
         }
+
+       
+
+        #endregion
 
     }
 }

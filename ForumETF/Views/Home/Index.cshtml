@@ -1,4 +1,7 @@
-﻿<div class="row" id="search-section">
+﻿@model IPagedList<Post>
+@using PagedList.Mvc;
+
+<div class="row" id="search-section">
     <div class="col-md-12">
         @using (Ajax.BeginForm("Index", "Home", new AjaxOptions
         {
@@ -23,6 +26,10 @@
     <div class="col-md-12" id="posts-wrapper">
         <div id="post-list" class="col-md-9">
             @Html.Partial("_Posts")
+            @*@foreach (var item in Model)
+            {
+                <p>@item.Title</p><br/>
+            }*@
         </div>
         <div id="widgets" class="col-md-3">
             @{

@@ -74,11 +74,11 @@
             </div>
             <div class="form-group">
                 <div class="col-md-2 col-sm-2">
-                    @Html.LabelFor(m => m.PhoneNumber, "Broj telefona:", new {@class = "control-label"})
+                    @Html.LabelFor(m => m.Phone, "Broj telefona:", new {@class = "control-label"})
                 </div>
                 <div class="col-md-6 col-sm-10">
-                    @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "form-control"})
-                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new {@class = "text-danger"})
+                    @Html.TextBoxFor(m => m.Phone, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Phone, "", new {@class = "text-danger"})
                 </div>
             </div>
             <div class="form-group">
@@ -110,11 +110,11 @@
             </div>
             <div class="form-group">
                 <div class="col-md-2 col-sm-2">
-                    @Html.LabelFor(m => m.LinkedInUrl, "LinkedIn:", new { @class = "control-label" })
+                    @Html.LabelFor(m => m.LinkedinUrl, "LinkedIn:", new { @class = "control-label" })
                 </div>
                 <div class="col-md-6 col-sm-10">
-                    @Html.TextBoxFor(m => m.LinkedInUrl, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.LinkedInUrl, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.LinkedinUrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LinkedinUrl, "", new { @class = "text-danger" })
                 </div>
             </div>
         </fieldset>

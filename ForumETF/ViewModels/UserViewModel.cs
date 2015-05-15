@@ -18,11 +18,11 @@ namespace ForumETF.ViewModels
         public HttpPostedFileBase Avatar { get; set; }
 
         public string WebSite { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
         public string MobilePhone { get; set; }
         public string FacebookUrl { get; set; }
         public string TwitterUrl { get; set; }
-        public string LinkedInUrl { get; set; }
+        public string LinkedinUrl { get; set; }
 
         public List<Post> Posts { get; set; }
     }

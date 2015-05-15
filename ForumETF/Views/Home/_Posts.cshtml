@@ -29,10 +29,11 @@
                 <p>
                     @*@Html.SubstringTextFor(item.Title, 36, "Details", "Post", new { postId = item.PostId, seoName = item.Title }, null)*@
                     @Html.ActionLink(item.Title, "Details", "Post", new { postId = item.PostId, seoName = item.Title}, null)
+                    
                 </p>
             </div>
             <div class="post-info">
-                <span><i class="fa fa-user"></i>&nbsp;autor: <a href="@Url.Action("Profile", "User", new {username = @item.User.UserName})" class="btn-link">@item.User.UserName</a> |</span>
+                @*<span><i class="fa fa-user"></i>&nbsp;autor: <a href="@Url.Action("Profile", "User", new {username = @item.User.UserName})" class="btn-link">@item.User.UserName</a> |</span>*@
                 <span><i class="fa fa-folder-open-o"></i>&nbsp;Kategorija: @Html.ActionLink(item.Category.CategoryName, "GetPostsByCategory", "Post", new { categoryName = item.Category.CategoryName }, null) |</span>
                 <span><i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014</span>
             </div>

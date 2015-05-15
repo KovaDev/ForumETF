@@ -1,137 +1,127 @@
-﻿@model ForumETF.ViewModels.PostDetailsViewModel
+﻿@model PostDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<div class="row post-wrapper">
-
-    <header class="col-md-12">
-        <h3>@Model.Title</h3>
-    </header>
-    <div class="col-md-12">
-        <div class="col-md-1">
-            <span class="vote-span"><a href="#"><i class="fa fa-angle-up fa-3x"></i></a></span>
-            <span class="vote-span" id="vote-count">@Model.Votes</span>
-            <span class="vote-span"><a href="#"><i class="fa fa-angle-down fa-3x"></i></a></span>
-            <span class="vote-span"><a href="#"><i class="fa fa-star-o fa-3x" style="color: yellow;"></i></a></span>
+<div class="row" id="post-page-wrapper">
+    <div class="col-md-12" id="post-details-wrapper">
+        <div class="col-md-12" id="details-title">
+            <h3>@Model.Title</h3>
+            <hr />
         </div>
-        <div class="col-md-11">
-            <p>
-                @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Content))
-            </p>
-        </div>
-        <footer class="col-md-11 col-md-offset-1">
-            <div>
-                <i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@Model.User.UserName</a>&nbsp; | &nbsp;
-                <i class="fa fa-calendar"></i>&nbsp;datum objave: @Model.CreatedAt &nbsp; | &nbsp;
-                <i class="fa fa-comments"></i>&nbsp;broj komentara: @Model.Comments.Count &nbsp; | &nbsp;
-                <i class="fa fa-reply"></i>&nbsp;broj odgovora: 5
+        <div class="col-md-12" id="details-body">
+            <div class="col-md-1" id="ratings">
+                <span><i class="fa fa-2x fa-chevron-up"></i></span>
+                <span>@Model.Votes</span>
+                <span><i class="fa fa-2x fa-chevron-down"></i></span>
+                <span><i class="fa fa-2x fa-star-o"></i></span>
+                <span>6</span>
             </div>
-            <div class="tags-row">
+            <div class="col-md-11">
+                @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Content))
+            </div>
+        </div>
+        <div class="col-md-11 col-md-offset-1" id="details-info">
+            <div class="col-md-12" style="padding-bottom: 10px;">
                 @foreach (var tag in Model.Tags)
                 {
-                    <a href="@Url.Action("GetPostsByTag", "Post", new { tagName = tag.TagName })" class="btn btn-primary tag">
-                        <i class="fa fa-tag"></i>&nbsp;&nbsp;@tag.TagName
-                    </a>
+                    <a href="#" class="btn btn-xs btn-primary">@tag.TagName</a>
                 }
             </div>
-            <div>
+            <div class="col-md-12">
                 @foreach (var file in Model.Attachments)
-                { 
+                {
                     <i class="fa fa-paperclip">&nbsp;&nbsp;</i><a href="@Url.Action("GetFile", "Post", new {filename = file.FileName, postId = Model.PostId})">@file.FileName</a>
                     @*@Html.ActionLink("Link download", "GetFile", "Post", new{filename = file.FileName, postId = Model.PostID}, null)*@
                     <br />
                 }
             </div>
-        </footer>
-    </div>
-
-</div>
-
-<div class="row">
-    <div class="col-md-8 col-md-offset-4" id="comments-area">
-        @foreach (var comment in Model.Comments)
-        {   
-            <div class="col-md-12 comment">
-                <div class="col-md-12">
-                    @comment.Content
-                </div>
-                <div class="col-md-12">
-                    <i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@comment.User.UserName</a>&nbsp; | &nbsp;
-                    <i class="fa fa-calendar"></i>&nbsp;datum objave: 16.12.2014
-                </div>
-            </div>
-        }
-    </div>
-    <div class="col-md-8 col-md-offset-4">
-        <hr />
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <a href="#" id="new-comment-link" class="btn-link">Dodajte komentar&nbsp;<i class="fa fa-angle-down"></i></a>
-            </div>
         </div>
-        <div class="col-md-12" id="comment-form-wrapper">
-            @using (Ajax.BeginForm("Create", "Comment", new { post = @Model.PostId }, new AjaxOptions
-            {
-                UpdateTargetId = "comments-area",
-                HttpMethod = "Post",
-                InsertionMode = InsertionMode.InsertAfter
-            }, new { id = "comment-form" }))
-            {
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <label>Komentar:</label>
+    </div>
+
+    <div class="col-md-12" id="post-comments-list">
+        <div class="col-md-12">
+            <div class="col-md-12" id="comments">
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="col-md-8 col-md-offset-4">
+                        <div class="col-md-12">
+                            @comment.Content
+                        </div>
+                        <div class="col-md-12">
+                            <a href="@Url.Action("Profile", "User", new {username = @comment.User.UserName})">@comment.User.UserName</a> | @comment.CreatedAt
+                        </div>
                     </div>
-                    <div class="col-md-10 col-md-offset-2">
-                        <textarea id="commentTextarea" name="commentContent"></textarea>
+                }
+            </div>
+            <hr/>
+        </div>
+        <div>
+            @using (Ajax.BeginForm("Create", "Comment", new { post = @Model.PostId } , new AjaxOptions
+            {
+                UpdateTargetId = "comments", HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter
+            }, new {id = "comment-form"}))
+            {
+                <!-- forma za kreiranje komentara -->
+                <div class="form-group" style="padding-bottom: 30px;">
+                    <div class="col-md-4 col-sm-2">
+                        <label class="control-label">Vaš komentar</label>
+                    </div>
+                    <div class="col-md-8 col-sm-10">
+                        <textarea class="form-control" name="commentContent" placeholder="Unesite vaš komentar"></textarea>
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Ostavite komentar" class="btn btn-danger" />
+                    <div class="col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-2">
+                        <input type="submit" id="comment-save" value="Pošalji" class="btn btn-block btn-primary" />
                     </div>
                 </div>
             }
-        </div>
     </div>
 </div>
 
-<hr />
-
-<div class="row">
-    <div class="col-md-11 col-md-offset-1" id="answers-area">
+<div class="col-md-12" id="post-answers-list">
+    <div class="col-md-10 col-md-offset-2">
         @foreach (var answer in Model.Answers)
         {
-            <div class="col-md-12 answer-wrapper">
-                <div class="col-md-1">
-                    <span class="vote-span"><a href="#"><i class="fa fa-angle-up fa-3x"></i></a></span>
-                    <span class="vote-span" id="vote-count">@answer.Votes</span>
-                    <span class="vote-span"><a href="#"><i class="fa fa-angle-down fa-3x"></i></a></span>
-                    <span class="vote-span"><a href="#"><i class="fa fa-star-o fa-3x" style="color: yellow;"></i></a></span>
-                </div>
-                <div class="col-md-11 answer-content">
-                    <p>
-                        @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Content))
-                    </p>
-                </div>
-                <footer class="col-md-11 col-md-offset-1">
-                    <div>
-                        <i class="fa fa-user"></i>&nbsp;autor: <a href="#" class="btn-link">@answer.User.UserName</a>&nbsp; | &nbsp;
-                        <i class="fa fa-calendar"></i>&nbsp;datum objave: @answer.CreatedAt
-                    </div>
-                    <hr />
-                </footer>
+            <div class="col-md-12">
+                @answer.Content
+            </div>
+            <div class="col-md-12">
+                @answer.User.UserName
             </div>
         }
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-8 col-md-offset-4">
-        @Html.Partial("_RichEditor")            
-    </div>
+<div class="col-md-12" id="new-answer-area">
+    @using (Ajax.BeginForm("Create", "Answer", new { post = @Model.PostId }, new AjaxOptions
+    {
+        UpdateTargetId = "answers",
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.InsertAfter
+    }, new { id = "answer-form", @class = "form-horizontal" }))
+    {
+        <hr />
+        <div class="form-group">
+            <div class="col-md-2 col-sm-2">
+                <label class="control-label">Tekst:</label>
+            </div>
+            <div class="col-md-10 col-sm-10" id="post-wysiwyg-wrapper">
+                @Html.Partial("_RichEditor2")
+            </div>
+        </div>
+
+        @Html.HiddenFor(m => m.Content)
+
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-2 col-sm-10 col-sm-offset-2">
+                <input type="submit" id="answer-save" value="Pošalji" class="btn btn-block btn-primary" />
+            </div>
+        </div>
+    }
 </div>
 
-
-
+</div>

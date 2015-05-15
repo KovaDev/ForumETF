@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using ForumETF.Models;
 using ForumETF.Repositories;
 using ForumETF.ViewModels;
@@ -13,15 +14,15 @@ namespace ForumETF.Controllers
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
     public class UserController : Controller
     {
-        private IUserRepository _repo = null;
-        private AppDbContext db = null;
-        private UserManager<AppUser> manager = null;
+        private IUserRepository _repo;
+        private readonly AppDbContext _db;
+        private readonly UserManager<AppUser> _manager;
 
         public UserController()
         {
             _repo = new UserRepository();
-            db = new AppDbContext();
-            manager = new UserManager<AppUser>(new UserStore<AppUser>(db));
+            _db = new AppDbContext();
+            _manager = new UserManager<AppUser>(new UserStore<AppUser>(_db));
         }
 
         [Route("User/Profile/{username}")]
@@ -29,39 +30,15 @@ namespace ForumETF.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult UserProfile(string username)
         {
-            AppUser user = manager.FindByName(username);
+            var user = _manager.FindByName(username);
+            var viewModel = MapDomainToViewModel(user);
 
-            UserViewModel viewModel = new UserViewModel()
-            {
-                UserName = user.UserName,
-                AvatarUrl = user.AvatarUrl,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Department = user.Department,
-                Address = user.Address,
-                PhoneNumber = user.Phone,
-                MobilePhone = user.MobilePhone,
-                FacebookUrl = user.FacebookUrl,
-                TwitterUrl = user.TwitterUrl,
-                LinkedInUrl = user.LinkedinUrl
-            };
-
-            var postsCount = db.Posts.Count(p => p.User.UserName == user.UserName);
-            
-            ViewBag.PostsCount = postsCount;
+            ViewBag.PostsCount = _db.Posts.Count(p => p.User.UserName == user.UserName);
 
             return View("Details", viewModel);
         }
 
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public PartialViewResult Details(string username)
-        {
-            //var user = _repo.GetUser(username);
-
-            //return PartialView("_Details", user);
-            return null;
-        }
+       
 
         //[HttpGet]
         //[OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
@@ -85,23 +62,8 @@ namespace ForumETF.Controllers
         [Route("User/Profile/{username}/Edit")]
         public ActionResult Edit(string username)
         {
-            AppUser user = manager.FindByName(username);
-
-            UserViewModel viewModel = new UserViewModel()
-            {
-                UserName = user.UserName,
-                AvatarUrl = user.AvatarUrl,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Department = user.Department,
-                Address = user.Address,
-                PhoneNumber = user.Phone,
-                MobilePhone = user.MobilePhone,
-                FacebookUrl = user.FacebookUrl,
-                TwitterUrl = user.TwitterUrl,
-                LinkedInUrl = user.LinkedinUrl
-            };
+            var user = _manager.FindByName(username);
+            var viewModel = MapDomainToViewModel(user);
 
             return View(viewModel);
         }
@@ -112,7 +74,10 @@ namespace ForumETF.Controllers
         [Route("User/Profile/{username}/Edit")]
         public ActionResult Edit(UserViewModel model)
         {
-            AppUser user = manager.FindById(User.Identity.GetUserId());
+            var user = _manager.FindById(User.Identity.GetUserId());
+
+            Mapper.CreateMap<UserViewModel, AppUser>();
+            Mapper.Map(model, user);
 
             if (model.Avatar != null && model.Avatar.ContentLength > 0)
             {
@@ -121,21 +86,11 @@ namespace ForumETF.Controllers
                 model.Avatar.SaveAs(path);
                 user.AvatarUrl = path;
             }
+            //UpdateProfilePicture(user, model);
 
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.Department = model.Department;
-            user.Address = model.Address;
-            user.Email = model.Email;
-            user.Phone = model.PhoneNumber;
-            user.MobilePhone = model.MobilePhone;
-            user.FacebookUrl = model.FacebookUrl;
-            user.TwitterUrl = model.TwitterUrl;
-            user.LinkedinUrl = model.LinkedInUrl;
-
-            IdentityResult result = manager.Update(user);
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
+            IdentityResult result = _manager.Update(user);
+            _db.Entry(user).State = EntityState.Modified;
+            _db.SaveChanges();
 
             return RedirectToAction("Profile", "User", new { username = User.Identity.Name });
         }
@@ -145,29 +100,15 @@ namespace ForumETF.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult GetPublishedPosts()
         {
-            AppUser user = manager.FindById(User.Identity.GetUserId());
+            var user = _manager.FindById(User.Identity.GetUserId());
 
-            var posts = (from p in db.Posts
+            var posts = (from p in _db.Posts
                         where p.User.UserName == user.UserName
                         select p
                         ).OrderByDescending(p => p.CreatedAt).ToList();
 
-            UserViewModel viewModel = new UserViewModel()
-            {
-                UserName = user.UserName,
-                AvatarUrl = user.AvatarUrl,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Department = user.Department,
-                Address = user.Address,
-                PhoneNumber = user.Phone,
-                MobilePhone = user.MobilePhone,
-                FacebookUrl = user.FacebookUrl,
-                TwitterUrl = user.TwitterUrl,
-                LinkedInUrl = user.LinkedinUrl,
-                Posts = posts
-            };
+            var viewModel = MapDomainToViewModel(user);
+            viewModel.Posts = _db.Posts.ToList();
 
             return View("PublishedPosts", viewModel);
         }
@@ -175,6 +116,33 @@ namespace ForumETF.Controllers
         public ActionResult Modal(int postId)
         {
             return Content("Uspjesno obrisan post br ", postId.ToString());
+        }
+
+        private void UpdateProfilePicture(AppUser user, UserViewModel viewModel)
+        {
+            if (viewModel.Avatar != null && viewModel.Avatar.ContentLength > 0)
+            {
+                var filename = Path.GetFileName(viewModel.Avatar.FileName);
+                var path = Path.Combine(Server.MapPath("~/Uploads/ProfilePictures"), filename);
+                viewModel.Avatar.SaveAs(path);
+                user.AvatarUrl = path;
+            }
+        }
+
+        private UserViewModel MapDomainToViewModel(AppUser user)
+        {
+            Mapper.CreateMap<AppUser, UserViewModel>();
+            var viewModel = Mapper.Map<UserViewModel>(user);
+         
+            return viewModel;
+        }
+
+        private AppUser MapViewModelToDomainModel(UserViewModel viewModel)
+        {
+            Mapper.CreateMap<UserViewModel, AppUser>();
+            var user = Mapper.Map<AppUser>(viewModel);
+
+            return user;
         }
     }
 }

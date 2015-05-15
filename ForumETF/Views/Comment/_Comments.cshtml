@@ -1,0 +1,10 @@
+﻿@model Comment
+
+<div class="col-md-8 col-md-offset-4">
+    <div class="col-md-12">
+        @Model.Content
+    </div>
+    <div class="col-md-12">
+        <a href="@Url.Action("Profile", "User", new { username = @Model.User.UserName})">@Model.User.UserName</a> | @Model.CreatedAt
+    </div>
+</div>

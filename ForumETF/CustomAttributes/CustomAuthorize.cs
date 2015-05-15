@@ -11,7 +11,7 @@ namespace ForumETF.CustomAttributes
             {
                 base.HandleUnauthorizedRequest(filterContext);
             }
-            else if (!this.Roles.Split(',').Any(filterContext.HttpContext.User.IsInRole))
+            else if (!Roles.Split(',').Any(filterContext.HttpContext.User.IsInRole))
             {
                 filterContext.Result = new ViewResult()
                 {

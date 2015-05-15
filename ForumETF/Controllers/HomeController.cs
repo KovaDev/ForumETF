@@ -6,7 +6,7 @@ using PagedList;
 
 namespace ForumETF.Controllers
 {   
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         private readonly AppDbContext _db;
@@ -26,21 +26,21 @@ namespace ForumETF.Controllers
         {
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-
+            
             var posts = _db.Posts.Where(p => p.Title.Contains(searchTerm) || searchTerm == null)
                 .OrderByDescending(p => p.CreatedAt)
                 .ToPagedList(pageNumber, pageSize);
-
+            /*
             if (Request.IsAjaxRequest())
             {
-                
                 return PartialView("_Posts", posts);
-            }
+            }*/
 
             return View(posts);
         }
 
         [ChildActionOnly]
+        [OutputCache(Duration = 60)]
         public ActionResult CategoriesWidget()
         {
             var categories = _db.Categories.ToList();
@@ -49,6 +49,7 @@ namespace ForumETF.Controllers
         }
 
         [ChildActionOnly]
+        [OutputCache(Duration = 60)]
         public ActionResult TopTenPostsWidget()
         {
             return PartialView("_TopTenPostsWidget", _repo.GetTop10Posts());
@@ -75,6 +76,7 @@ namespace ForumETF.Controllers
             return PartialView("_Posts", posts);
         }
 
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

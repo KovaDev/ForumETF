@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace ForumETF.Models
 {
@@ -13,7 +15,10 @@ namespace ForumETF.Models
         }
 
         public int PostId { get; set; }
+
+        [Required]
         public string Title { get; set; }
+        [AllowHtml]
         public string Content { get; set; }
         public int Votes { get; set; }
         public bool IsApproved { get; set; }

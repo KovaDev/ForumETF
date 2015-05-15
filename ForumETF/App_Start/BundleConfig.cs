@@ -33,11 +33,13 @@ namespace ForumETF
                       "~/Content/PagedList.css",
                       "~/Content/hover.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
+                      "~/Scripts/tinymce/tinymce.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                     "~/Scripts/Custom/functions.js",
                     "~/Scripts/Custom/bootstrap-validation.js",
-                    "~/Scripts/Custom/modalConfig.js"
-                ));
+                    "~/Scripts/Custom/modalConfig.js"));
         }
 
     }

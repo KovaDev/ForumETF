@@ -31,6 +31,8 @@
                             <td>
                                 @*<a href="#"><i class="fa fa-pencil">&nbsp;</i></a>&nbsp;&nbsp;&nbsp;
                                     <a href="#"><i class="fa fa-trash-o">&nbsp;</i></a>*@
+                                @Html.ActionLink("Izmijeni", "Edit", "Post", new { id = item.PostId }, null)
+                                <a href="@Url.Action("Edit", "Post", new { postId = item.PostId } )"><i class="fa fa-pencil">&nbsp;</i> Edit</a>    
                                 <button id="edit-btn" class="btn btn-primary btn-sm edit-btn"><i class="fa fa-pencil"></i></button>
                                 @*<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>*@
                                 <a href="#" id="@item.PostId" class="btn btn-danger btn-sm delete-btn" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i></a>

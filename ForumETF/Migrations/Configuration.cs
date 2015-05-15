@@ -1,22 +1,18 @@
-using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.Migrations;
+using ForumETF.Models;
 
 namespace ForumETF.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using ForumETF.Models;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<ForumETF.Models.AppDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AppDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "ForumETF.Models.DbContext";
         }
 
-        protected override void Seed(ForumETF.Models.AppDbContext context)
+        protected override void Seed(AppDbContext context)
         {
             /*
             context.Tags.AddOrUpdate(t => t.TagName,

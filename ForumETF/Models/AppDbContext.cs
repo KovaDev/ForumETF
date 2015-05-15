@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
-using System.Threading.Tasks;
-
 
 namespace ForumETF.Models
 {
@@ -21,10 +15,12 @@ namespace ForumETF.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Post>().HasMany<Comment>(a => a.Comments).WithOptional().WillCascadeOnDelete(true);
-            modelBuilder.Entity<Post>().HasMany<Answer>(a => a.Answers).WithOptional().WillCascadeOnDelete(true);
-            modelBuilder.Entity<Post>().HasMany<PostAttachment>(a => a.Attachments).WithOptional().WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Post>().HasMany<Comment>(a => a.Comments).WithOptional().WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Post>().HasMany<Answer>(a => a.Answers).WithOptional().WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Post>().HasMany<PostAttachment>(a => a.Attachments).WithOptional().WillCascadeOnDelete(true);
             //modelBuilder.Entity<Post>().HasMany<Tag>(a => a.Tags).WithOptional().WillCascadeOnDelete();
+
+            Database.SetInitializer<AppDbContext>(new DropCreateDatabaseAlways<AppDbContext>());
 
             //modelBuilder.Entity<Comment>().has
             //modelBuilder.Entity<Answer>().HasMany<Answer>(a => a.Answers).WithOptional().WillCascadeOnDelete();
@@ -38,7 +34,5 @@ namespace ForumETF.Models
         public DbSet<Answer> Answers { get; set; }
         public DbSet<AnswerComment> AnswerComments { get; set; }
         public DbSet<PostAttachment> PostAttachments { get; set; }
-
-        //public System.Data.Entity.DbSet<ForumETF.Models.AppUser> AppUsers { get; set; }
     }
 }
